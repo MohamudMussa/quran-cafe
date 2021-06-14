@@ -3,20 +3,23 @@
 @tailwind components;
 @tailwind utilities;
 
-/* #vintage {
-    background-image: url("https://i.imgur.com/esoGQSU.gif");
-    height: 100%;
-    width: 100%;
-    opacity: 0.06;
-    background-repeat: repeat;
+#vintage {
     position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url(images/new.gif);
+    z-index: 11;
+    background-size: 100% 100%;
+    mix-blend-mode: overlay;
+    opacity: 0.6;
 
-
-} */
+}
 
 #darken {
     position: absolute;
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(255, 255, 255, 0.445);
     width: 100%;
     height: 100%;
     top: 0;

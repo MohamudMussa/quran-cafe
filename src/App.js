@@ -4,7 +4,7 @@ import bg from './images/test.jpg'
 import bgtwo from './images/oldmecca.jpg'
 import bgthree from './images/oldmeccatwo.jpg'
 import ReactPlayer from 'react-player/youtube'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 
 function App() {
@@ -12,6 +12,7 @@ function App() {
   const [isPlaying, setIsPlaying] = useState(true)
 
   const [isMuted, setIsMuted] = useState(true)
+
 
   const hiddenPlayer = {
     pointerEvents: "none",
@@ -22,13 +23,15 @@ function App() {
   };
 
 
+
+
   return (
 
-    <div id='darken'>
+    <div >
 
       <div
         id="vintage"
-        class="flex items-center justify-center min-h-screen "
+        className="flex items-center justify-center min-h-screen "
         style={{
           backgroundImage: `url('${bgthree}')`,
           backgroundSize: "cover",
@@ -36,8 +39,9 @@ function App() {
         }}>
 
         <div>
+
           <button
-            class="font-mono text-5xl	..."
+            className="font-mono text-5xl	..."
             onClick={() => setIsMuted(false)}> Click here to start</button>
         </div>
 
@@ -46,7 +50,7 @@ function App() {
           url='https://youtu.be/UaMPoBQr7uA?t=789'
           style={hiddenPlayer}
           playing={isPlaying}
-          controls="false"
+          controls={false}
           // width="100vw"
           // height="200vw"
           muted={isMuted}

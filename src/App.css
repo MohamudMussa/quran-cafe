@@ -3,7 +3,7 @@
 @tailwind components;
 @tailwind utilities;
 
-#vintage {
+/* #vintage {
     background-image: url("https://i.imgur.com/esoGQSU.gif");
     height: 100%;
     width: 100%;
@@ -12,7 +12,7 @@
     position: absolute;
 
 
-}
+} */
 
 #darken {
     position: absolute;

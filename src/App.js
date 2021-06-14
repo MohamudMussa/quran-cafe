@@ -24,7 +24,7 @@ function App() {
 
   return (
 
-    <div>
+    <div id='darken'>
 
       <div
         id="vintage"

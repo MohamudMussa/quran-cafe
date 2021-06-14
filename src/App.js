@@ -3,6 +3,7 @@ import './index.css';
 import bg from './images/vignette.png'
 import bgtwo from './images/oldmecca.jpg'
 import bgthree from './images/oldmadinatwo.jpg'
+import mecca from './images/meccanew.jpg'
 import ReactPlayer from 'react-player/youtube'
 import { useEffect, useState } from 'react';
 
@@ -35,14 +36,14 @@ function App() {
         id='darken'
         className="flex items-center justify-center min-h-screen "
         style={{
-          backgroundImage: `url('${bg}')`,
+          backgroundImage: `url('${bgthree}')`,
           backgroundSize: "cover",
-          opacity: "0.5"
+          opacity: "0.8"
 
         }}>
 
         <div class="container mx-auto flex px-5 py-24 items-center justify-center flex-col">
-          <img class="lg:w-2/6 md:w-3/6 w-5/6 mb-10 object-cover object-center rounded z-40" alt="hero" src={bgtwo}></img>
+          <img class="lg:w-2/6 md:w-3/6 w-5/6 mb-10 object-cover object-center rounded z-40" alt="hero" ></img>
           <div class="text-center lg:w-2/3 w-full">
             <button
               class="title-font sm:text-4xl text-3xl mb-4 font-medium text-white"

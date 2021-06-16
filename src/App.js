@@ -2,18 +2,34 @@ import './App.css';
 import './index.css';
 import meccaone from './images/darker.jpg'
 import medina from './images/medina2.jpg'
-import bgthree from './images/oldmadinatwo.jpg'
-import mecca from './images/meccanew.jpg'
+import meccatwo from './images/meccanew.jpg'
 import ReactPlayer from 'react-player/youtube'
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { motion } from "framer-motion"
 
 
+const IMAGES = [
+  meccaone, medina, meccatwo,
+];
 
 function App() {
 
+  const getImage = () => {
+    const number = Math.floor(Math.random() * 2) + 1;
+    console.log(number);
+    return IMAGES[number];
+  };
+
+  const [activeImage, setActiveImage] = useState(IMAGES[0]);
+
+  const handleClick = () => {
+    const image = getImage();
+    setActiveImage(image);
+  };
+
+
   const [volume, setVolume] = useState(1)
-  const [isPlaying, setIsPlaying] = useState(true)
+  const [isPlaying, setIsPlaying] = useState(false)
 
   const [isMuted, setIsMuted] = useState(true)
 
@@ -34,23 +50,29 @@ function App() {
     <div
 
     >
-      <div className="flex py-16	 justify-center min-h-screen ">
-        <div class="text-center lg:w-2/3 w-full">
-          <button
-            class="text-3xl text-center font-black ...  font-extrabold	tracking-wide	 "
-          >  وَاِذَا قُرِئَ الۡقُرۡاٰنُ فَاسۡتَمِعُوۡا لَهٗ وَاَنۡصِتُوۡا لَعَلَّكُمۡ تُرۡحَمُوۡنَ‏  ۝ </button>
+      <motion.div className="flex py-16	 justify-center min-h-screen "
+        initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}
+
+      >
+        <div className="text-center lg:w-2/3 w-full">
+          <h1
+            className="text-3xl text-center font-black ...  font-extrabold	tracking-wide	 "
+
+          >
+            وَاِذَا قُرِئَ الۡقُرۡاٰنُ فَاسۡتَمِعُوۡا لَهٗ وَاَنۡصِتُوۡا لَعَلَّكُمۡ تُرۡحَمُوۡنَ‏  ۝ </h1>
 
 
-          <p class="text-l py-2	text-center  font-mono  font-extrabold text-white-800 ">
+          <p className="text-l py-2	text-center  font-mono  font-extrabold text-white-800 ">
             So when the Qur'an is recited, listen carefully to it, and keep silent so that you may, be shown mercy.
           </p>
-          <p class="text-l pb-2	text-center  font-mono  font-extrabold text-white-800 ">
+          <p className="text-l pb-2	text-center  font-mono  font-extrabold text-white-800 ">
             [7:204]
           </p>
-          <div class="flex justify-center">
+          <div className="flex justify-center">
+
 
             <motion.button
-              class="pr-4"
+              className="pr-4"
               onClick={() => setVolume(volume + 0.2)}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }} >
@@ -59,7 +81,7 @@ function App() {
 
             {isPlaying === false && (
               <motion.button
-                class="pr-4"
+                className="pr-4"
                 onClick={() => setIsPlaying(true)}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }} >
@@ -71,7 +93,7 @@ function App() {
             {isPlaying === true && (
 
               <motion.button
-                class="pr-4"
+                className="pr-4"
                 onClick={() => setIsPlaying(false)}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }} >
@@ -92,26 +114,23 @@ function App() {
               <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24"><path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6 13h-12v-2h12v2z" /></svg>
             </motion.button>
 
+            <motion.button
+              onClick={handleClick}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }} >
+              <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24"><path d="M5 8.5c0-.828.672-1.5 1.5-1.5s1.5.672 1.5 1.5c0 .829-.672 1.5-1.5 1.5s-1.5-.671-1.5-1.5zm9 .5l-2.519 4-2.481-1.96-4 5.96h14l-5-8zm8-4v14h-20v-14h20zm2-2h-24v18h24v-18z" /></svg>
+            </motion.button>
 
 
-
-            {/* <button
-              onClick={() => setPlay(false)}>
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-
-            </button> */}
           </div>
         </div>
 
-      </div>
+      </motion.div>
 
-      <div class="absolute top-0 left-0 right-9 flex items-center justify-between p-4">
-        <div class="relative -top-0.5">
-          <div class="flex items-center space-x-1">
-            <span class="text-xs">
+      <div className="absolute top-0 left-0 right-9 flex items-center justify-between p-4">
+        <div className="relative -top-0.5">
+          <div className="flex items-center space-x-1">
+            <span className="text-xs">
               Online
             </span>
           </div>
@@ -126,7 +145,7 @@ function App() {
       <div
         id='vignette'
         style={{
-          backgroundImage: `url('${meccaone}')`,
+          backgroundImage: `url('${activeImage}')`,
           backgroundSize: "cover",
           opacity: "0.7"
 
@@ -136,7 +155,7 @@ function App() {
           id='vin'>
           <div
             id='vignette'
-            class="flex flex-col items-center md:h-screen md:justify-center px-4 py-16 md:py-0">
+            className="flex flex-col items-center md:h-screen md:justify-center px-4 py-16 md:py-0">
 
           </div>
 

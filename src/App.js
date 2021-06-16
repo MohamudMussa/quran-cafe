@@ -12,6 +12,7 @@ import { motion } from "framer-motion"
 
 function App() {
 
+  const [volume, setVolume] = useState(1)
   const [isPlaying, setIsPlaying] = useState(true)
 
   const [isMuted, setIsMuted] = useState(true)
@@ -48,32 +49,50 @@ function App() {
           </p>
           <div class="flex justify-center">
 
+            <motion.button
+              class="pr-4"
+              onClick={() => setVolume(volume + 0.2)}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }} >
+              <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24"><path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6 13h-5v5h-2v-5h-5v-2h5v-5h2v5h5v2z" /></svg>
+            </motion.button>
+
             {isPlaying === false && (
               <motion.button
+                class="pr-4"
                 onClick={() => setIsPlaying(true)}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }} >
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-20 w-20" fill="none" viewBox="0 0 24 24" stroke="black">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24"><path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-3 17v-10l9 5.146-9 4.854z" /></svg>
+
               </motion.button>
             )}
 
             {isPlaying === true && (
+
               <motion.button
+                class="pr-4"
                 onClick={() => setIsPlaying(false)}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }} >
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-20 w-20" fill="none" viewBox="0 0 24 24" stroke="black">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24"><path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-1 17h-3v-10h3v10zm5-10h-3v10h3v-10z" /></svg>
+
               </motion.button>
 
 
 
 
             )}
+
+
+            <motion.button
+              onClick={() => setVolume(volume - 0.2)}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }} >
+              <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24"><path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6 13h-12v-2h12v2z" /></svg>
+            </motion.button>
+
+
 
 
             {/* <button
@@ -136,7 +155,7 @@ function App() {
             // width="100vw"
             // height="200vw"
             muted={isMuted}
-            volume={1}
+            volume={volume}
             playsinline={true}
             onPlay={() => setIsMuted(false)}
             onPause={() => setIsPlaying(false)}

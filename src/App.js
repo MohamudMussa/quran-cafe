@@ -138,7 +138,8 @@ function App() {
 
 
 
-      <div
+      <motion.div
+        initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }}
         id='vignette'
         style={{
           backgroundImage: `url('${activeImage}')`,
@@ -167,8 +168,8 @@ function App() {
             style={hiddenPlayer}
             playing={isPlaying}
             controls={false}
-            // width="100vw"
-            // height="200vw"
+            width="100vw"
+            height="200vw"
             muted={isMuted}
             volume={volume}
             playsinline={true}
@@ -176,7 +177,7 @@ function App() {
             onPause={() => setIsPlaying(false)}
           />
         </div>
-      </div>
+      </motion.div>
     </div >
 
 

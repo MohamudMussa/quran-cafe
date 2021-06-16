@@ -41,10 +41,10 @@ function App() {
           >  وَاِذَا قُرِئَ الۡقُرۡاٰنُ فَاسۡتَمِعُوۡا لَهٗ وَاَنۡصِتُوۡا لَعَلَّكُمۡ تُرۡحَمُوۡنَ‏  ۝ </button>
 
 
-          <p class="text-l py-3	text-center  font-mono  font-extrabold text-white-800 ">
+          <p class="text-l py-2	text-center  font-mono  font-extrabold text-white-800 ">
             So when the Qur'an is recited, listen carefully to it, and keep silent so that you may, be shown mercy.
           </p>
-          <p class="text-l 	text-center  font-mono  font-extrabold text-white-800 ">
+          <p class="text-l pb-2	text-center  font-mono  font-extrabold text-white-800 ">
             [7:204]
           </p>
           <div class="flex justify-center">

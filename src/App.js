@@ -1,7 +1,7 @@
 import './App.css';
 import './index.css';
 import meccaone from './images/darker.jpg'
-import medina from './images/medina2.jpg'
+import medina from './images/medina.jpg'
 import meccatwo from './images/meccanew.jpg'
 import ReactPlayer from 'react-player/youtube'
 import { useState } from 'react';

@@ -44,6 +44,8 @@ function App() {
 
   const handleNext = () => {
     const station = getStation();
+    const wallpaper = getImage();
+    setActiveImage(wallpaper);
     setStation(station);
   };
 

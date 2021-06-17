@@ -3,17 +3,14 @@ import './index.css';
 import meccaone from './images/darker.jpg'
 import medina from './images/medina.jpg'
 import meccatwo from './images/meccanew.jpg'
-import one from './images/1.jpg'
-import two from './images/2.jpg'
-import three from './images/3.jpg'
+
 import four from './images/4.jpg'
 import five from './images/5.jpg'
-import six from './images/6.jpg'
 import seven from './images/7.jpg'
 import eight from './images/8.jpg'
 import nine from './images/9.jpg'
 import ten from './images/10.jpg'
-import eleven from './images/11.jpg'
+
 
 import ReactPlayer from 'react-player/youtube'
 import { useState } from 'react';
@@ -31,12 +28,17 @@ const STATION = [
   "hO5wCnVLHWU",
   "bEGm_DHmiuk&list=PLxGJ20Im19wOWIfITK3KL69qm2j8kb3gI&ab_channel=%D9%85%D8%AD%D8%A8%D8%A7%D9%84%D8%AE%D9%8A%D8%B1%D9%85%D8%AD%D8%A8%D8%A7%D9%84%D8%AE%D9%8A%D8%B1",
   "C2BMIMWnt-c&ab_channel=UniqueQuranUniqueQuran",
+  "tRnuRmK9vuY",
+  "P-H6XZvf7mM",
+  "1EE8b26FUR0&t=7s",
+  "FDTkE9MI43k&t=8s",
+  "0dzsXQb_MYc&t=7s"
 ];
 
 function App() {
 
   const getImage = () => {
-    const number = Math.floor(Math.random() * 9);
+    const number = Math.floor(Math.random() * IMAGES.length);
     console.log(number);
     return IMAGES[number];
   };
@@ -52,7 +54,7 @@ function App() {
 
   const getStation = () => {
 
-    const numberStation = Math.floor(Math.random() * 3);
+    const numberStation = Math.floor(Math.random() * STATION.length);
     console.log(numberStation);
     return STATION[numberStation];
   };

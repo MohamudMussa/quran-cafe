@@ -4,7 +4,6 @@ import meccaone from './images/darker.jpg'
 import medina from './images/medina.jpg'
 import meccatwo from './images/meccanew.jpg'
 
-import four from './images/4.jpg'
 import five from './images/5.jpg'
 import seven from './images/7.jpg'
 import eight from './images/8.jpg'
@@ -13,7 +12,7 @@ import ten from './images/10.jpg'
 
 
 import ReactPlayer from 'react-player/youtube'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion } from "framer-motion"
 
 
@@ -21,7 +20,7 @@ const IMAGES = [
   meccaone,
   medina,
   meccatwo,
-  four, five, seven, eight, nine, ten,
+  five, seven, eight, nine, ten,
 ];
 
 const STATION = [
@@ -86,6 +85,16 @@ function App() {
     top: "100%",
     left: "100%",
   };
+
+  useEffect(() => {
+
+    const station = getStation();
+    const wallpaper = getImage();
+    setActiveImage(wallpaper);
+    setStation(station);
+
+
+  }, [])
 
 
 

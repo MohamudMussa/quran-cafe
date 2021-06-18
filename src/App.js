@@ -69,6 +69,13 @@ function App() {
     setStation(station);
   };
 
+  const shuffleOnEnd = () => {
+    const station = getStation();
+    setStation(station);
+  };
+
+
+
 
 
 
@@ -258,6 +265,7 @@ function App() {
             playsinline={true}
             onPlay={() => setIsMuted(false)}
             onPause={() => setIsPlaying(false)}
+            onEnded={() => shuffleOnEnd()}
           />
         </div>
       </motion.div>

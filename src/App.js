@@ -26,13 +26,30 @@ const IMAGES = [
 
 const STATION = [
   "hO5wCnVLHWU",
-  "bEGm_DHmiuk&list=PLxGJ20Im19wOWIfITK3KL69qm2j8kb3gI&ab_channel=%D9%85%D8%AD%D8%A8%D8%A7%D9%84%D8%AE%D9%8A%D8%B1%D9%85%D8%AD%D8%A8%D8%A7%D9%84%D8%AE%D9%8A%D8%B1",
+  "bEGm_DHmiuk&list=PLxGJ20Im19wOWIfITK3KL69qm2j8kb3gI&index=3&ab_channel=محبالخير",
+  "Wmbt8a9RPrE&list=PLxGJ20Im19wOWIfITK3KL69qm2j8kb3gI&index=4&ab_channel=NaqaaStudio",
   "C2BMIMWnt-c&ab_channel=UniqueQuranUniqueQuran",
+  "4ToJYAOQ-BE&t=19s&ab_channel=NaqaaStudio",
+  "P00F8z6_9RI&list=PLxGJ20Im19wOWIfITK3KL69qm2j8kb3gI&index=8&ab_channel=muslim13100",
+  "b5UU1xmiTmY&t=6s&ab_channel=UniqueQuran",
+  "d-8Zho0kFEc&t=9s&ab_channel=UniqueQuran",
+  "eIIGLkj2Bm0&t=12s&ab_channel=NaqaaStudio",
+  "a41MKjpsH_c&t=11s&ab_channel=UniqueQuran",
+  "pggcG0XwBTA&list=PLxGJ20Im19wOWIfITK3KL69qm2j8kb3gI&index=24&ab_channel=Muqbil",
+  "JskuxU44UOw&t=20s&ab_channel=NaqaaStudio",
   "tRnuRmK9vuY",
   "P-H6XZvf7mM",
-  "1EE8b26FUR0&t=7s",
-  "FDTkE9MI43k&t=8s",
-  "0dzsXQb_MYc&t=7s"
+  "hATbP1aGSCc&t=3s&ab_channel=UniqueQuran", // Surah Ankabut
+  "FDTkE9MI43k&t=7s",
+  "0dzsXQb_MYc&t=7s",
+  "Z9dz6_LybSU&t=39s&ab_channel=Beyzanishantasomali",
+  "lD40MsqrI6I&ab_channel=HassanSaleh",
+  "cFDYqgZhWmw&ab_channel=HassanMasoud",
+  "0t9jEGXDaDA&t=20s&ab_channel=AbdalaShuraym",
+  "x9xjKWePfAI&t=10s&ab_channel=UniqueQuran",
+  "cia8JLXLrvc&t=6s&ab_channel=UniqueQuran",
+  "Y63kr37P7Gc&t=13s&ab_channel=PearlsOfKnowledge"
+
 ];
 
 function App() {
@@ -266,6 +283,7 @@ function App() {
             onPlay={() => setIsMuted(false)}
             onPause={() => setIsPlaying(false)}
             onEnded={() => shuffleOnEnd()}
+            onError={() => shuffleOnEnd()}
           />
         </div>
       </motion.div>

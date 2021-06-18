@@ -12,7 +12,7 @@ import ten from './images/10.jpg'
 
 
 import ReactPlayer from 'react-player/youtube'
-import { TwitterShareButton } from 'react-twitter-embed';
+// import { TwitterShareButton } from 'react-twitter-embed';
 import { useEffect, useState } from 'react';
 import { motion } from "framer-motion"
 
@@ -84,6 +84,7 @@ const STATION = [
   "H2qqrfRSALw&ab_channel=TaleexWacaan",
   "iWqy1pXcndg&t=13s&ab_channel=ALBAYAANUK",
   "6ABibmGp3Ik&t=16s&ab_channel=SheikhHassanAl-waajidiOfficialChannel",
+  "G3u-MHPqZZw&ab_channel=السنيةالسلفية",
 
 
 
@@ -237,17 +238,17 @@ function App() {
               <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24"><path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6 13h-12v-2h12v2z" /></svg>
             </motion.button>
 
-            <div class="absolute top-5 right-4 h-16 w-16 ...">
-              {/* <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 4.248c-3.148-5.402-12-3.825-12 2.944 0 4.661 5.571 9.427 12 15.808 6.43-6.381 12-11.147 12-15.808 0-6.792-8.875-8.306-12-2.944z" /> */}
-              {/* <TwitterShareButton
+            {/* <div class="absolute top-5 right-4 h-16 w-16 ..."> */}
+            {/* <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 4.248c-3.148-5.402-12-3.825-12 2.944 0 4.661 5.571 9.427 12 15.808 6.43-6.381 12-11.147 12-15.808 0-6.792-8.875-8.306-12-2.944z" /> */}
+            {/* <TwitterShareButton
                 url={'https://quran.cafe/'}
                 options={{ text: `I'm currently Listen to Quran on @QuranCafe and you should too!`, via: 'qurancafe' }}
               >
               </TwitterShareButton> */}
-              {/* </svg> */}
+            {/* </svg> */}
 
 
-            </div>
+            {/* </div> */}
 
 
 

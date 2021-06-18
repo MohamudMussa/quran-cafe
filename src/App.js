@@ -48,7 +48,20 @@ const STATION = [
   "0t9jEGXDaDA&t=20s&ab_channel=AbdalaShuraym",
   "x9xjKWePfAI&t=10s&ab_channel=UniqueQuran",
   "cia8JLXLrvc&t=6s&ab_channel=UniqueQuran",
-  "Y63kr37P7Gc&t=13s&ab_channel=PearlsOfKnowledge"
+  "Y63kr37P7Gc&t=13s&ab_channel=PearlsOfKnowledge",
+  "C-DezfgLumU&t=7s&ab_channel=UniqueQuran",
+  "SD9-FFDcyTE&ab_channel=BouilleRochdiBouilleRochdi",
+  "T6e_Nm6DvJM&ab_channel=tawus7691tawus7691",
+  "Dp9qvYIMRTA&ab_channel=InkTVInkTV",
+  "1tob6BxH474&ab_channel=InkTVInkTV",
+  "8rshbLpiG9Y&t=27s&ab_channel=AlMadrasatuAlUmariyyah",
+  "Q3d_jeHESck&t=27s&ab_channel=AlMadrasatuAlUmariyyah",
+  "rT1SzQEcrxE&t=29s&ab_channel=AlMadrasatuAlUmariyyah",
+  "f_zM7xEJfpQ&ab_channel=abdelmalikabouaichaabdelmalikabouaicha",
+  "JaXYk15stts&ab_channel=MuqbilMuqbil",
+  "lb0WZRCoMcA&ab_channel=MuqbilMuqbil",
+  "",
+
 
 ];
 
@@ -190,6 +203,8 @@ function App() {
             )}
 
 
+
+
             <motion.button
               className="pr-4"
               onClick={() => setVolume(volume - 0.2)}
@@ -200,12 +215,13 @@ function App() {
 
             <div class="absolute top-5 right-4 h-16 w-16 ...">
               {/* <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 4.248c-3.148-5.402-12-3.825-12 2.944 0 4.661 5.571 9.427 12 15.808 6.43-6.381 12-11.147 12-15.808 0-6.792-8.875-8.306-12-2.944z" /> */}
-              <TwitterShareButton
+              {/* <TwitterShareButton
                 url={'https://quran.cafe/'}
                 options={{ text: `I'm currently Listen to Quran on @QuranCafe and you should too!`, via: 'qurancafe' }}
               >
-              </TwitterShareButton>
+              </TwitterShareButton> */}
               {/* </svg> */}
+
 
             </div>
 

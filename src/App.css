@@ -37,11 +37,12 @@
     right: 0;
     bottom: 0;
     /* background: url(images/vignette.png); */
+    background: rgba(233, 233, 233, 0.966);
     z-index: 11;
     background-size: 100% 100%;
     mix-blend-mode: overlay;
-    /* pointer-events: none; */
-    opacity: 0.1;
+    pointer-events: none;
+    opacity: 0.8;
   }
 
 
@@ -68,4 +69,5 @@
     top: 0;
     left: 0;
     z-index: 1;
+    
   }

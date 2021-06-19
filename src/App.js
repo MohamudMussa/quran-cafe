@@ -12,7 +12,7 @@ import ten from './images/10.jpg'
 
 
 import ReactPlayer from 'react-player/youtube'
-// import { TwitterShareButton } from 'react-twitter-embed';
+import { TwitterShareButton, TwitterOnAirButton } from 'react-twitter-embed';
 import { useEffect, useState } from 'react';
 import { motion } from "framer-motion"
 
@@ -101,6 +101,8 @@ function App() {
 
   const [activeImage, setActiveImage] = useState(IMAGES[0]);
 
+  const [isBuffering, setIsBuffering] = useState(true)
+
   const handleClick = () => {
     const image = getImage();
     setActiveImage(image);
@@ -135,7 +137,7 @@ function App() {
 
 
 
-  const [volume, setVolume] = useState(0.5)
+  const [volume, setVolume] = useState(0.2)
 
   const [isPlaying, setIsPlaying] = useState(false)
 
@@ -151,7 +153,17 @@ function App() {
   };
 
   const removeGif = () => {
-    document.getElementById('vignette').id = 'normal';
+
+    var elem = document.getElementById('vignette');
+
+    if (typeof elem == 'undefined' || elem == null) {
+      document.getElementById('normal').id = 'vignette';
+      document.getElementById('normal').id = 'vignette';
+    }
+    else {
+      document.getElementById('vignette').id = 'normal';
+      document.getElementById('vignette').id = 'normal';
+    }
   }
 
 
@@ -198,6 +210,8 @@ function App() {
           <p className="text-l pb-2	text-center  font-mono  font-extrabold text-white-800 ">
             [7:204]
           </p>
+
+
           <div className="flex justify-center">
 
 
@@ -244,24 +258,25 @@ function App() {
               <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24"><path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6 13h-12v-2h12v2z" /></svg>
             </motion.button>
 
-            <div class="absolute top-5 right-4 h-16 w-16 ...">
+            <div class=" top-5 right-4 h-16 w-16 ...">
+
+
+
+              {/* <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 4.248c-3.148-5.402-12-3.825-12 2.944 0 4.661 5.571 9.427 12 15.808 6.43-6.381 12-11.147 12-15.808 0-6.792-8.875-8.306-12-2.944z" /> */}
+              <TwitterShareButton
+                url={'https://quran.cafe/'}
+                options={{ text: `I'm currently Listen to Quran on @QuranCafe and you should too!`, via: 'qurancafe' }}
+              >
+              </TwitterShareButton>
+              {/* </svg> */}
 
               <motion.button
+
                 onClick={removeGif}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }} >
                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24"><path d="M19 8v8h-17v-8h17zm2-2h-21v12h21v-12zm1 9h.75c.69 0 1.25-.56 1.25-1.25v-3.5c0-.69-.56-1.25-1.25-1.25h-.75v6zm-16-6h-3v6h3v-6z" /></svg>
               </motion.button>
-
-
-              {/* <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 4.248c-3.148-5.402-12-3.825-12 2.944 0 4.661 5.571 9.427 12 15.808 6.43-6.381 12-11.147 12-15.808 0-6.792-8.875-8.306-12-2.944z" />
-             <TwitterShareButton
-                url={'https://quran.cafe/'}
-                options={{ text: `I'm currently Listen to Quran on @QuranCafe and you should too!`, via: 'qurancafe' }}
-              >
-              </TwitterShareButton> 
-            </svg> */}
-
 
             </div>
 
@@ -284,6 +299,9 @@ function App() {
               <svg xmlns="http://www.w3.org/2000/svg" width="30" height="32" viewBox="0 0 24 24"><path d="M5 8.5c0-.828.672-1.5 1.5-1.5s1.5.672 1.5 1.5c0 .829-.672 1.5-1.5 1.5s-1.5-.671-1.5-1.5zm9 .5l-2.519 4-2.481-1.96-4 5.96h14l-5-8zm8-4v14h-20v-14h20zm2-2h-24v18h24v-18z" /></svg>
             </motion.button>
 
+
+
+
             <motion.button
 
               onClick={handleNext}
@@ -291,7 +309,6 @@ function App() {
               whileTap={{ scale: 0.9 }} >
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M18 9v-3c-1 0-3.308-.188-4.506 2.216l-4.218 8.461c-1.015 2.036-3.094 3.323-5.37 3.323h-3.906v-2h3.906c1.517 0 2.903-.858 3.58-2.216l4.218-8.461c1.356-2.721 3.674-3.323 6.296-3.323v-3l6 4-6 4zm-9.463 1.324l1.117-2.242c-1.235-2.479-2.899-4.082-5.748-4.082h-3.906v2h3.906c2.872 0 3.644 2.343 4.631 4.324zm15.463 8.676l-6-4v3c-3.78 0-4.019-1.238-5.556-4.322l-1.118 2.241c1.021 2.049 2.1 4.081 6.674 4.081v3l6-4z" /></svg>
             </motion.button>
-
 
 
 
@@ -326,6 +343,18 @@ function App() {
 
         <div>
 
+          {isBuffering === true && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.1, repeat: Infinity }}
+            >
+
+              <h1
+                className="text-xl pb-2	text-center  font-mono  font-extrabold text-white-800"
+              > Loading </h1>
+            </motion.div>
+          )}
 
 
 
@@ -343,8 +372,12 @@ function App() {
             onPause={() => setIsPlaying(false)}
             onEnded={() => shuffleOnEnd()}
             onError={() => shuffleOnEnd()}
+            onBuffer={() => setIsBuffering(true)}
+            onBufferEnd={() => setIsBuffering(false)}
+
           />
         </div>
+
       </motion.div>
     </div >
 

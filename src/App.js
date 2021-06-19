@@ -12,7 +12,7 @@ import ten from './images/10.jpg'
 
 
 import ReactPlayer from 'react-player/youtube'
-import { TwitterShareButton, TwitterOnAirButton } from 'react-twitter-embed';
+import { Menu } from './components/Menu'
 import { useEffect, useState } from 'react';
 import { motion } from "framer-motion"
 
@@ -91,11 +91,12 @@ const STATION = [
 
 ];
 
+
 function App() {
 
   const getImage = () => {
     const number = Math.floor(Math.random() * IMAGES.length);
-    console.log(number);
+    // console.log(number);
     return IMAGES[number];
   };
 
@@ -113,7 +114,7 @@ function App() {
   const getStation = () => {
 
     const numberStation = Math.floor(Math.random() * STATION.length);
-    console.log(numberStation);
+    // console.log(numberStation);
     return STATION[numberStation];
   };
 
@@ -129,6 +130,7 @@ function App() {
 
   const shuffleOnEnd = () => {
     const station = getStation();
+
     setStation(station);
   };
 
@@ -154,6 +156,7 @@ function App() {
 
   const removeGif = () => {
 
+    //get the elemnt by the following ID 
     var elem = document.getElementById('vignette');
 
     if (typeof elem == 'undefined' || elem == null) {
@@ -176,8 +179,6 @@ function App() {
 
 
   }, [])
-
-
 
 
   return (
@@ -258,41 +259,44 @@ function App() {
               <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24"><path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6 13h-12v-2h12v2z" /></svg>
             </motion.button>
 
-            <div class=" top-5 right-4 h-16 w-16 ...">
+
+
+            {/* HEART */}
+            {/* <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 4.248c-3.148-5.402-12-3.825-12 2.944 0 4.661 5.571 9.427 12 15.808 6.43-6.381 12-11.147 12-15.808 0-6.792-8.875-8.306-12-2.944z" />
+          
+              </svg> */}
 
 
 
-              {/* <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 4.248c-3.148-5.402-12-3.825-12 2.944 0 4.661 5.571 9.427 12 15.808 6.43-6.381 12-11.147 12-15.808 0-6.792-8.875-8.306-12-2.944z" /> */}
-              <TwitterShareButton
-                url={'https://quran.cafe/'}
-                options={{ text: `I'm currently Listen to Quran on @QuranCafe and you should too!`, via: 'qurancafe' }}
-              >
-              </TwitterShareButton>
-              {/* </svg> */}
-
-              <motion.button
-
-                onClick={removeGif}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }} >
-                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24"><path d="M19 8v8h-17v-8h17zm2-2h-21v12h21v-12zm1 9h.75c.69 0 1.25-.56 1.25-1.25v-3.5c0-.69-.56-1.25-1.25-1.25h-.75v6zm-16-6h-3v6h3v-6z" /></svg>
-              </motion.button>
-
-            </div>
 
 
 
           </div>
+
         </div>
 
       </motion.div>
 
       <div className="absolute top-0 left-0 right-9 flex items-center justify-between p-4">
+
+        <button
+
+        >
+        </button>
         <div className="relative -top-0.5">
           <div className="flex items-center space-x-1">
 
-            <motion.button
 
+            <motion.button
+              className="pr-2"
+              onClick={handleNext}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }} >
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M18 9v-3c-1 0-3.308-.188-4.506 2.216l-4.218 8.461c-1.015 2.036-3.094 3.323-5.37 3.323h-3.906v-2h3.906c1.517 0 2.903-.858 3.58-2.216l4.218-8.461c1.356-2.721 3.674-3.323 6.296-3.323v-3l6 4-6 4zm-9.463 1.324l1.117-2.242c-1.235-2.479-2.899-4.082-5.748-4.082h-3.906v2h3.906c2.872 0 3.644 2.343 4.631 4.324zm15.463 8.676l-6-4v3c-3.78 0-4.019-1.238-5.556-4.322l-1.118 2.241c1.021 2.049 2.1 4.081 6.674 4.081v3l6-4z" /></svg>
+            </motion.button>
+
+            <motion.button
+              className="pr-2"
               onClick={handleClick}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }} >
@@ -301,13 +305,12 @@ function App() {
 
 
 
-
             <motion.button
-
-              onClick={handleNext}
+              className="pr-2"
+              onClick={removeGif}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }} >
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M18 9v-3c-1 0-3.308-.188-4.506 2.216l-4.218 8.461c-1.015 2.036-3.094 3.323-5.37 3.323h-3.906v-2h3.906c1.517 0 2.903-.858 3.58-2.216l4.218-8.461c1.356-2.721 3.674-3.323 6.296-3.323v-3l6 4-6 4zm-9.463 1.324l1.117-2.242c-1.235-2.479-2.899-4.082-5.748-4.082h-3.906v2h3.906c2.872 0 3.644 2.343 4.631 4.324zm15.463 8.676l-6-4v3c-3.78 0-4.019-1.238-5.556-4.322l-1.118 2.241c1.021 2.049 2.1 4.081 6.674 4.081v3l6-4z" /></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24"><path d="M19 8v8h-17v-8h17zm2-2h-21v12h21v-12zm1 9h.75c.69 0 1.25-.56 1.25-1.25v-3.5c0-.69-.56-1.25-1.25-1.25h-.75v6zm-16-6h-3v6h3v-6z" /></svg>
             </motion.button>
 
 
@@ -347,14 +350,15 @@ function App() {
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.1, repeat: Infinity }}
+              transition={{ duration: 0.3, repeat: Infinity }}
             >
 
               <h1
-                className="text-xl pb-2	text-center  font-mono  font-extrabold text-white-800"
-              > Loading </h1>
+                className="text-3xl pb-2	text-center  font-mono  font-extrabold text-white-800"
+              > Loading... </h1>
             </motion.div>
           )}
+
 
 
 
@@ -368,17 +372,22 @@ function App() {
             muted={isMuted}
             volume={volume}
             playsinline={true}
+
             onPlay={() => setIsMuted(false)}
             onPause={() => setIsPlaying(false)}
             onEnded={() => shuffleOnEnd()}
             onError={() => shuffleOnEnd()}
             onBuffer={() => setIsBuffering(true)}
+            onReady={() => setIsBuffering(false)}
             onBufferEnd={() => setIsBuffering(false)}
 
           />
         </div>
 
+
+
       </motion.div>
+      <Menu />
     </div >
 
 

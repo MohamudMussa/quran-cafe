@@ -73,8 +73,6 @@ const STATION = [
   "NIoY0SJIycM&t=7s&ab_channel=TheQuranProject",
   "Jb22cetMpzA&t=6s&ab_channel=shahidaxD",
   "nxyueNqrhLk&t=45s&ab_channel=SalaamStudio",
-  "3c5KNNKjFW8&ab_channel=TaleexWacaan",
-  "STpDDhEszqg&t=14s&ab_channel=QuranShaykh",
   "v5Yqe9jFYO0&t=65s&ab_channel=AlFurqanCentre%28MasjidAlFurqan%29",
   "ulZXOfJbDdQ&ab_channel=husseinaliraqi",
   "dOW0pVnaor4&t=10s&ab_channel=IbrahimAdhhamAli",
@@ -86,6 +84,13 @@ const STATION = [
   "iWqy1pXcndg&t=13s&ab_channel=ALBAYAANUK",
   "6ABibmGp3Ik&t=16s&ab_channel=SheikhHassanAl-waajidiOfficialChannel",
   "G3u-MHPqZZw&ab_channel=السنيةالسلفية",
+  "Lg7SPMXiG14",
+  "_q6TJD0ttO4&t=5s",
+  "JDsfr0d-8jM",
+  "srCy6oxNbYs&t=4s",
+  "NUXJz8UL_p8&t=8s",
+  "-l0I8Uak-IQ",
+  "bdi877qwKgM&t=33s"
 
 
 

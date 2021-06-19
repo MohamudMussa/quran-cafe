@@ -14,9 +14,8 @@ const variants = {
 export const Navigation = () => (
     <motion.ul variants={variants}>
 
-        <MenuItem />
+        <MenuItem class="change-my-color" />
 
     </motion.ul>
 );
 
-const itemIds = [0, 1, 2, 3, 4];

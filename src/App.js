@@ -261,6 +261,28 @@ function App() {
 
 
 
+            {/* NEXT AND PREVIOUS BUTTONS */}
+
+            {/* <motion.button
+              className="pr-4"
+              onClick={() => setStation(station - 1)}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }} >
+              <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24"><path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-5 16v-8l6 4-6 4zm6 0v-8l6 4-6 4z" /></svg>
+            </motion.button>
+
+
+            <motion.button
+              className="pr-4"
+              onClick={() => setStation(station + 1)}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }} >
+              <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24"><path d="M22 12c0 5.514-4.486 10-10 10s-10-4.486-10-10 4.486-10 10-10 10 4.486 10 10zm-22 0c0 6.627 5.373 12 12 12s12-5.373 12-12-5.373-12-12-12-12 5.373-12 12zm11 0l6-4v8l-6-4zm-6 0l6-4v8l-6-4z" /></svg>
+            </motion.button> */}
+
+
+
+
             {/* HEART */}
             {/* <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 4.248c-3.148-5.402-12-3.825-12 2.944 0 4.661 5.571 9.427 12 15.808 6.43-6.381 12-11.147 12-15.808 0-6.792-8.875-8.306-12-2.944z" />
           

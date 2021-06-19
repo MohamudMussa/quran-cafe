@@ -80,7 +80,12 @@ export const MenuItem = ({ i }) => {
                     options={{ text: `I'm currently Listen to Quran on @QuranCafe and you should too!`, via: 'qurancafe' }}
                 >
                 </TwitterShareButton>
+
+
             </div>
+
+
+
 
 
         </motion.div>

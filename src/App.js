@@ -189,10 +189,7 @@ function App() {
 
   return (
 
-    <div class="h-screen md:h-screen md:justify-center md:py-0"
-
-    >
-
+    <>
 
       <motion.div className="flex py-16	 justify-center h-screen  "
         initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}
@@ -417,8 +414,8 @@ function App() {
 
       </motion.div>
       <Menu />
-    </div >
 
+    </>
 
   );
 

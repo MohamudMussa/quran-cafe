@@ -202,10 +202,10 @@ function App() {
 
 
 
-        <div className="text-center lg:w-2/3 w-full sm:text-sm sm:pt-5">
+        <div className="text-center lg:w-2/3 w-full sm:text-lg">
 
           <h1
-            className="text-3xl text-center font-black font-extrabold	tracking-wide sm:pt-5 sm:text-base"
+            className="text-3xl text-center font-black font-extrabold	tracking-wide	 "
 
           >
             وَاِذَا قُرِئَ الۡقُرۡاٰنُ فَاسۡتَمِعُوۡا لَهٗ وَاَنۡصِتُوۡا لَعَلَّكُمۡ تُرۡحَمُوۡنَ‏  ۝ </h1>

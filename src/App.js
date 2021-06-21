@@ -189,7 +189,7 @@ function App() {
 
   return (
 
-    <div className="min-h-screen"
+    <div class="flex flex-col items-center md:h-screen md:justify-center px-4 py-16 md:py-0"
 
     >
 
@@ -303,7 +303,7 @@ function App() {
 
       </motion.div>
 
-      <div className="absolute top-0 left-0 right-9 flex items-center justify-between p-4">
+      <div className="absolute top-0 left-0 right-0 flex items-center justify-between p-4">
 
         <button
 

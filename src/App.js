@@ -90,7 +90,8 @@ const STATION = [
   "srCy6oxNbYs&t=4s",
   "NUXJz8UL_p8&t=8s",
   "-l0I8Uak-IQ",
-  "bdi877qwKgM&t=33s"
+  "bdi877qwKgM&t=33s",
+
 
 
 
@@ -188,7 +189,7 @@ function App() {
 
   return (
 
-    <div
+    <div className="min-h-screen"
 
     >
 

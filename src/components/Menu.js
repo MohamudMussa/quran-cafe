@@ -34,6 +34,7 @@ export const Menu = () => {
 
     return (
         <motion.nav
+            className="flex py-16	 justify-center min-h-screen "
             initial={false}
             animate={isOpen ? "open" : "closed"}
             custom={height}

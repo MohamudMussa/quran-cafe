@@ -189,12 +189,12 @@ function App() {
 
   return (
 
-    <div class="flex flex-col items-center md:h-screen md:justify-center px-4 py-16 md:py-0"
+    <div class="h-screen md:h-screen md:justify-center md:py-0"
 
     >
 
 
-      <motion.div className="flex py-16	 justify-center min-h-screen "
+      <motion.div className="flex py-16	 justify-center md:h-screen min-h-screen  "
         initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}
 
       >
@@ -202,10 +202,10 @@ function App() {
 
 
 
-        <div className="text-center lg:w-2/3 w-full">
+        <div className="text-center lg:w-2/3 w-full sm:text-sm sm:pt-5">
 
           <h1
-            className="text-3xl text-center font-black font-extrabold	tracking-wide	 "
+            className="text-3xl text-center font-black font-extrabold	tracking-wide sm:pt-5 sm:text-base"
 
           >
             وَاِذَا قُرِئَ الۡقُرۡاٰنُ فَاسۡتَمِعُوۡا لَهٗ وَاَنۡصِتُوۡا لَعَلَّكُمۡ تُرۡحَمُوۡنَ‏  ۝ </h1>

@@ -1,6 +1,6 @@
 import * as React from "react";
 import { motion } from "framer-motion";
-import { TwitterShareButton } from 'react-twitter-embed';
+// import { TwitterShareButton } from 'react-twitter-embed';
 
 
 const variants = {
@@ -32,7 +32,7 @@ export const MenuItem = ({ i }) => {
             whileTap={{ scale: 0.95 }}
         >
 
-            {/* ABOUT ME ADDED */}
+            {/* ABOUT ME ADDED
             <div className="icon-placeholder" >
                 <h1 className="pb-3"> Quran Cafe ☕ </h1>
 
@@ -74,7 +74,7 @@ export const MenuItem = ({ i }) => {
 
 
             </div>
-
+ */}
 
 
 

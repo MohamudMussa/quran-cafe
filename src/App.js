@@ -196,6 +196,12 @@ function App() {
 
       <motion.div className="flex py-16	 justify-center md:h-screen min-h-screen  "
         initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}
+        style={{
+          backgroundImage: `url('${activeImage}')`,
+          backgroundSize: "cover",
+          opacity: "0.7"
+
+        }}
 
       >
 
@@ -354,12 +360,7 @@ function App() {
       <motion.div
         initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }}
         id='vignette'
-        style={{
-          backgroundImage: `url('${activeImage}')`,
-          backgroundSize: "cover",
-          opacity: "0.7"
-
-        }}>
+      >
 
         <div
           id='vin'>

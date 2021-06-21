@@ -202,7 +202,7 @@ function App() {
 
 
 
-        <div className="text-center lg:w-2/3 w-full sm:text-lg">
+        <div className="text-center lg:w-2/3 w-full">
 
           <h1
             className="text-3xl text-center font-black font-extrabold	tracking-wide	 "
@@ -371,7 +371,8 @@ function App() {
 
         </div >
 
-        <div>
+        <div
+        >
 
           {isBuffering === true && (
             <motion.div
@@ -381,7 +382,7 @@ function App() {
             >
 
               <h1
-                className="text-3xl pb-2	text-center  font-mono  font-extrabold text-white-800"
+                className="sm:text-xs text-3xl pb-2	text-center  font-mono  font-extrabold text-white-800"
               > Loading... </h1>
             </motion.div>
           )}

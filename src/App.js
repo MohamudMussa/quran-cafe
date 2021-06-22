@@ -11,10 +11,10 @@ import nine from './images/9.jpg'
 import ten from './images/10.jpg'
 
 
-import ReactPlayer from 'react-player/youtube'
-import { Menu } from './components/Menu'
+import ReactPlayer from 'react-player/youtube';
+import { Menu } from './components/Menu';
 import { useEffect, useState } from 'react';
-import { motion } from "framer-motion"
+import { motion } from "framer-motion";
 
 
 const IMAGES = [
@@ -94,7 +94,8 @@ const STATION = [
   "eRYqtmWv8KQ&t=8s&ab_channel=MahdeeHasanStudio",
   "PiI8fIGF-nY&ab_channel=MahdeeHasanStudioMahdeeHasanStudio",
   "fj1Ijaj_ceE&t=2s&ab_channel=sheikhAbdirhamanbukhari",
-  "BbSCFOBTfgc&t=11s&ab_channel=اللعبان"
+  "BbSCFOBTfgc&t=11s&ab_channel=اللعبان",
+  "BoGP5arVC88&t=4s&ab_channel=AmelSoname"
 
 
 

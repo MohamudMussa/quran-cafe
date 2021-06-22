@@ -92,7 +92,8 @@ const STATION = [
   "-l0I8Uak-IQ",
   "bdi877qwKgM&t=33s",
   "eRYqtmWv8KQ&t=8s&ab_channel=MahdeeHasanStudio",
-  "PiI8fIGF-nY&ab_channel=MahdeeHasanStudioMahdeeHasanStudio"
+  "PiI8fIGF-nY&ab_channel=MahdeeHasanStudioMahdeeHasanStudio",
+  "fj1Ijaj_ceE&t=2s&ab_channel=sheikhAbdirhamanbukhari"
 
 
 

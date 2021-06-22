@@ -17,12 +17,13 @@
     left: 0;
     bottom: 0;
     width: 300px;
-    background: rgb(71, 71, 71);
+    background: rgb(0, 0, 0);
   }
   
   .btn1 {
     outline: none;
     border: none;
+    fill: gold;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;

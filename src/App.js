@@ -95,7 +95,10 @@ const STATION = [
   "PiI8fIGF-nY&ab_channel=MahdeeHasanStudioMahdeeHasanStudio",
   "fj1Ijaj_ceE&t=2s&ab_channel=sheikhAbdirhamanbukhari",
   "BbSCFOBTfgc&t=11s&ab_channel=اللعبان",
-  "BoGP5arVC88&t=4s&ab_channel=AmelSoname"
+  "BoGP5arVC88&t=4s&ab_channel=AmelSoname",
+  "FtpvHlbvQkg&t=7s&ab_channel=abdwaliyuddin",
+  "l1RNV16J_Oo&ab_channel=abdwaliyuddinabdwaliyuddin",
+  "jFv49fYBhnI&t=5s&ab_channel=MrM4nsoor"
 
 
 

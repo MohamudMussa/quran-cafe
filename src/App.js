@@ -98,7 +98,9 @@ const STATION = [
   "BoGP5arVC88&t=4s&ab_channel=AmelSoname",
   "FtpvHlbvQkg&t=7s&ab_channel=abdwaliyuddin",
   "l1RNV16J_Oo&ab_channel=abdwaliyuddinabdwaliyuddin",
-  "jFv49fYBhnI&t=5s&ab_channel=MrM4nsoor"
+  "jFv49fYBhnI&t=5s&ab_channel=MrM4nsoor",
+  "24zDC_Qc60A&ab_channel=IslamExplainedIslamExplained",
+  "jcttVRPMh-8&t=12s&ab_channel=ThelightofholyQuran"
 
 
 

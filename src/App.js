@@ -215,7 +215,7 @@ function App() {
 
 
 
-        <div className="text-center lg:w-2/3 w-full">
+        <div className="text-center lg:w-2/3 w-full sm: pt-9">
 
           <h1
             className="text-3xl text-center font-black font-extrabold	tracking-wide	 "
@@ -237,7 +237,7 @@ function App() {
 
 
             <motion.button
-              className="pr-4"
+              className="pr-4 z-40"
               onClick={() => setVolume(volume + 0.2)}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }} >
@@ -246,7 +246,7 @@ function App() {
 
             {isPlaying === false && (
               <motion.button
-                className="pr-4"
+                className="pr-4  z-40"
                 onClick={() => setIsPlaying(true)}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }} >
@@ -258,7 +258,7 @@ function App() {
             {isPlaying === true && (
 
               <motion.button
-                className="pr-4"
+                className="pr-4  z-40"
                 onClick={() => setIsPlaying(false)}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }} >
@@ -271,7 +271,7 @@ function App() {
 
 
             <motion.button
-              className="pr-4"
+              className="pr-4  z-40"
               onClick={() => setVolume(volume - 0.2)}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }} >
@@ -327,7 +327,7 @@ function App() {
 
 
             <motion.button
-              className="pr-2"
+              className="pr-2  z-40"
               onClick={handleNext}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }} >
@@ -335,7 +335,7 @@ function App() {
             </motion.button>
 
             <motion.button
-              className="pr-2"
+              className="pr-2  z-40"
               onClick={handleClick}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }} >
@@ -345,7 +345,7 @@ function App() {
 
 
             <motion.button
-              className="pr-2"
+              className="pr-2  z-40"
               onClick={removeGif}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }} >
@@ -390,7 +390,7 @@ function App() {
             >
 
               <h1
-                className="sm:text-xs text-3xl pb-2	text-center  font-mono  font-extrabold text-white-800"
+                className="sm:text-xs text-3xl pb-2	text-center  font-mono  font-extrabold text-white-800 sm: text-md"
               > Loading... </h1>
             </motion.div>
           )}

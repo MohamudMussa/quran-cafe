@@ -26,17 +26,27 @@ export const MenuItem = ({ i }) => {
     return (
 
         <motion.div
-            className=" text-md  text-white font-mono "
+            className=" text-md  text-white font-mono z-50 "
             variants={variants}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
+
         >
 
             {/* ABOUT ME ADDED */}
             <div className="icon-placeholder" >
-                <h1 className="pb-3"> Quran Cafe ☕ </h1>
+                <h1 > Share the reward </h1>
+                <TwitterShareButton
+                    url={'https://quran.cafe/'}
+                    options={{ text: `I'm currently Listen to Quran on @QuranCafe and you should too!`, via: 'qurancafe' }}
+                >
+                </TwitterShareButton>
 
-                <p className="pb-3"> Quran Cafe was made so that you could Study / Code while listening to a unique selections of Quran from all around the world.</p>
+
+            </div>
+
+            <div className="icon-placeholder z-50" >
+                <h1 className="pt-3"> بسم الله‎ </h1>
+
+                <p className="pb-3 z-50"> Quran Cafe ☕ was made so that you could Study / Code while listening to a unique selections of Quran from all around the world.</p>
 
                 <p className="pb-3">  Share your Quran playlist with us 🤍 and we'll add it to our stations </p>
                 <a
@@ -64,16 +74,7 @@ export const MenuItem = ({ i }) => {
             <p > Remove Film Effect </p>
 
 
-            <div className="icon-placeholder" >
-                <h1 className="pt-20"> Share the reward </h1>
-                <TwitterShareButton
-                    url={'https://quran.cafe/'}
-                    options={{ text: `I'm currently Listen to Quran on @QuranCafe and you should too!`, via: 'qurancafe' }}
-                >
-                </TwitterShareButton>
 
-
-            </div>
 
 
 

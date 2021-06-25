@@ -44,9 +44,9 @@ export const MenuItem = ({ i }) => {
             </div>
 
             <div className="icon-placeholder z-50" >
-                <h1 className="pt-3"> بسم الله‎ </h1>
+                <h1 className="pt-3 text-2xl font-mono"> بسم الله‎ </h1>
 
-                <p className="pb-3 z-50"> Quran Cafe ☕ was made so that you could Study / Code while listening to a unique selections of Quran from all around the world.</p>
+                <p className="pb-3 z-50"> Quran Cafe ☕ was made so that you could Study / Code + more while listening to a unique selections of Quran from all around the world.</p>
 
                 <p className="pb-3">  Share your Quran playlist with us 🤍 and we'll add it to our stations </p>
                 <a

@@ -101,7 +101,9 @@ const STATION = [
   "jFv49fYBhnI&t=5s&ab_channel=MrM4nsoor",
   "24zDC_Qc60A&ab_channel=IslamExplainedIslamExplained",
   "jcttVRPMh-8&t=12s&ab_channel=ThelightofholyQuran",
-  "O9ULdDIzbeM&t=9s&ab_channel=الكلباني-Alkalbani"
+  "O9ULdDIzbeM&t=9s&ab_channel=الكلباني-Alkalbani",
+  "NK6i5JLrbVw&t=38s&ab_channel=Salafmedia",
+
 
 
 

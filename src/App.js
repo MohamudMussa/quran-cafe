@@ -104,7 +104,8 @@ const STATION = [
   "O9ULdDIzbeM&t=9s&ab_channel=الكلباني-Alkalbani",
   "NK6i5JLrbVw&t=38s&ab_channel=Salafmedia",
   "cmpYjCPQXmU&ab_channel=NiinCuluus",
-  "uiE3JJd6Lag&t=40s&ab_channel=AlFurqanCentre%28MasjidAlFurqan%29"
+  "uiE3JJd6Lag&t=40s&ab_channel=AlFurqanCentre%28MasjidAlFurqan%29",
+  "https://youtu.be/JtjftCjDH1Q?t=22"
 
 
 

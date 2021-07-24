@@ -184,6 +184,7 @@ function App() {
     right: 0,
     bottom: 0,
     zIndex: 0,
+    borderRadius: "8px",
   };
 
 
@@ -195,6 +196,8 @@ function App() {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    borderRadius: "8px",
+
   };
 
   const hiddenStyle = {
@@ -208,7 +211,8 @@ function App() {
   const reactPlayerStyle = {
     pointerEvents: "none",
     userSelect: "none",
-    zIndex: 33,
+    zIndex: -1,
+    borderRadius: "8px",
   };
 
 

@@ -24,6 +24,8 @@ const IMAGES = [
   five, seven, eight, nine, ten,
 ];
 
+
+
 const STATION = [
   "hO5wCnVLHWU",
   "bEGm_DHmiuk&list=PLxGJ20Im19wOWIfITK3KL69qm2j8kb3gI&index=3&ab_channel=محبالخير",
@@ -157,24 +159,59 @@ function App() {
   };
 
 
-
-
-
-
   const [volume, setVolume] = useState(0.2)
 
   const [isPlaying, setIsPlaying] = useState(false)
 
   const [isMuted, setIsMuted] = useState(true)
 
+  const [show, setShow] = useState(false)
 
-  const hiddenPlayer = {
+  function handleShowOriginalVideo() {
+    if (!show) {
+    }
+    setShow(!show);
+  }
+
+
+  const wrapperStyle = {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    position: "fixed",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    zIndex: 0,
+  };
+
+
+  const innerWrapperStyle = {
+    zIndex: 22,
+    width: "100%",
+    height: "100%",
+    overflow: "hidden",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  };
+
+  const hiddenStyle = {
     pointerEvents: "none",
     userSelect: "none",
     position: "fixed",
     top: "100%",
     left: "100%",
   };
+
+  const reactPlayerStyle = {
+    pointerEvents: "none",
+    userSelect: "none",
+    zIndex: 33,
+  };
+
+
 
   const removeGif = () => {
 
@@ -217,6 +254,47 @@ function App() {
         }}
 
       >
+
+
+        <div
+          style={show ? wrapperStyle : hiddenStyle}
+        >
+
+          <div style={innerWrapperStyle}>
+            <ReactPlayer
+              url={"https://www.youtube.com/watch?v=" + station}
+              style={reactPlayerStyle}
+              playing={isPlaying}
+              controls={false}
+              // width="100vw"
+              // height="200vw"
+              muted={isMuted}
+              volume={volume}
+              playsinline={true}
+
+              config={{
+                youtube: {
+                  playerVars: {
+                    modestbranding: true,
+                    color: "black",
+                  },
+                },
+              }}
+
+              onPlay={() => setIsMuted(false)}
+              onPause={() => setIsPlaying(false)}
+              onEnded={() => shuffleOnEnd()}
+              onError={() => shuffleOnEnd()}
+              onBuffer={() => setIsBuffering(true)}
+              onReady={() => setIsBuffering(false)}
+              onBufferEnd={() => setIsBuffering(false)}
+
+            />
+
+
+          </div>
+
+        </div>
 
 
 
@@ -284,36 +362,6 @@ function App() {
               <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24"><path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6 13h-12v-2h12v2z" /></svg>
             </motion.button>
 
-            {/* NEXT AND PREVIOUS BUTTONS */}
-
-            {/* <motion.button
-                className="pr-4"
-                onClick={() => setStation(station - 1)}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }} >
-                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24"><path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-5 16v-8l6 4-6 4zm6 0v-8l6 4-6 4z" /></svg>
-              </motion.button>
-
-
-              <motion.button
-                className="pr-4"
-                onClick={() => setStation(station + 1)}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }} >
-                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24"><path d="M22 12c0 5.514-4.486 10-10 10s-10-4.486-10-10 4.486-10 10-10 10 4.486 10 10zm-22 0c0 6.627 5.373 12 12 12s12-5.373 12-12-5.373-12-12-12-12 5.373-12 12zm11 0l6-4v8l-6-4zm-6 0l6-4v8l-6-4z" /></svg>
-              </motion.button> */}
-
-
-
-
-            {/* HEART */}
-            {/* <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 4.248c-3.148-5.402-12-3.825-12 2.944 0 4.661 5.571 9.427 12 15.808 6.43-6.381 12-11.147 12-15.808 0-6.792-8.875-8.306-12-2.944z" />
-          
-              </svg> */}
-
-
-
-
 
 
           </div>
@@ -334,11 +382,23 @@ function App() {
 
             <motion.button
               className="pr-2  z-40"
+              onClick={handleShowOriginalVideo}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }} >
+
+
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-.001 5.75c.69 0 1.251.56 1.251 1.25s-.561 1.25-1.251 1.25-1.249-.56-1.249-1.25.559-1.25 1.249-1.25zm2.001 12.25h-4v-1c.484-.179 1-.201 1-.735v-4.467c0-.534-.516-.618-1-.797v-1h3v6.265c0 .535.517.558 1 .735v.999z" /></svg>
+            </motion.button>
+
+
+            <motion.button
+              className="pr-2  z-40"
               onClick={handleNext}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }} >
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M18 9v-3c-1 0-3.308-.188-4.506 2.216l-4.218 8.461c-1.015 2.036-3.094 3.323-5.37 3.323h-3.906v-2h3.906c1.517 0 2.903-.858 3.58-2.216l4.218-8.461c1.356-2.721 3.674-3.323 6.296-3.323v-3l6 4-6 4zm-9.463 1.324l1.117-2.242c-1.235-2.479-2.899-4.082-5.748-4.082h-3.906v2h3.906c2.872 0 3.644 2.343 4.631 4.324zm15.463 8.676l-6-4v3c-3.78 0-4.019-1.238-5.556-4.322l-1.118 2.241c1.021 2.049 2.1 4.081 6.674 4.081v3l6-4z" /></svg>
             </motion.button>
+
 
             <motion.button
               className="pr-2  z-40"
@@ -403,31 +463,7 @@ function App() {
 
 
 
-
-          <ReactPlayer
-            url={"https://www.youtube.com/watch?v=" + station}
-            style={hiddenPlayer}
-            playing={isPlaying}
-            controls={false}
-            width="100vw"
-            height="200vw"
-            muted={isMuted}
-            volume={volume}
-            playsinline={true}
-
-            onPlay={() => setIsMuted(false)}
-            onPause={() => setIsPlaying(false)}
-            onEnded={() => shuffleOnEnd()}
-            onError={() => shuffleOnEnd()}
-            onBuffer={() => setIsBuffering(true)}
-            onReady={() => setIsBuffering(false)}
-            onBufferEnd={() => setIsBuffering(false)}
-
-          />
         </div>
-
-
-
       </motion.div>
       <Menu />
 

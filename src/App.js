@@ -112,6 +112,7 @@ const STATION = [
   "1FUl7IhOi24&t=8s&ab_channel=ISLAMICVIDEOS",
   "BTHo0_ii3uo&t=41s&ab_channel=AmirMuhammadAl-Yemani",
   "https://www.youtube.com/watch?v=f_1hwmtLr9Q&t=22s&ab_channel=NaqaaStudio",
+  "https://www.youtube.com/watch?t=22&v=vNSu3_NoW9E&feature=youtu.be&ab_channel=AlMadrasatuAlUmariyyah",
 
 
 

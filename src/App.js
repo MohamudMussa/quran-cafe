@@ -110,6 +110,8 @@ const STATION = [
   "JtjftCjDH1Q&t=22s&ab_channel=ReadandAscend",
   "pCLWMuaoNLo&t=91s&ab_channel=جائزةدبيالدوليةللقرآنالكريمDIHQA",
   "1FUl7IhOi24&t=8s&ab_channel=ISLAMICVIDEOS",
+  "BTHo0_ii3uo&t=41s&ab_channel=AmirMuhammadAl-Yemani",
+  "https://www.youtube.com/watch?v=f_1hwmtLr9Q&t=22s&ab_channel=NaqaaStudio",
 
 
 
@@ -275,11 +277,10 @@ function App() {
               muted={isMuted}
               volume={volume}
               playsinline={true}
-
               config={{
                 youtube: {
                   playerVars: {
-                    modestbranding: true,
+                    modestbranding: false,
                     color: "black",
                   },
                 },

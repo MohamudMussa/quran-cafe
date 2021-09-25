@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Script from "next/script";
 
 export const DEFAULT_META = {
   title: "Quran Cafe",
@@ -8,6 +9,11 @@ export const DEFAULT_META = {
 function Layout({ children, meta = DEFAULT_META }) {
   return (
     <>
+      <Script
+        afterInteractive
+        data-domain="quran.cafe"
+        src="https://plausible.io/js/plausible.js"
+      />
       <Head>
         <title>{meta.title}</title>
         <meta name="description" content={meta.description} />

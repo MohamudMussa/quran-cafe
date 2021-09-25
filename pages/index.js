@@ -154,13 +154,13 @@ function Home() {
         </div>
 
         <div className="text-center lg:w-2/3 w-full sm: pt-9">
-          <h1 className="text-3xl text-center font-black font-extrabold	tracking-wide	 ">
+          <h1 className="text-3xl text-center font-black font-extrabold	tracking-wide">
             وَاِذَا قُرِئَ الۡقُرۡاٰنُ فَاسۡتَمِعُوۡا لَهٗ وَاَنۡصِتُوۡا
             لَعَلَّكُمۡ تُرۡحَمُوۡنَ‏ ۝{" "}
           </h1>
 
           <p className="text-l py-2	text-center  font-mono  font-extrabold text-white-800 ">
-            So when the Qur'an is recited, listen carefully to it, and keep
+            So when the Quran is recited, listen carefully to it, and keep
             silent so that you may, be shown mercy.
           </p>
           <p className="text-l pb-2	text-center  font-mono  font-extrabold text-white-800 ">

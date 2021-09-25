@@ -46,8 +46,7 @@ const MenuItem = () => {
         </p>
 
         <p className="pb-3">
-          {" "}
-          Share your Quran playlist with us 🤍 and we'll add it to our stations{" "}
+          Share your Quran playlist with us 🤍 and well add it to our stations
         </p>
         <a
           style={{ color: "gold" }}

@@ -1,6 +1,6 @@
 function Content({ title, content, reference }) {
   return (
-    <div className="text-center lg:w-2/3 w-full sm: pt-9">
+    <div>
       <h1 className="text-3xl text-center font-black font-extrabold	tracking-wide">
         {title}
       </h1>

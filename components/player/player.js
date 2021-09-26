@@ -47,9 +47,6 @@ function Player({
   onPause,
   onEnded,
   onError,
-  onBuffer,
-  onBufferEnd,
-  onReady,
   muted,
   volume,
 }) {
@@ -57,12 +54,10 @@ function Player({
     <div style={show ? wrapperStyle : hiddenStyle}>
       <div style={innerWrapperStyle}>
         <ReactPlayer
-          url={"https://www.youtube.com/watch?v=" + station}
+          url={station.video_url}
           style={reactPlayerStyle}
           playing={playing}
           controls={false}
-          // width="100vw"
-          // height="200vw"
           muted={muted}
           volume={volume}
           playsinline={true}
@@ -78,9 +73,6 @@ function Player({
           onPause={onPause}
           onEnded={onEnded}
           onError={onError}
-          onBuffer={onBuffer}
-          onReady={onReady}
-          onBufferEnd={onBufferEnd}
         />
       </div>
     </div>

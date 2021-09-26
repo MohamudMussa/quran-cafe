@@ -100,22 +100,21 @@ function Home() {
           onReady={() => setIsBuffering(false)}
           onBufferEnd={() => setIsBuffering(false)}
         />
-        <div className="text-center lg:w-2/3 w-full sm: pt-9">
-          <Content
-            title={`وَاِذَا قُرِئَ الۡقُرۡاٰنُ فَاسۡتَمِعُوۡا لَهٗ وَاَنۡصِتُوۡا
+
+        <Content
+          title={`وَاِذَا قُرِئَ الۡقُرۡاٰنُ فَاسۡتَمِعُوۡا لَهٗ وَاَنۡصِتُوۡا
             لَعَلَّكُمۡ تُرۡحَمُوۡنَ‏ ۝`}
-            content={`So when the Quran is recited, listen carefully to it, and keep
+          content={`So when the Quran is recited, listen carefully to it, and keep
             silent so that you may, be shown mercy.`}
-            reference={`[7:204]`}
-          />
-          <Actions
-            playing={isPlaying}
-            handlePlay={() => setIsPlaying(true)}
-            handlePause={() => setIsPlaying(false)}
-            incrementVolume={() => setVolume((volume) => volume + 0.2)}
-            decrementVolume={() => setVolume((volume) => volume - 0.2)}
-          />
-        </div>
+          reference={`[7:204]`}
+        />
+        <Actions
+          playing={isPlaying}
+          handlePlay={() => setIsPlaying(true)}
+          handlePause={() => setIsPlaying(false)}
+          incrementVolume={() => setVolume((volume) => volume + 0.2)}
+          decrementVolume={() => setVolume((volume) => volume - 0.2)}
+        />
       </motion.div>
 
       <AdditionalActions

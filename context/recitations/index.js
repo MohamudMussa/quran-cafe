@@ -2,26 +2,16 @@ import { createContext, useContext, useEffect, useRef, useState } from "react";
 import Recitations from "../../lib/db/models/recitations";
 
 const DEFAULT_VALUE = {
-  recitations: [],
+  instance: [],
 };
 
 const RecitationsContext = createContext(DEFAULT_VALUE);
 
 export const RecitationsProvider = ({ children }) => {
   const instance = useRef(new Recitations());
-  const [data, setData] = useState(DEFAULT_VALUE.data);
-
-  const fetchAll = async () => {
-    const res = await instance.current.getAll();
-    setData(res);
-  };
-
-  useEffect(() => {
-    fetchAll();
-  }, []);
 
   const value = {
-    recitations: data,
+    instance: instance,
   };
 
   return (
@@ -31,6 +21,6 @@ export const RecitationsProvider = ({ children }) => {
   );
 };
 
-export default function useRecitation() {
+export default function useRecitations() {
   return useContext(RecitationsContext);
 }

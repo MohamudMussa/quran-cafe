@@ -4,8 +4,11 @@ import { Actions, AdditionalActions, Content, Player } from ".";
 import { removeGif, getImage, getStation } from "./utils";
 import { IMAGES } from "../../config/constants";
 import useRecitations from "../../context/recitations";
+import useListeners from "../../hooks/use-listeners/use-listeners";
+import { LiveListeners } from "../live-listeners";
 
 function Container({ recitations }) {
+  const { data, error } = useListeners();
   const { instance } = useRecitations();
   const [voted, setVoted] = useState(false);
   const [activeImage, setActiveImage] = useState(IMAGES[0]);
@@ -55,6 +58,7 @@ function Container({ recitations }) {
           opacity: "0.7",
         }}
       >
+        <LiveListeners count={data.count} />
         <Player
           playing={isPlaying}
           muted={isMuted}

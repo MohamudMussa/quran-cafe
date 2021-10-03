@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import SocialShare from "../social-share/social-share";
 
 function AdditionalActions({
   onShuffleClick,
@@ -10,8 +11,9 @@ function AdditionalActions({
     <div className="absolute top-0 right-0 flex items-center justify-between p-4">
       <div className="relative -top-0.5">
         <div className="flex items-center space-x-1">
+          <SocialShare />
           <motion.button
-            className="pr-2  z-40"
+            className="pr-2 "
             onClick={toggleVideo}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
@@ -26,7 +28,7 @@ function AdditionalActions({
             </svg>
           </motion.button>
           <motion.button
-            className="pr-2  z-40"
+            className="pr-2  "
             onClick={onShuffleClick}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
@@ -42,7 +44,7 @@ function AdditionalActions({
           </motion.button>
 
           <motion.button
-            className="pr-2  z-40"
+            className="pr-2  "
             onClick={onBackgroundShuffleClick}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
@@ -58,7 +60,7 @@ function AdditionalActions({
           </motion.button>
 
           <motion.button
-            className="pr-2  z-40"
+            className="pr-2  "
             onClick={onVignetteClick}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}

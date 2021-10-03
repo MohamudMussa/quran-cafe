@@ -9,7 +9,13 @@ import Recitations from "../lib/db/models/recitations";
 
 function Home({ recitations }) {
   return (
-    <Layout>
+    <Layout
+      meta={{
+        title: "Quran Cafe",
+        description:
+          "Quran Cafe ☕️ Study / Code while listening to unique recitations of the Quran from 🌎 | Share your Quran playlist with us ❤️",
+      }}
+    >
       <PlayerContainer recitations={recitations} />
       <Background />
       <Menu />

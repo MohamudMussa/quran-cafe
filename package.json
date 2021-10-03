@@ -9,17 +9,22 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^1.23.0",
+    "dotenv": "^10.0.0",
     "framer-motion": "^4.1.17",
     "next": "11.1.2",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-player": "^2.9.0",
+    "react-query": "^3.24.4",
     "react-twitter-embed": "^3.0.3"
   },
   "devDependencies": {
     "autoprefixer": "^10.3.5",
     "eslint": "7.32.0",
     "eslint-config-next": "11.1.2",
+    "eslint-plugin-react": "^7.26.1",
+    "eslint-plugin-react-hooks": "^4.2.0",
     "postcss": "^8.3.8",
     "tailwindcss": "^2.2.15"
   }

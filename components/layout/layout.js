@@ -17,6 +17,24 @@ function Layout({ children, meta = DEFAULT_META }) {
       <Head>
         <title>{meta.title}</title>
         <meta name="description" content={meta.description} />
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary" key="twcard" />
+        <meta name="twitter:creator" content="@qurancafe" key="twhandle" />
+
+        {/* Open Graph */}
+        <meta property="og:url" content="https://quran.cafe/" key="ogurl" />
+        <meta
+          property="og:image"
+          content="https://quran.cafe/_next/static/image/public/darker.a00dc7b3e280775c740b4c5f98f3b25e.jpg"
+          key="ogimage"
+        />
+        <meta property="og:site_name" content="Quran Cafe" key="ogsitename" />
+        <meta property="og:title" content={meta.title} key="ogtitle" />
+        <meta
+          property="og:description"
+          content={meta.description}
+          key="ogdesc"
+        />
         <link rel="icon" href="/favicon.ico" />
         <link
           rel="apple-touch-icon"

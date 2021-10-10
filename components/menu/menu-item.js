@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { TwitterShareButton } from "react-twitter-embed";
 
 const variants = {
   open: {
@@ -25,20 +24,8 @@ const MenuItem = () => {
       variants={variants}
     >
       {/* ABOUT ME ADDED */}
-      <div className="icon-placeholder">
-        <h1> Share the reward </h1>
-        <TwitterShareButton
-          url="https://quran.cafe/"
-          options={{
-            text: `I'm currently Listen to Quran on @QuranCafe and you should too!`,
-            via: "qurancafe",
-          }}
-        />
-      </div>
-
       <div className="icon-placeholder z-50">
-        <h1 className="pt-3 text-2xl font-mono"> بسم الله‎ </h1>
-
+        <h1 className="text-2xl font-mono"> بسم الله‎ </h1>
         <p className="pb-3 z-50">
           {" "}
           Quran Cafe ☕ was made so that you could Study / Code + more while
@@ -55,7 +42,6 @@ const MenuItem = () => {
         >
           DM @QuranCafe
         </a>
-        <div className="pb-10"></div>
       </div>
 
       <svg

@@ -6,8 +6,7 @@ function SocialShare() {
       <TwitterShareButton
         url="https://quran.cafe/"
         options={{
-          text: `I'm currently Listen to Quran on @QuranCafe and you should too!`,
-          via: "qurancafe",
+          text: `I'm currently Listen to Quran on @QuranCafe and you should too!`
         }}
       />
     </div>

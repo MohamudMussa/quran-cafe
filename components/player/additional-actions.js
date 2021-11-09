@@ -59,7 +59,9 @@ function AdditionalActions({
             </svg>
           </motion.button>
 
-          <motion.button
+          {/* vignette button removed */}
+
+          {/* <motion.button
             className="pr-2  "
             onClick={onVignetteClick}
             whileHover={{ scale: 1.1 }}
@@ -73,7 +75,7 @@ function AdditionalActions({
             >
               <path d="M19 8v8h-17v-8h17zm2-2h-21v12h21v-12zm1 9h.75c.69 0 1.25-.56 1.25-1.25v-3.5c0-.69-.56-1.25-1.25-1.25h-.75v6zm-16-6h-3v6h3v-6z" />
             </svg>
-          </motion.button>
+          </motion.button> */}
         </div>
       </div>
     </div>

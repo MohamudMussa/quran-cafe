@@ -22,7 +22,7 @@ function Background() {
           style={{
             backgroundImage: `url(${newImage.src})`,
           }}
-          className="flex flex-col items-center md:h-screen md:justify-center px-4 py-16 md:py-0"
+          className="z-0 flex flex-col items-center md:h-screen md:justify-center px-4 py-16 md:py-0"
         />
       </div>
     </motion.div>

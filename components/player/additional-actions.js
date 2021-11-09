@@ -4,8 +4,8 @@ import SocialShare from "../social-share/social-share";
 function AdditionalActions({
   onShuffleClick,
   onBackgroundShuffleClick,
-  onVignetteClick,
-  toggleVideo,
+  // onVignetteClick,
+  // toggleVideo,
 }) {
   return (
     <div className="absolute top-0 right-0 flex items-center justify-between p-4">

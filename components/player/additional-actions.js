@@ -12,6 +12,9 @@ function AdditionalActions({
       <div className="relative -top-0.5">
         <div className="flex items-center space-x-1">
           <SocialShare />
+
+          {/* Removed toggle video as its not needed */}
+
           {/* <motion.button
             className="pr-2 "
             onClick={toggleVideo}

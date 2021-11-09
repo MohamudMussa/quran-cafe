@@ -1,16 +1,5 @@
 import { IMAGES } from "../../config/constants";
 
-export const removeGif = () => {
-  var elem = document.getElementById("vignette");
-
-  if (typeof elem == "undefined" || elem == null) {
-    document.getElementById("normal").id = "vignette";
-    document.getElementById("normal").id = "vignette";
-  } else {
-    document.getElementById("vignette").id = "normal";
-    document.getElementById("vignette").id = "normal";
-  }
-};
 
 export const getImage = () => {
   const number = Math.floor(Math.random() * IMAGES.length);

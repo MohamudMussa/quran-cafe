@@ -1,4 +1,4 @@
-import meccaone from "../public/darker.jpg";
+import meccaone from "../public/meccanew.jpg";
 import medina from "../public/medina.jpg";
 import meccatwo from "../public/meccanew.jpg";
 import five from "../public/5.jpg";

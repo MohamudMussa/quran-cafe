@@ -74,6 +74,9 @@ function Container({ recitations }) {
             silent so that you may, be shown mercy.`}
             reference={`[7:204]`}
           />
+          <div className="py-3 mb-4 bg-black max-w-xs mx-auto">
+            <p className="text-white">{station.reciters.name}</p>
+          </div>
           <Actions
             voted={voted}
             upvoteVideo={handleUpvote}

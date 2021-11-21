@@ -10,9 +10,9 @@ const variants = {
   },
 };
 
-const Navigation = () => (
+const Navigation = ({ playlists }) => (
   <motion.ul variants={variants}>
-    <MenuItem />
+    <MenuItem playlists={playlists} />
   </motion.ul>
 );
 

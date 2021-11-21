@@ -24,7 +24,7 @@ const sidebar = {
   },
 };
 
-const Menu = () => {
+const Menu = ({ playlists }) => {
   const [isOpen, toggleOpen] = useCycle(false, true);
   const containerRef = useRef(null);
   const { height } = useDimensions(containerRef);
@@ -38,7 +38,7 @@ const Menu = () => {
       className="nav"
     >
       <motion.div className="background" variants={sidebar} />
-      <Navigation />
+      <Navigation playlists={playlists} />
       <MenuToggle toggle={() => toggleOpen()} />
     </motion.nav>
   );

@@ -1,3 +1,4 @@
+import { Switch } from "../switch";
 import { motion } from "framer-motion";
 
 const variants = {
@@ -17,7 +18,7 @@ const variants = {
   },
 };
 
-const MenuItem = () => {
+const MenuItem = ({ playlists }) => {
   return (
     <motion.div
       className=" text-md  text-white font-mono z-50"
@@ -69,7 +70,21 @@ const MenuItem = () => {
         />
       </svg>
       <p> Change Background </p>
-
+      <p className="mt-3 mb-1" style={{ color: "gold" }}>
+        Playlists
+      </p>
+      {playlists.map((p) => {
+        return (
+          <div key={p.id} className="flex items-center mb-3">
+            <div className="mr-3">
+              <Switch />
+            </div>
+            <div>
+              <p>{p.name}</p>
+            </div>
+          </div>
+        );
+      })}
     </motion.div>
   );
 };

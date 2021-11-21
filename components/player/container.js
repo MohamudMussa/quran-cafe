@@ -5,7 +5,9 @@ import { removeGif, getImage, getStation } from "./utils";
 import { IMAGES } from "../../config/constants";
 import useRecitations from "../../context/recitations";
 
-function Container({ recitations }) {
+function Container({ recitations, playlists: playlistsData }) {
+  const [selectedPlaylist, setSelectedPlaylist] = useState("jummah");
+  const [playlists, setPlaylists] = useState([]);
   const { instance } = useRecitations();
   const [voted, setVoted] = useState(false);
   const [activeImage, setActiveImage] = useState(IMAGES[0]);
@@ -41,6 +43,26 @@ function Container({ recitations }) {
     const station = getStation(recitations);
     setStation(station);
   }, [recitations]);
+
+  useEffect(() => {
+    if (playlistsData.length) {
+      const items = playlistsData.map((p) => {
+        const tracks = recitations.filter((r) => r.playlist_id === p.id);
+        return {
+          ...p,
+          type: p.name.toLowerCase(),
+          selected: false,
+          tracks: tracks,
+        };
+      });
+      items.push({
+        selected: true,
+        type: "default",
+        tracks: recitations,
+      });
+      setPlaylists(items);
+    }
+  }, [playlistsData, recitations]);
 
   return (
     <>

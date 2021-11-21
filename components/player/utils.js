@@ -1,6 +1,5 @@
 import { IMAGES } from "../../config/constants";
 
-
 export const getImage = () => {
   const number = Math.floor(Math.random() * IMAGES.length);
   return IMAGES[number];

@@ -15,16 +15,17 @@ function Container({ recitations }) {
   const [isMuted, setIsMuted] = useState(true);
   const [show, setShow] = useState(false);
 
-  const handleClick = useCallback(() => {
+  const handleBackgroundShuffle = useCallback(() => {
     const image = getImage();
     setActiveImage(image);
   }, []);
 
   const handleNext = useCallback(() => {
     const station = getStation(recitations);
+    handleBackgroundShuffle();
     setStation(station);
     setVoted(false);
-  }, [recitations]);
+  }, [handleBackgroundShuffle, recitations]);
 
   const handleUpvote = useCallback(async () => {
     if (voted) return;
@@ -41,6 +42,10 @@ function Container({ recitations }) {
     const station = getStation(recitations);
     setStation(station);
   }, [recitations]);
+
+  useEffect(() => {
+    handleBackgroundShuffle();
+  }, []);
 
   return (
     <>
@@ -92,7 +97,7 @@ function Container({ recitations }) {
       <AdditionalActions
         toggleVideo={() => setShow(!show)}
         onShuffleClick={handleNext}
-        onBackgroundShuffleClick={handleClick}
+        onBackgroundShuffleClick={handleBackgroundShuffle}
         onVignetteClick={removeGif}
       />
     </>

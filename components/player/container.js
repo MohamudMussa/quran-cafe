@@ -1,30 +1,38 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { motion } from "framer-motion";
 import { Actions, AdditionalActions, Content, Player } from ".";
 import { removeGif, getImage, getStation } from "./utils";
 import { IMAGES } from "../../config/constants";
 import useRecitations from "../../context/recitations";
+import Slider from "./slider";
+import styles  from "./action.module.css";
 
 function Container({ recitations }) {
   const { instance } = useRecitations();
   const [voted, setVoted] = useState(false);
   const [activeImage, setActiveImage] = useState(IMAGES[0]);
   const [station, setStation] = useState(getStation(recitations));
-  const [volume, setVolume] = useState(0.2);
+  const [previousStation, setPreviousStation] = useState();
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
+  const [onLoop, setOnLoop] = useState(false);
   const [show, setShow] = useState(false);
+  const [duration, setDuration] = useState();
+  const [progress, setProgress] = useState(0);
+  const [seeking, setSeeking] = useState(false);
+  const playerRef = useRef();
 
-  const handleClick = useCallback(() => {
-    const image = getImage();
-    setActiveImage(image);
-  }, []);
+  const PLAYER_VOLUME = 0.2;
+  const UP_VOTED_STATION_LOCALHOST_KEY = "upVotedStations";
 
-  const handleNext = useCallback(() => {
-    const station = getStation(recitations);
-    setStation(station);
-    setVoted(false);
-  }, [recitations]);
+  useEffect(() => {
+      const rawVotedStations = localStorage.getItem(UP_VOTED_STATION_LOCALHOST_KEY);
+      console.log('rawVotedStations::::', rawVotedStations);
+      if(rawVotedStations) {
+        const votedStations = JSON.parse(rawVotedStations) || [];
+        setVoted(votedStations.includes(station.id))
+      }
+  }, [station, recitations]);
 
   const handleUpvote = useCallback(async () => {
     if (voted) return;
@@ -33,14 +41,51 @@ function Container({ recitations }) {
       station.up_vote + 1
     );
     if (res) {
+      let votedStations = [];
+      const rawVotedStations = localStorage.getItem(UP_VOTED_STATION_LOCALHOST_KEY);
+      if(rawVotedStations) {
+        console.log("JSON.parse(rawVotedStations)::::", JSON.parse(rawVotedStations));
+        votedStations = JSON.parse(rawVotedStations) || [];
+      }
+      votedStations.push(station.id);
+      localStorage.setItem(UP_VOTED_STATION_LOCALHOST_KEY, JSON.stringify(votedStations));
       setVoted(true);
     }
   }, [instance, station, voted]);
 
-  const shuffleOnEnd = useCallback(() => {
-    const station = getStation(recitations);
-    setStation(station);
+  const handleShuffle = useCallback(() => {
+    setPreviousStation(station);
+    const shuffledStation = getStation(recitations);
+    setStation(shuffledStation);
+    const image = getImage();
+    setActiveImage(image);
+    setOnLoop(false);
   }, [recitations]);
+
+  const handleSeekChange = (seekFraction) => {
+    const time = seekFraction/100*duration;
+    setSeeking(true);
+    playerRef.current.seekTo(time);
+  };
+
+  const handleProgress = ({ playedSeconds }) => {
+    // if (!seeking) {
+      const percentageProgress = (playedSeconds/duration)*100;
+      setProgress(percentageProgress)
+    // }
+  }
+
+  const handleSetLoop = () => {
+    setOnLoop(!onLoop);
+  }
+
+  const handleOnPrevious = () => {
+    if (previousStation) {
+      setStation(previousStation);
+      const image = getImage();
+      setActiveImage(image);
+    }
+  }
 
   return (
     <>
@@ -56,42 +101,45 @@ function Container({ recitations }) {
         }}
       >
         <Player
+          playerRef={playerRef}
           playing={isPlaying}
           muted={isMuted}
-          volume={volume}
+          volume={PLAYER_VOLUME}
           show={show}
+          loop={onLoop}
           station={station}
           onPlay={() => setIsMuted(false)}
           onPause={() => setIsPlaying(false)}
-          onEnded={shuffleOnEnd}
-          onError={shuffleOnEnd}
+          onDuration={(duration) => setDuration(duration)}
+          onProgress={handleProgress}
+          onEnded={handleShuffle}
+          onError={handleShuffle}
         />
         <div className="text-center lg:w-2/3 w-full sm: pt-9">
-          <Content
-            title={`وَاِذَا قُرِئَ الۡقُرۡاٰنُ فَاسۡتَمِعُوۡا لَهٗ وَاَنۡصِتُوۡا
-            لَعَلَّكُمۡ تُرۡحَمُوۡنَ‏ ۝`}
-            content={`So when the Quran is recited, listen carefully to it, and keep
-            silent so that you may, be shown mercy.`}
-            reference={`[7:204]`}
-          />
+          <div className="station-info">
+            <p className="reciter-name">{station.reciter?.name}</p>
+            <p className="surah-name">{station.surah}</p>
+          </div>
+          <div className="slider-container">
+            {
+              duration && 
+              <Slider value={progress} onSeek={handleSeekChange}/>
+            }
+          </div>
           <Actions
             voted={voted}
-            upvoteVideo={handleUpvote}
-            toggleVideo={() => setShow(!show)}
+            loop={onLoop}
+            onUpvote={handleUpvote}
             playing={isPlaying}
             handlePlay={() => setIsPlaying(true)}
             handlePause={() => setIsPlaying(false)}
-            incrementVolume={() => setVolume((volume) => volume + 0.2)}
-            decrementVolume={() => setVolume((volume) => volume - 0.2)}
+            onSetLoop={handleSetLoop}
+            onShuffle={handleShuffle}
+            onPrevious={handleOnPrevious}
           />
         </div>
       </motion.div>
-      <AdditionalActions
-        toggleVideo={() => setShow(!show)}
-        onShuffleClick={handleNext}
-        onBackgroundShuffleClick={handleClick}
-        onVignetteClick={removeGif}
-      />
+      <AdditionalActions />
     </>
   );
 }

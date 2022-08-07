@@ -1,0 +1,11 @@
+.player {
+  width: 488px;
+  height: 72px;
+  background-color:#825e1c;
+  border-radius: 35px;
+  margin: 10px auto;
+};
+.sliderContainer {
+  margin-bottom: 30px;
+}
+

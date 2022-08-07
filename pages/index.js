@@ -1,6 +1,5 @@
 // Components
 import { Layout } from "../components/layout";
-import { Menu } from "../components/menu";
 
 import { Background, PlayerContainer } from "../components/player";
 import Recitations from "../lib/db/models/recitations";
@@ -18,7 +17,6 @@ function Home({ recitations }) {
     >
       <PlayerContainer recitations={recitations} />
       <Background />
-      <Menu />
     </Layout>
   );
 }

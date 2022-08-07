@@ -1,31 +1,51 @@
 import { motion } from "framer-motion";
+import styles  from "./action.module.css";
 
 function Actions({
   playing,
   handlePlay,
   handlePause,
-  incrementVolume,
-  decrementVolume,
-  toggleVideo,
-  upvoteVideo,
+  onPrevious,
+  onSetLoop,
+  onUpvote,
+  onShuffle,
   voted,
+  loop
 }) {
+  const disabledColor = "rgba(23, 23, 23, 0.5)";
   return (
-    <div className="flex justify-center">
+    <div className={`flex justify-evenly ${styles.player}`}>
       <motion.button
         className="pr-4 z-40"
-        onClick={incrementVolume}
+        onClick={onPrevious}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="30"
-          height="30"
-          viewBox="0 0 24 24"
-        >
-          <path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6 13h-5v5h-2v-5h-5v-2h5v-5h2v5h5v2z" />
+        <svg width="39" height="41" viewBox="0 0 39 41" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g clipPath="url(#clip0_105_104)">
+          <path d="M19.5001 34.1667L21.7914 31.7579L12.7239 22.2084L32.5001 22.2084L32.5001 18.7917L12.7239 18.7917L21.7914 9.2421L19.5001 6.83335L6.50012 20.5L19.5001 34.1667Z" fill="white"/>
+          </g>
+          <defs>
+          <clipPath id="clip0_105_104">
+          <rect width="39" height="41" fill="white" transform="translate(39 41) rotate(-180)"/>
+          </clipPath>
+          </defs>
         </svg>
+      </motion.button>
+
+      <motion.button
+        className="pr-4 z-40"
+        onClick={onSetLoop}
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+      >
+        <svg width="34" height="35" viewBox="0 0 34 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M30.6278 8.8355C31.5432 8.2465 31.5432 6.90813 30.6278 6.31913L23.5556 1.76902C22.5599 1.12844 21.25 1.8433 21.25 3.02721V12.1274C21.25 13.3113 22.5599 14.0262 23.5556 13.3856L30.6278 8.8355Z" fill={loop ? disabledColor : "white"}/>
+          <path d="M3.53289 27.7939C2.61742 27.2049 2.61742 25.8665 3.53289 25.2775L10.6051 20.7274C11.6007 20.0868 12.9106 20.8017 12.9106 21.9856L12.9106 31.0858C12.9106 32.2697 11.6007 32.9846 10.6051 32.344L3.53289 27.7939Z" fill={loop ? disabledColor : "white"}/>
+          <path d="M5.66663 16.0416V15.7916C5.66663 11.0972 9.47221 7.29163 14.1666 7.29163V7.29163H21.25" stroke={loop ? disabledColor : "white"} strokeWidth="2.9922" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M26.9166 17.5001V17.7501C26.9166 22.4445 23.111 26.2501 18.4166 26.2501V26.2501H11.3333" stroke={loop ? disabledColor : "white"} strokeWidth="2.9922" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+
       </motion.button>
 
       {playing ? (
@@ -35,14 +55,11 @@ function Actions({
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="30"
-            height="30"
-            viewBox="0 0 24 24"
-          >
-            <path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-1 17h-3v-10h3v10zm5-10h-3v10h3v-10z" />
+          <svg width="33" height="34" viewBox="0 0 40 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="6.66663" y="5.25" width="10" height="31.5" rx="2" fill="white"/>
+            <rect x="23.3334" y="5.25" width="10" height="31.5" rx="2" fill="white"/>
           </svg>
+
         </motion.button>
       ) : (
         <motion.button
@@ -51,50 +68,38 @@ function Actions({
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="30"
-            height="30"
-            viewBox="0 0 24 24"
-          >
-            <path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-3 17v-10l9 5.146-9 4.854z" />
+          <svg width="19" height="26" viewBox="0 0 19 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0.333252 0.75V25.25L18.6666 13L0.333252 0.75Z" fill="white"/>
           </svg>
         </motion.button>
       )}
 
       <motion.button
         className="pr-4  z-40"
-        onClick={decrementVolume}
+        onClick={onShuffle}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="30"
-          height="30"
-          viewBox="0 0 24 24"
-        >
-          <path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6 13h-12v-2h12v2z" />
+        <svg width="34" height="35" viewBox="0 0 34 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M22.6666 26.25C20.4324 26.25 18.3409 25.3496 16.7891 23.8214" stroke="white" strokeWidth="2.9922" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M10.1358 11.7425C8.20066 9.85851 5.60478 8.75006 2.83325 8.75006" stroke="white" strokeWidth="2.9922" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M32.0445 27.7939C32.96 27.2049 32.96 25.8665 32.0445 25.2775L24.9723 20.7274C23.9767 20.0868 22.6667 20.8017 22.6667 21.9856V31.0858C22.6667 32.2697 23.9767 32.9846 24.9723 32.344L32.0445 27.7939Z" fill="white"/>
+          <path d="M22.6667 8.75006H22.3924C19.1331 8.75006 16.1997 10.7273 14.9769 13.7485L11.9399 21.2516C10.717 24.2728 7.7836 26.2501 4.52432 26.2501H2.83337" stroke="white" strokeWidth="2.9922" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M30.6279 10.2939C31.5433 9.70487 31.5433 8.3665 30.6279 7.7775L23.5557 3.2274C22.5601 2.58682 21.2501 3.30167 21.2501 4.48558V13.5858C21.2501 14.7697 22.5601 15.4846 23.5557 14.844L30.6279 10.2939Z" fill="white"/>
         </svg>
       </motion.button>
-      {/* <motion.button
-        className="z-40 -mt-2"
-        onClick={upvoteVideo}
+
+      <motion.button
+        className="pr-4  z-40"
+        onClick={onUpvote}
+        disabled={voted}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="30"
-          height="30"
-          viewBox="0 0 512 512"
-        >
-          <path
-            fill={voted ? "#00FF00" : "#000"}
-            d="M104 224H24c-13.255 0-24 10.745-24 24v240c0 13.255 10.745 24 24 24h80c13.255 0 24-10.745 24-24V248c0-13.255-10.745-24-24-24zM64 472c-13.255 0-24-10.745-24-24s10.745-24 24-24 24 10.745 24 24-10.745 24-24 24zM384 81.452c0 42.416-25.97 66.208-33.277 94.548h101.723c33.397 0 59.397 27.746 59.553 58.098.084 17.938-7.546 37.249-19.439 49.197l-.11.11c9.836 23.337 8.237 56.037-9.308 79.469 8.681 25.895-.069 57.704-16.382 74.757 4.298 17.598 2.244 32.575-6.148 44.632C440.202 511.587 389.616 512 346.839 512l-2.845-.001c-48.287-.017-87.806-17.598-119.56-31.725-15.957-7.099-36.821-15.887-52.651-16.178-6.54-.12-11.783-5.457-11.783-11.998v-213.77c0-3.2 1.282-6.271 3.558-8.521 39.614-39.144 56.648-80.587 89.117-113.111 14.804-14.832 20.188-37.236 25.393-58.902C282.515 39.293 291.817 0 312 0c24 0 72 8 72 81.452z"
-          />
+        <svg width="32" height="29" viewBox="0 0 32 29" fill={voted ? disabledColor : "none"} xmlns="http://www.w3.org/2000/svg">
+          <path d="M27.8409 4.21018C27.1568 3.50949 26.3445 2.95365 25.4504 2.57442C24.5563 2.19519 23.598 2 22.6302 2C21.6625 2 20.7042 2.19519 19.8101 2.57442C18.916 2.95365 18.1037 3.50949 17.4195 4.21018L15.9996 5.66368L14.5798 4.21018C13.1978 2.7955 11.3234 2.00073 9.36905 2.00073C7.41466 2.00073 5.54031 2.7955 4.15835 4.21018C2.77638 5.62487 2 7.54359 2 9.54426C2 11.5449 2.77638 13.4637 4.15835 14.8783L5.57823 16.3318L15.9996 27L26.4211 16.3318L27.8409 14.8783C28.5254 14.178 29.0684 13.3464 29.4389 12.4312C29.8093 11.5159 30 10.535 30 9.54426C30 8.55356 29.8093 7.57258 29.4389 6.65734C29.0684 5.7421 28.5254 4.91054 27.8409 4.21018V4.21018Z" stroke={voted ? disabledColor : "white"} strokeWidth="2.9922" strokeLinecap="round" strokeLinejoin="round"/>
         </svg>
-      </motion.button> */}
+      </motion.button>
     </div>
   );
 }

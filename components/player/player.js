@@ -48,19 +48,27 @@ function Player({
   onEnded,
   onError,
   muted,
+  loop,
   volume,
+  onDuration,
+  onProgress,
+  playerRef
 }) {
   return (
     <div style={show ? wrapperStyle : hiddenStyle}>
       <div style={innerWrapperStyle}>
         <ReactPlayer
+          ref={playerRef}
           url={station.video_url}
           style={reactPlayerStyle}
           playing={playing}
           controls={false}
           muted={muted}
           volume={volume}
+          loop={loop}
           playsinline={true}
+          onDuration={onDuration}
+          onProgress={onProgress}
           config={{
             youtube: {
               playerVars: {

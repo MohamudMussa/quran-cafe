@@ -3,6 +3,13 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'TiroDevaMarathi';
+  src: url('../assets/TiroDevaMarathi/TiroDevaMarathi-Regular.ttf');
+  font-weight: 400;
+  font-style: normal;
+  }
+
 #vin {
   position: absolute;
   top: 0;
@@ -100,4 +107,83 @@ nav li {
   justify-content: center;
   align-items: center;
   cursor: pointer;
+}
+
+/* Slider styles */
+
+.slider {
+  display: flex;
+  width: 100%;
+  max-width: 447px;
+  margin: auto;
+}
+
+.thumb {
+  cursor: pointer;
+  position: absolute;
+  z-index: 100;
+  background: #ffffff;
+  border-radius: 100%;
+  display: block;
+  box-shadow: 0 0 2px 0 rgb(0 0 0 / 44%);
+}
+
+.thumb.active {
+  background-color: #ffffff;
+}
+
+.track {
+  position: relative;
+  background: #825e1c;
+}
+
+.track.track-0 {
+  background: #ffffff;
+}
+
+.slider .track {
+  top: 20px;
+  height: 4px;
+}
+
+.slider .thumb {
+  top: 17px;
+  width: 10px;
+  outline: none;
+  height: 10px;
+  line-height: 38px;
+}
+
+.slider-container {
+  margin-bottom: 95.4px;
+}
+
+/* Station info section */
+
+.station-info {
+  margin-bottom: 30px;
+}
+
+.reciter-name {
+  font-family: 'TiroDevaMarathi';
+  font-size: 42px;
+  font-weight: 400;
+  margin-bottom: 16;
+  color: #FFFFFF;
+}
+
+.surah-name {
+  font-family: 'TiroDevaMarathi';
+  font-size: 24px;
+  font-weight: 400;
+  color: #FFFFFF;
+}
+
+/* Additional action styles */
+
+.twitter-share-button {
+  font-family: 'TiroDevaMarathi';
+  font-weight: 400;
+  font-size: 18px;
+  color: #eaad32
 }

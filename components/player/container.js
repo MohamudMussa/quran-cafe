@@ -124,7 +124,7 @@ function Container({ recitations }) {
             <div className="slider-container">
               {
                 duration && 
-                <Slider value={progress} onSeek={handleSeekChange}/>
+                <Slider value={progress} duration={duration} onSeek={handleSeekChange}/>
               }
             </div>
             <Actions

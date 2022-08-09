@@ -2,6 +2,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
 @font-face {
   font-family: 'TiroDevaMarathi';
@@ -158,7 +159,22 @@ nav li {
 
 .slider-container {
   max-width: 447px;
-  margin: 0px auto 75px auto;
+  margin: 0px auto 40px auto;
+}
+
+.time-wrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40px;
+}
+
+.time {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 15px;
+  color: #FFA700;
 }
 
 .player-wrapper {

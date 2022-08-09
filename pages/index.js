@@ -1,4 +1,5 @@
 // Components
+import Footer from "../components/Footer/Footer";
 import { Layout } from "../components/layout";
 
 import { Background, PlayerContainer } from "../components/player";
@@ -17,6 +18,7 @@ function Home({ recitations }) {
     >
       <PlayerContainer recitations={recitations} />
       <Background />
+      <Footer />
     </Layout>
   );
 }

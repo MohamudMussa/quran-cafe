@@ -18,8 +18,10 @@
   bottom: 0;
   background-size: 100% 100%;
   mix-blend-mode: overlay;
+  background-color: black;
   pointer-events: none;
   opacity: 0.9;
+  z-index: -1;
 }
 
 #vignette {
@@ -134,7 +136,7 @@ nav li {
 
 .track {
   position: relative;
-  background: #825e1c;
+  background: #FFA700;
 }
 
 .track.track-0 {
@@ -155,7 +157,14 @@ nav li {
 }
 
 .slider-container {
-  margin-bottom: 95.4px;
+  max-width: 447px;
+  margin: 0px auto 75px auto;
+}
+
+.player-wrapper {
+  width: 100%;
+  position: "fixed";
+  z-index: 999;
 }
 
 /* Station info section */
@@ -185,5 +194,109 @@ nav li {
   font-family: 'TiroDevaMarathi';
   font-weight: 400;
   font-size: 18px;
-  color: #eaad32
+  color: #FFA700
+}
+
+.ayah-container {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 372px;
+}
+
+.ayah-text {
+  font-family: 'TiroDevMarathi';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 26.43px;
+  line-height: 35px;
+  color: #FFFFFF;
+  text-align: left;
+}
+
+.ayah-reference {
+  margin-top: 20px
+}
+
+.signature {
+  position: absolute;
+  width: 243px;
+  height: 85px;
+  margin: 0 auto;
+  bottom: 10px;
+  left: 38%;
+}
+
+.logo {
+  position: absolute;
+  width: 116px;
+  height: 101px;
+  right: 20px;
+  bottom: 20px;
+}
+
+.footer {
+  width: 100%;
+  padding: 20px;
+  position: fixed;
+  bottom: 0;
+}
+
+@media (max-width: 1024px) {
+  .ayah-container {
+    position: relative;
+    width: 100%;
+  }
+  .ayah-text {
+    text-align: center;
+  }
+  .ayah-inner {
+    width: 480px;
+    margin: 30px auto 0 auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .slider-container {
+    max-width: 460px
+  }
+
+  .reciter-name {
+    font-size: 35px;
+  }
+
+  .surah-name {
+    font-size: 18px;
+  }
+  
+  .ayah-text {
+    font-size: 22px;
+    line-height: 30px;
+  }
+
+  .ayah-inner {
+    width: 320px;
+  }
+  .player-wrapper {
+    padding: 10px
+  }
+  .signature {
+    width: 180px;
+    height: 86px;
+    left: 20px;
+  }
+  .logo {
+    width: 95px;
+    height: 90px;
+  }
+}
+
+@media (max-width: 320px) {
+  .slider-container  {
+    max-width: 310px
+  }
+
+  .ayah-inner {
+    width: 318px;
+  }
 }

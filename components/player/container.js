@@ -100,46 +100,56 @@ function Container({ recitations }) {
           opacity: "0.7",
         }}
       >
-        <Player
-          playerRef={playerRef}
-          playing={isPlaying}
-          muted={isMuted}
-          volume={PLAYER_VOLUME}
-          show={show}
-          loop={onLoop}
-          station={station}
-          onPlay={() => setIsMuted(false)}
-          onPause={() => setIsPlaying(false)}
-          onDuration={(duration) => setDuration(duration)}
-          onProgress={handleProgress}
-          onEnded={handleShuffle}
-          onError={handleShuffle}
-        />
-        <div className="text-center lg:w-2/3 w-full sm: pt-9">
-          <div className="station-info">
-            <p className="reciter-name">{station.reciter?.name}</p>
-            <p className="surah-name">{station.surah}</p>
-          </div>
-          <div className="slider-container">
-            {
-              duration && 
-              <Slider value={progress} onSeek={handleSeekChange}/>
-            }
-          </div>
-          <Actions
-            voted={voted}
-            loop={onLoop}
-            onUpvote={handleUpvote}
+        <div className="player-wrapper">
+          <Player
+            playerRef={playerRef}
             playing={isPlaying}
-            handlePlay={() => setIsPlaying(true)}
-            handlePause={() => setIsPlaying(false)}
-            onSetLoop={handleSetLoop}
-            onShuffle={handleShuffle}
-            onPrevious={handleOnPrevious}
+            muted={isMuted}
+            volume={PLAYER_VOLUME}
+            show={show}
+            loop={onLoop}
+            station={station}
+            onPlay={() => setIsMuted(false)}
+            onPause={() => setIsPlaying(false)}
+            onDuration={(duration) => setDuration(duration)}
+            onProgress={handleProgress}
+            onEnded={handleShuffle}
+            onError={handleShuffle}
           />
+          <div className="text-center lg:w-2/3 w-full sm: pt-9 mx-auto">
+            <div className="station-info">
+              <p className="reciter-name">{station.reciter?.name}</p>
+              <p className="surah-name">{station.surah}</p>
+            </div>
+            <div className="slider-container">
+              {
+                duration && 
+                <Slider value={progress} onSeek={handleSeekChange}/>
+              }
+            </div>
+            <Actions
+              voted={voted}
+              loop={onLoop}
+              onUpvote={handleUpvote}
+              playing={isPlaying}
+              handlePlay={() => setIsPlaying(true)}
+              handlePause={() => setIsPlaying(false)}
+              onSetLoop={handleSetLoop}
+              onShuffle={handleShuffle}
+              onPrevious={handleOnPrevious}
+            />
+            <div className="ayah-container">
+              <div className="ayah-inner">
+                <p className="ayah-text">So when the Quran is recited, listen carefully to it, and keep silent so that you may, be shown mercy.</p>
+                <p className="ayah-text ayah-reference">[7:204]</p>
+              </div>
+            </div>
+          </div>
         </div>
       </motion.div>
-      <AdditionalActions />
+      <div>
+        <AdditionalActions />
+      </div>
     </>
   );
 }

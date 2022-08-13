@@ -7,7 +7,7 @@ function Background() {
   return (
     <motion.div
       initial={{ opacity: 0 }}
-      animate={{ opacity: 0.3 }}
+      animate={{ opacity: 0.6 }}
       transition={{ duration: 1 }}
       id="vignette"
     >

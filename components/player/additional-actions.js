@@ -7,7 +7,7 @@ function AdditionalActions({
   // onVignetteClick,
   // toggleVideo,
 }) {
-  const socialShareText = "I'm currently Listen to Quran on @QuranCafe and you should too! https://quran.cafe/";
+  const socialShareText = "I'm currently listening to Quran on @QuranCafe and you should too! https://quran.cafe/";
   const socialShareLink = `https://twitter.com/intent/tweet?text=${encodeURIComponent(socialShareText)}`
   const contactLink = "https://twitter.com/QuranCafe";
   return (

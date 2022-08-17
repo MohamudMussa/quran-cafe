@@ -116,7 +116,7 @@ function Container({ recitations }) {
             onEnded={handleShuffle}
             onError={handleShuffle}
           />
-          <div className="text-center lg:w-2/3 w-full sm: pt-20 mx-auto">
+          <div className="text-center lg:w-2/3 w-full mx-auto player-inner">
             <div className="station-info">
               <p className="reciter-name">{station.reciter?.name}</p>
               <p className="surah-name">{station.surah}</p>

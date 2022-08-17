@@ -12,7 +12,7 @@ function Actions({
   voted,
   loop
 }) {
-  const disabledColor = "rgba(23, 23, 23, 0.5)";
+  const disabledColor = "#000000";
   return (
     <div className={`flex justify-evenly ${styles.player}`}>
       <motion.button

@@ -12,7 +12,6 @@
     "@supabase/supabase-js": "^1.23.0",
     "dotenv": "^10.0.0",
     "framer-motion": "^4.1.17",
-    "i": "^0.3.7",
     "moment": "^2.29.4",
     "next": "11.1.2",
     "react": "17.0.2",

@@ -292,7 +292,7 @@ nav li {
   }
   
   .ayah-text {
-    font-size: 22px;
+    font-size: 0px;
     line-height: 30px;
   }
 
@@ -308,8 +308,8 @@ nav li {
     left: 20px;
   }
   .logo {
-    width: 95px;
-    height: 90px;
+    width: 0px;
+    height: 0px;
   }
 }
 

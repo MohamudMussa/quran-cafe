@@ -22,9 +22,7 @@ export const IMAGES = [
 ];
 
 export const GLITCHES = [
-  glitch_1,
   glitch_2,
-  glitch_3,
 ];
 
 export const STATION = [

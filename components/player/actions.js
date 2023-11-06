@@ -36,6 +36,9 @@ function Actions({
           whileTap={{ scale: 1 }}
         >
           <RxLoop size={21} color="black" />
+          <div className="">
+            <span className="ml-1 absolute ">{loop && "1"}</span>
+          </div>
         </motion.button>
 
         <motion.button
@@ -61,7 +64,7 @@ function Actions({
         </motion.button>
 
 
-      </div>
+      </div >
       <div>
         <motion.button
           className="p-2 pt-3 border-2 border-black rounded-md h-full z-40 "
@@ -75,7 +78,7 @@ function Actions({
           }
         </motion.button>
       </div>
-    </div>
+    </div >
   );
 }
 

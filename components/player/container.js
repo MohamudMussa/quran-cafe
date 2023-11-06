@@ -11,6 +11,7 @@ import { Howl } from 'howler';
 import { Audio } from 'react-loader-spinner'
 import { BsDashLg } from "react-icons/bs";
 import fscreen from 'fscreen';
+import CountdownTimer from "../CountDownTimer";
 
 
 
@@ -30,6 +31,10 @@ function Container({ recitations }) {
   const [seeking, setSeeking] = useState(false);
   const [isBuffering, setIsBuffering] = useState(false);
   const playerRef = useRef();
+
+  const time = new Date();
+  time.setSeconds(time.getSeconds() + 600); // 10 minutes timer
+
   // Volume
   const [volume, setVolume] = useState(0.70)
   const [muted, setMuted] = useState(false)
@@ -91,7 +96,7 @@ function Container({ recitations }) {
     console.log('Fullscreen Error', e);
   }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (fscreen.fullscreenEnabled) {
       fscreen.addEventListener(
         'fullscreenchange',
@@ -126,8 +131,6 @@ function Container({ recitations }) {
     }
   }, [station, recitations]);
 
-  console.log(voted)
-
   const handleUpvote = useCallback(async () => {
     if (voted) return;
     const res = await instance.current.incrementUpvoteById(
@@ -148,7 +151,6 @@ function Container({ recitations }) {
   }, [instance, station, voted]);
 
   const handleShuffle = useCallback(() => {
-    soundPlay()
     setIsBuffering(true);
     setActiveImage(GLITCHES[Math.floor(Math.random() * GLITCHES.length)]);
     setTimeout(() => {
@@ -181,7 +183,6 @@ function Container({ recitations }) {
 
   const handleOnPrevious = () => {
     if (previousStation) {
-      soundPlay()
       setIsBuffering(true);
       setActiveImage(GLITCHES[Math.floor(Math.random() * GLITCHES.length)]);
 
@@ -199,6 +200,10 @@ function Container({ recitations }) {
       className="noise"
       ref={appElement}
     >
+      <div className="flex flex-col items-center justify-center w-80 h-60 max-w-md absolute">
+        <CountdownTimer expiryTimestamp={time} />
+        {/* <button className="" onClick={() => setTimerStarted(true)}>Start Time</button> */}
+      </div>
       <motion.div
         className="flex py-16	justify-center h-screen"
         initial={{ opacity: 0 }}
@@ -331,7 +336,7 @@ function Container({ recitations }) {
 
           <div className="glassmorphism p-3 rounded-xl flex justify-start flex-col">
             <span className="text-black text-sm rotate-90"> {inFullscreenMode && 'exit '}fullscreen</span>
-            <span className="text-xl"> press <span className="font-semibold text-xl">{inFullscreenMode ? 'esc': 'f'}</span></span>
+            <span className="text-xl"> press <span className="font-semibold text-xl">{inFullscreenMode ? 'esc' : 'f'}</span></span>
           </div>
         </div>
         <AdditionalActions toggleFullscreen={toggleFullscreen} inFullscreenMode={inFullscreenMode} appElement={appElement} />

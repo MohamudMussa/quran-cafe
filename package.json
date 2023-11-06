@@ -25,6 +25,7 @@
     "react-player": "^2.9.0",
     "react-query": "^3.24.4",
     "react-slider": "^2.0.1",
+    "react-timer-hook": "^3.0.7",
     "react-tooltip": "^5.22.0",
     "typewriter-effect": "^2.21.0"
   },

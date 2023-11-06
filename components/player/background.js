@@ -7,12 +7,6 @@ import newImage from "../../public/new.gif";
 function Background() {
   return (
     <motion.div
-      animate={{
-        scale: [0,0.5,1, 2, 2, 1, 1],
-        delay: 2,
-      }}
-      transition={{ duration: 0.5 }}
-      delay={2.5}
       id="vignette"
     >
       <div

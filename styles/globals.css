@@ -349,11 +349,10 @@ nav li {
   -webkit-backdrop-filter: blur(7.5px);
 }
 
-.noise {
-  /* ... */
+/* .noise {
   background: linear-gradient(to right, black, transparent),
     url(https://grainy-gradients.vercel.app/noise.svg);
-}
+} */
 
 /* countdown timer */
 .circular-timer {

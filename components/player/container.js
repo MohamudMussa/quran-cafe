@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useRef } from "react";
+import React, { useState, useEffect, useCallback, useRef, useMemo } from "react";
 import { motion } from "framer-motion";
 import { Actions, AdditionalActions, Content, Player } from ".";
 import { removeGif, getImage, getStation } from "./utils";
@@ -11,12 +11,10 @@ import { Howl } from 'howler';
 import { Audio } from 'react-loader-spinner'
 import { BsDashLg } from "react-icons/bs";
 import fscreen from 'fscreen';
-import CountdownTimer from "../CountDownTimer";
+import PomodoroTimer from "../PomodoroTimer";
 
 
-
-
-function Container({ recitations }) {
+function Container({ recitations, appElement }) {
   const { instance } = useRecitations();
   const [voted, setVoted] = useState(false);
   const [activeImage, setActiveImage] = useState(IMAGES[0]);
@@ -34,6 +32,7 @@ function Container({ recitations }) {
 
   const time = new Date();
   time.setSeconds(time.getSeconds() + 600); // 10 minutes timer
+
 
   // Volume
   const [volume, setVolume] = useState(0.70)
@@ -120,8 +119,6 @@ function Container({ recitations }) {
   }, [inFullscreenMode]);
 
 
-  const appElement = useRef(null);
-
   useEffect(() => {
     const rawVotedStations = localStorage.getItem(UP_VOTED_STATION_LOCALHOST_KEY);
     console.log('rawVotedStations::::', rawVotedStations);
@@ -198,12 +195,13 @@ function Container({ recitations }) {
   return (
     <main
       className="noise"
-      ref={appElement}
     >
-      <div className="flex flex-col items-center justify-center w-80 h-60 max-w-md absolute">
-        <CountdownTimer expiryTimestamp={time} />
-        {/* <button className="" onClick={() => setTimerStarted(true)}>Start Time</button> */}
-      </div>
+
+      <Draggable>
+        <div className={`flex cursor-pointer flex-col items-center justify-center w-80 h-60 max-w-md absolute ${isBuffering && "-top-full"}`}>
+          <PomodoroTimer expiryTimestamp={time} />
+        </div>
+      </Draggable>
       <motion.div
         className="flex py-16	justify-center h-screen"
         initial={{ opacity: 0 }}
@@ -325,22 +323,26 @@ function Container({ recitations }) {
           )
         }
 
-
       </motion.div >
-      <div>
-        <div className="absolute right-5 bottom-5">
-          <div className="glassmorphism p-3 rounded-xl flex justify-start flex-col mb-5">
-            <span className="text-black text-sm rotate-90">play/pause</span>
-            <span className="text-xl"> press <span className="font-semibold text-xl">space</span></span>
-          </div>
+      {
+        !isBuffering && (
+          <div>
+            <div className="absolute right-5 bottom-5">
+              <div className="glassmorphism p-3 rounded-xl flex justify-start flex-col mb-5">
+                <span className="text-black text-sm rotate-90">play/pause</span>
+                <span className="text-xl"> press <span className="font-semibold text-xl">space</span></span>
+              </div>
 
-          <div className="glassmorphism p-3 rounded-xl flex justify-start flex-col">
-            <span className="text-black text-sm rotate-90"> {inFullscreenMode && 'exit '}fullscreen</span>
-            <span className="text-xl"> press <span className="font-semibold text-xl">{inFullscreenMode ? 'esc' : 'f'}</span></span>
+              <div className="glassmorphism p-3 rounded-xl flex justify-start flex-col">
+                <span className="text-black text-sm rotate-90"> {inFullscreenMode && 'exit '}fullscreen</span>
+                <span className="text-xl"> press <span className="font-semibold text-xl">{inFullscreenMode ? 'esc' : 'f'}</span></span>
+              </div>
+            </div>
+            <AdditionalActions toggleFullscreen={toggleFullscreen} inFullscreenMode={inFullscreenMode} appElement={appElement} />
           </div>
-        </div>
-        <AdditionalActions toggleFullscreen={toggleFullscreen} inFullscreenMode={inFullscreenMode} appElement={appElement} />
-      </div>
+        )
+      }
+
 
 
 

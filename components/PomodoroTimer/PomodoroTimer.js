@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { memo, useState } from 'react';
 import useTimer from 'react-timer-hook';
 
 function PomodoroTimer() {
@@ -29,7 +29,7 @@ function PomodoroTimer() {
     const handleReset = () => {
         // Restarts to 5 minutes timer
         const time = new Date();
-        time.setSeconds(totalSeconds + 60);
+        time.setSeconds(minutes * 60 + seconds + 60);
         restart(time)
     };
 
@@ -46,7 +46,7 @@ function PomodoroTimer() {
                         isRunning ? "Pause" : "Start"
                     }
                 </button>
-                <button onClick={handleReset} className="glassmorphism text-lg text-white px-10 py-2 mt-4">
+                <button onClick={handleReset} className="glassmorphism text-lg text-black px-10 py-2 mt-4">
                     + 1
                 </button>
             </div>
@@ -54,4 +54,4 @@ function PomodoroTimer() {
     );
 }
 
-export default PomodoroTimer;
+export default memo(PomodoroTimer);

@@ -1,5 +1,5 @@
 // Components
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Footer from "../components/Footer/Footer";
 import { Layout } from "../components/layout";
 
@@ -53,6 +53,8 @@ function Home() {
     }, 500);
   }, [loadingText]);
 
+  const appElement = useRef(null);
+
   return (
     <Layout
       meta={{
@@ -61,44 +63,46 @@ function Home() {
           "Quran Cafe ☕️ Study / Code while listening to unique recitations of the Quran from 🌎 | Share your Quran playlist with us ❤️",
       }}
     >
-      {
-        recitations ? (
-          <PlayerContainer recitations={recitations} />
-        ) : (
-          <div className="m-8">
-            <div className="text-xl">
+      <main ref={appElement}>
+        {
+          recitations ? (
+            <PlayerContainer appElement={appElement} recitations={recitations} />
+          ) : (
+            <div className="m-8">
+              <div className="text-xl">
 
-              {/* Loading */}
-              <span>{loadingText}</span>
+                {/* Loading */}
+                <span>{loadingText}</span>
 
-              <div className="mt-2">
-                <Typewriter
-                  onInit={(typewriter) => {
-                    setTimeout(() => {
-                      typewriter.typeString(`Setting up the cafe`)
-                        .callFunction(() => {
-                          console.log('String typed out!');
-                        })
-                        .start();
-                    }, 1000);
-                  }}
-                  options={
-                    {
-                      autoStart: true,
-                      loop: false,
-                      delay: 10,
+                <div className="mt-2">
+                  <Typewriter
+                    onInit={(typewriter) => {
+                      setTimeout(() => {
+                        typewriter.typeString(`Setting up the cafe`)
+                          .callFunction(() => {
+                            console.log('String typed out!');
+                          })
+                          .start();
+                      }, 1000);
+                    }}
+                    options={
+                      {
+                        autoStart: true,
+                        loop: false,
+                        delay: 10,
+                      }
                     }
-                  }
-                />
+                  />
+                </div>
+
+
               </div>
-
-
             </div>
-          </div>
-        )
-      }
-      <Background />
-      <Footer />
+          )
+        }
+        <Background />
+        <Footer />
+      </main>
     </Layout>
   );
 }

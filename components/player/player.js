@@ -4,7 +4,6 @@ const wrapperStyle = {
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  position: "fixed",
   top: 0,
   left: 0,
   right: 0,
@@ -27,13 +26,13 @@ const innerWrapperStyle = {
 const hiddenStyle = {
   pointerEvents: "none",
   userSelect: "none",
-  position: "fixed",
   top: "100%",
   left: "100%",
 };
 
 const reactPlayerStyle = {
   pointerEvents: "none",
+  display: "none",
   userSelect: "none",
   zIndex: -1,
   borderRadius: "8px",

@@ -1,7 +1,7 @@
 .player {
   max-width: 488px;
   height: 72px;
-  background-color:#FFA700;
+  /* background-color:#FFA700; */
   border-radius: 60px;
   margin: 10px auto;
 };

@@ -4,8 +4,8 @@ import Signature from "../Signature/Signature"
 const Footer = () => {
   return (
     <div className="footer">
-      <Signature />
-      <Logo />
+      {/* <Signature /> */}
+      {/* <Logo /> */}
     </div>
   )
 };

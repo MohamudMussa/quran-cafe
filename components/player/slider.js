@@ -3,19 +3,19 @@ import moment from 'moment';
 
 const Slider = ({
   onSeek,
-  value=0,
+  value = 0,
   duration
 }) => {
 
-  const progressInSeconds = value/100*duration;
-  
+  const progressInSeconds = value / 100 * duration;
+
   const getTimeDuration = (d) => {
     const dateWithNoTime = moment().startOf('day');
-    const timeWithHour = dateWithNoTime.add(d,'s').format('HH.mm.ss');
+    const timeWithHour = dateWithNoTime.add(d, 's').format('HH.mm.ss');
 
     return timeWithHour;
   }
-  
+
   return (
     <div>
       <ReactSlider
@@ -28,8 +28,8 @@ const Slider = ({
         onAfterChange={onSeek}
       />
       <div className="time-wrapper">
-        <p className="time">{getTimeDuration(progressInSeconds)}</p>
-        <p className="time">{getTimeDuration(duration)}</p>
+        <p className="">{getTimeDuration(progressInSeconds)}</p>
+        <p className="">{getTimeDuration(duration)}</p>
       </div>
     </div>
   )

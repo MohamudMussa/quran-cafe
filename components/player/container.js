@@ -12,6 +12,10 @@ import { Audio } from 'react-loader-spinner'
 import { BsDashLg } from "react-icons/bs";
 import fscreen from 'fscreen';
 import PomodoroTimer from "../PomodoroTimer";
+import TodoList from "../TodoList/Index";
+import dynamic from "next/dynamic";
+
+const KeyboardEventHandler = dynamic(() => import("react-keyboard-event-handler"), { ssr: false })
 
 
 function Container({ recitations, appElement }) {
@@ -53,27 +57,16 @@ function Container({ recitations, appElement }) {
 
 
   // handle keypress
-  const [keyPressed, setKeyPressed] = useState('');
-
-  const handleKeyDown = (e) => {
-    setKeyPressed(e.key === ' ' ? 'Space' : e.key);
+  const handleKeyDown = (key) => {
+    console.log(key)
+    try {
+      key === 'ctrl+space' && setIsPlaying(!isPlaying);
+      key === 'ctrl+f' && fscreen.requestFullscreen(appElement.current);
+      key === 'esc' && fscreen.exitFullscreen();
+    } catch (e) {
+      console.log(e)
+    }
   };
-
-  useEffect(() => {
-    keyPressed === 'Space' && setIsPlaying(!isPlaying);
-    setKeyPressed('');
-    keyPressed === 'f' && fscreen.requestFullscreen(appElement.current);
-    keyPressed === 'Escape' && fscreen.exitFullscreen();
-  }, [keyPressed, isPlaying]);
-
-
-  useEffect(() => {
-    document.addEventListener('keydown', handleKeyDown);
-
-    return () => {
-      document.removeEventListener('keydown', handleKeyDown);
-    };
-  }, []);
 
 
   // Handle full screen
@@ -197,11 +190,25 @@ function Container({ recitations, appElement }) {
       className="noise"
     >
 
+      <KeyboardEventHandler
+        handleKeys={['esc', 'ctrl+f', 'ctrl+space']}
+        onKeyEvent={(key, e) => handleKeyDown(key)} />
+
+
+      {/* Timer */}
       <Draggable>
         <div className={`flex cursor-pointer flex-col items-center justify-center w-80 h-60 max-w-md absolute ${isBuffering && "-top-full"}`}>
           <PomodoroTimer expiryTimestamp={time} />
         </div>
       </Draggable>
+
+      {/* TodoList */}
+      <Draggable>
+        <div className={`flex cursor-pointer flex-col items-center justify-center right-96 top-96 max-w-md w-96 absolute ${isBuffering && "-top-full"}`} >
+          <TodoList />
+        </div>
+      </Draggable>
+
       <motion.div
         className="flex py-16	justify-center h-screen"
         initial={{ opacity: 0 }}
@@ -213,138 +220,135 @@ function Container({ recitations, appElement }) {
           opacity: "0.7",
         }}
       >
-        {
-          !isBuffering && (
-            <Draggable>
-              <div className="w-96 h-80 glassmorphism rounded-none flex flex-col border-2 shadow">
-                {/* Header */}
-                <div className="flex justify-end border border-t-0 border-l-0 border-r-0 px-2">
-                  <button onClick={() => setShow(false)} className="absolute left-2 top-2">
-                    <RxCross2 size={12} fontWeight={1000} />
-                  </button>
-                  <p className="text-right">Quran-Cafe</p>
-                </div>
-                {/* Main */}
-                <div className="p-5 md:p-0">
-                  <Player
-                    playerRef={playerRef}
-                    playing={isPlaying}
-                    muted={isMuted}
-                    volume={volume}
-                    show={show}
-                    loop={onLoop}
-                    station={station}
-                    onPlay={() => setIsMuted(false)}
-                    onPause={() => setIsPlaying(false)}
-                    onDuration={(duration) => setDuration(duration)}
-                    onProgress={handleProgress}
-                    onEnded={handleShuffle}
-                    onError={handleShuffle}
-                  />
-                  <div className="p-6">
-                    {/* Info */}
-                    <div className="station-info flex items-center">
-                      <span className="text-2xl ml-10 text-gray-100 font-semibold">{station.surah.slice(0, 14)} </span>
-                      <BsDashLg size={10} color="black" className="text-gray-100 mx-2" />
-                      <span className="text-sm">{station.reciter?.name.slice(0, 23)}</span>
-                      <div className={`ml-4 absolute left-1 ${isPlaying ? 'top-11' : 'top-14'}`}>
-                        {
-                          isPlaying ? (<Audio
-                            height="30"
-                            width="30"
-                            radius="2"
-                            color='black'
-                            ariaLabel='three-dots-loading'
-                            animate={false}
-                            wrapperStyle={{
-                              display: 'flex',
-                              justifyContent: 'center',
-                              alignItems: 'center',
-                            }}
-                            wrapperClass
-                          />) : (
-                            <span className="text-xl">....</span>
-                          )
-                        }
-                      </div>
-                    </div>
-                    {/* Slider */}
-                    <div className="slider-container">
-                      {
-                        duration &&
-                        <Slider value={progress} duration={duration} onSeek={handleSeekChange} />
-                      }
-                    </div>
-                    {/* Actions */}
-                    <div className="">
-                      <Actions
-                        voted={voted}
-                        loop={onLoop}
-                        onUpvote={handleUpvote}
-                        playing={isPlaying}
-                        handlePlay={() => setIsPlaying(true)}
-                        handlePause={() => setIsPlaying(false)}
-                        onSetLoop={handleSetLoop}
-                        onShuffle={handleShuffle}
-                        onPrevious={handleOnPrevious}
-                      />
-                    </div>
 
-                    <div className="mt-8 flex flex-col">
-
-                      <div className="flex">
-                        {
-                          volumePart.map((item, index) => {
-                            return (
-                              <>
-                                <div onClick={
-                                  () => setVolume(item)
-                                } className={`${item <= volume ? "bg-black" : "bg-gray-400"
-                                  } px-1 py-2 mr-1 cursor-pointer`} />
-                                <span >
-                                </span>
-                              </>)
-                          })
-                        }
-                      </div>
-                    </div>
-                    <div className="ayah-container">
-                      <div className="ayah-inner">
-
-                        <p className="ayah-text">So when the Quran is recited, listen carefully to it, and keep silent so that you may, be shown mercy.</p>
-                        <p className="ayah-text ayah-reference">[7:204]</p>
-                      </div>
-                    </div>
-
+        {/* Player */}
+        <Draggable>
+          <div className={`w-96 h-80 glassmorphism rounded-none flex flex-col border-2 shadow ${isBuffering && 'hidden'}`}>
+            {/* Header */}
+            <div className="flex justify-end border border-t-0 border-l-0 border-r-0 px-2">
+              <button onClick={() => setShow(false)} className="absolute left-2 top-2">
+                <RxCross2 size={12} fontWeight={1000} />
+              </button>
+              <p className="text-right">Quran-Cafe</p>
+            </div>
+            {/* Main */}
+            <div className="p-5 md:p-0">
+              <Player
+                playerRef={playerRef}
+                playing={isPlaying}
+                muted={isMuted}
+                volume={volume}
+                show={show}
+                loop={onLoop}
+                station={station}
+                onPlay={() => setIsMuted(false)}
+                onPause={() => setIsPlaying(false)}
+                onDuration={(duration) => setDuration(duration)}
+                onProgress={handleProgress}
+                onEnded={handleShuffle}
+                onError={handleShuffle}
+              />
+              <div className="p-6">
+                {/* Info */}
+                <div className="station-info flex items-center">
+                  <span className="text-2xl ml-10 text-gray-100 font-semibold">{station.surah.slice(0, 14)} </span>
+                  <BsDashLg size={10} color="black" className="text-gray-100 mx-2" />
+                  <span className="text-sm">{station.reciter?.name.slice(0, 23)}</span>
+                  <div className={`ml-4 absolute left-1 ${isPlaying ? 'top-11' : 'top-14'}`}>
+                    {
+                      isPlaying ? (<Audio
+                        height="30"
+                        width="30"
+                        radius="2"
+                        color='black'
+                        ariaLabel='three-dots-loading'
+                        animate={false}
+                        wrapperStyle={{
+                          display: 'flex',
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                        }}
+                        wrapperClass
+                      />) : (
+                        <span className="text-xl">....</span>
+                      )
+                    }
                   </div>
                 </div>
+                {/* Slider */}
+                <div className="slider-container">
+                  {
+                    duration &&
+                    <Slider value={progress} duration={duration} onSeek={handleSeekChange} />
+                  }
+                </div>
+                {/* Actions */}
+                <div className="">
+                  <Actions
+                    voted={voted}
+                    loop={onLoop}
+                    onUpvote={handleUpvote}
+                    playing={isPlaying}
+                    handlePlay={() => setIsPlaying(true)}
+                    handlePause={() => setIsPlaying(false)}
+                    onSetLoop={handleSetLoop}
+                    onShuffle={handleShuffle}
+                    onPrevious={handleOnPrevious}
+                  />
+                </div>
+
+                <div className="mt-8 flex flex-col">
+
+                  <div className="flex">
+                    {
+                      volumePart.map((item, index) => {
+                        return (
+                          <>
+                            <div onClick={
+                              () => setVolume(item)
+                            } className={`${item <= volume ? "bg-black" : "bg-gray-400"
+                              } px-1 py-2 mr-1 cursor-pointer`} />
+                            <span >
+                            </span>
+                          </>)
+                      })
+                    }
+                  </div>
+                </div>
+                <div className="ayah-container">
+                  <div className="ayah-inner">
+
+                    <p className="ayah-text">So when the Quran is recited, listen carefully to it, and keep silent so that you may, be shown mercy.</p>
+                    <p className="ayah-text ayah-reference">[7:204]</p>
+                  </div>
+                </div>
+
               </div>
-            </Draggable>
-          )
-        }
+            </div>
+          </div>
+        </Draggable>
+
 
       </motion.div >
+      {/* Info Bar */}
       {
         !isBuffering && (
           <div>
             <div className="absolute right-5 bottom-5">
               <div className="glassmorphism p-3 rounded-xl flex justify-start flex-col mb-5">
                 <span className="text-black text-sm rotate-90">play/pause</span>
-                <span className="text-xl"> press <span className="font-semibold text-xl">space</span></span>
+                <span className="text-xl"> press <span className="font-semibold text-xl">ctrl+space</span></span>
               </div>
 
               <div className="glassmorphism p-3 rounded-xl flex justify-start flex-col">
                 <span className="text-black text-sm rotate-90"> {inFullscreenMode && 'exit '}fullscreen</span>
-                <span className="text-xl"> press <span className="font-semibold text-xl">{inFullscreenMode ? 'esc' : 'f'}</span></span>
+                <span className="text-xl"> press <span className="font-semibold text-xl">{inFullscreenMode ? 'esc' : 'ctrl+f'}</span></span>
               </div>
             </div>
             <AdditionalActions toggleFullscreen={toggleFullscreen} inFullscreenMode={inFullscreenMode} appElement={appElement} />
           </div>
         )
       }
-
-
-
 
     </main >
 

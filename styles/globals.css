@@ -396,3 +396,8 @@ nav li {
   font-weight: bold;
   color: #333;
 }
+
+textarea:focus,
+input:focus {
+  outline: none;
+}

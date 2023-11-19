@@ -14,9 +14,10 @@ import fscreen from 'fscreen';
 import PomodoroTimer from "../PomodoroTimer";
 import TodoList from "../TodoList/Index";
 import dynamic from "next/dynamic";
+import useWindowDimensions from "../../hooks/use-dimensions";
+import PrayerTime from "../PrayerTime";
 
 const KeyboardEventHandler = dynamic(() => import("react-keyboard-event-handler"), { ssr: false })
-
 
 function Container({ recitations, appElement }) {
   const { instance } = useRecitations();
@@ -33,6 +34,10 @@ function Container({ recitations, appElement }) {
   const [seeking, setSeeking] = useState(false);
   const [isBuffering, setIsBuffering] = useState(false);
   const playerRef = useRef();
+  const [location, setLocation] = useState({
+    latitude: null,
+    longitude: null,
+  });
 
   const time = new Date();
   time.setSeconds(time.getSeconds() + 600); // 10 minutes timer
@@ -44,6 +49,26 @@ function Container({ recitations, appElement }) {
   const finalVolume = muted ? 0 : volume ** 2
   let volumePart = [0, 0.10, 0.20, 0.30, 0.40, 0.50, 0.60, 0.70, 0.80, 0.90, 1]
 
+  // Geolocation
+  useEffect(() => {
+    const successCallback = (position) => {
+      console.log('Latitude is:', position.coords.latitude);
+      console.log('Longitude is:', position.coords.longitude);
+      setLocation({
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude,
+      });
+    };
+
+    const errorCallback = (error) => {
+      console.error('Error getting geolocation:', error.message);
+    };
+
+    navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+  }, []); // Empty dependency array ensures useEffect runs only once after initial render
+
+
+  const { height, width } = useWindowDimensions();
 
   let soundPlay = () => {
     const sound = new Howl({
@@ -185,6 +210,7 @@ function Container({ recitations, appElement }) {
     }
   }
 
+
   return (
     <main
       className="noise"
@@ -197,14 +223,21 @@ function Container({ recitations, appElement }) {
 
       {/* Timer */}
       <Draggable>
-        <div className={`flex cursor-pointer flex-col items-center justify-center w-80 h-60 max-w-md absolute ${isBuffering && "-top-full"}`}>
+        <div className={`flex cursor-pointer flex-col items-center justify-center w-80 top-10 -left-14 absolute max-w-md ${isBuffering && "-top-full"}`}>
+          <PrayerTime latitude={location.latitude} longitude={location.longitude} />
+        </div>
+      </Draggable>
+
+      {/* Timer */}
+      <Draggable>
+        <div className={`flex cursor-pointer flex-col items-center justify-center w-80 top-12 -right-5 absolute h-60 max-w-md ${isBuffering && "-top-full"}`}>
           <PomodoroTimer expiryTimestamp={time} />
         </div>
       </Draggable>
 
       {/* TodoList */}
       <Draggable>
-        <div className={`flex cursor-pointer flex-col items-center justify-center right-96 top-96 max-w-md w-96 absolute ${isBuffering && "-top-full"}`} >
+        <div className={`flex cursor-pointer flex-col items-center justify-center left-10 top-96 max-w-md w-96 absolute ${isBuffering && "-top-full"}`} >
           <TodoList />
         </div>
       </Draggable>
@@ -223,7 +256,9 @@ function Container({ recitations, appElement }) {
 
         {/* Player */}
         <Draggable>
-          <div className={`w-96 h-80 glassmorphism rounded-none flex flex-col border-2 shadow ${isBuffering && 'hidden'}`}>
+          <div className={`w-96 h-80 absolute left-[50%] glassmorphism rounded-none flex flex-col border-2 shadow ${isBuffering && 'hidden'}`} style={{
+            top: height / 2 - 200,
+          }}>
             {/* Header */}
             <div className="flex justify-end border border-t-0 border-l-0 border-r-0 px-2">
               <button onClick={() => setShow(false)} className="absolute left-2 top-2">

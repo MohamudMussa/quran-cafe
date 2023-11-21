@@ -51,6 +51,13 @@ function Container({ recitations, appElement }) {
 
   // Geolocation
   useEffect(() => {
+    handleGetLocation();
+  }, []); // Empty dependency array ensures useEffect runs only once after initial render
+
+
+  // Handle get location permission
+  const handleGetLocation = () => {
+
     const successCallback = (position) => {
       console.log('Latitude is:', position.coords.latitude);
       console.log('Longitude is:', position.coords.longitude);
@@ -65,8 +72,7 @@ function Container({ recitations, appElement }) {
     };
 
     navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
-  }, []); // Empty dependency array ensures useEffect runs only once after initial render
-
+  }
 
   const { height, width } = useWindowDimensions();
 
@@ -224,7 +230,7 @@ function Container({ recitations, appElement }) {
       {/* Timer */}
       <Draggable>
         <div className={`flex cursor-pointer flex-col items-center justify-center w-80 top-10 -left-14 absolute max-w-md ${isBuffering && "-top-full"}`}>
-          <PrayerTime latitude={location.latitude} longitude={location.longitude} />
+          <PrayerTime handleGetLocation={handleGetLocation} latitude={location.latitude} longitude={location.longitude} />
         </div>
       </Draggable>
 
@@ -237,7 +243,7 @@ function Container({ recitations, appElement }) {
 
       {/* TodoList */}
       <Draggable>
-        <div className={`flex cursor-pointer flex-col items-center justify-center left-10 top-96 max-w-md w-96 absolute ${isBuffering && "-top-full"}`} >
+        <div className={`flex cursor-pointer flex-col items-center justify-center left-10 bottom-8 max-w-md w-96 absolute ${isBuffering && "-top-full"}`} >
           <TodoList />
         </div>
       </Draggable>

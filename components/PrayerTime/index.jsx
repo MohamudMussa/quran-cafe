@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { FaLocationDot } from "react-icons/fa6";
 
-const PrayerTime = ({ longitude, latitude }) => {
+const PrayerTime = ({ longitude, latitude, handleGetLocation }) => {
   const [data, setData] = useState(null);
 
   useEffect(() => {
@@ -32,7 +33,7 @@ const PrayerTime = ({ longitude, latitude }) => {
           </tr>
         </thead>
         <tbody>
-          {data &&
+          {data ? (
             Object.keys(data).map((key, index) => {
               return (
                 <tr
@@ -43,7 +44,13 @@ const PrayerTime = ({ longitude, latitude }) => {
                   <td className="px-2 py-1 font-bold">{data[key]}</td>
                 </tr>
               );
-            })}
+            })
+          ) : (
+            <button onClick={handleGetLocation} className="text-center py-3 text-lg font-bold flex justify-center items-center">
+              {" "}
+              <FaLocationDot  /> <span className="pl-1">Need permission</span>
+            </button>
+          )}
         </tbody>
       </table>
     </div>

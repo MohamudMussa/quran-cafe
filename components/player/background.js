@@ -2,13 +2,11 @@ import { motion } from "framer-motion";
 
 import vignette from "../../public/vignette.png";
 import newImage from "../../public/new.gif";
+// import rain from "../../public/rain.gif";
 
 function Background() {
   return (
     <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 0.6 }}
-      transition={{ duration: 1 }}
       id="vignette"
     >
       <div

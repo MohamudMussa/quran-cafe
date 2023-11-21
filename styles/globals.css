@@ -2,14 +2,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 
 @font-face {
-  font-family: 'TiroDevaMarathi';
-  src: url('../assets/TiroDevaMarathi/TiroDevaMarathi-Regular.ttf');
+  font-family: "TiroDevaMarathi";
+  src: url("../assets/TiroDevaMarathi/TiroDevaMarathi-Regular.ttf");
   font-weight: 400;
   font-style: normal;
-  }
+}
 
 #vin {
   position: absolute;
@@ -137,7 +137,7 @@ nav li {
 
 .track {
   position: relative;
-  background: #FFA700;
+  background: #ffa700;
 }
 
 .track.track-0 {
@@ -169,7 +169,7 @@ nav li {
 }
 
 .time {
-  font-family: 'Poppins';
+  font-family: "Poppins";
   font-style: normal;
   font-weight: 800;
   font-size: 15px;
@@ -178,7 +178,7 @@ nav li {
 }
 
 .player-wrapper {
-  width: 100%;
+  /* width: 100%; */
   position: fixed;
   z-index: 999;
 }
@@ -194,27 +194,27 @@ nav li {
 }
 
 .reciter-name {
-  font-family: 'TiroDevaMarathi';
+  font-family: "TiroDevaMarathi";
   font-size: 30px;
   font-weight: 400;
   margin-bottom: 16;
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 .surah-name {
-  font-family: 'TiroDevaMarathi';
+  font-family: "TiroDevaMarathi";
   font-size: 20px;
   font-weight: 400;
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 /* Additional action styles */
 
 .twitter-share-button {
-  font-family: 'TiroDevaMarathi';
+  font-family: "TiroDevaMarathi";
   font-weight: 400;
   font-size: 18px;
-  color: #000000
+  color: #000000;
 }
 
 .ayah-container {
@@ -225,17 +225,17 @@ nav li {
 }
 
 .ayah-text {
-  font-family: 'TiroDevMarathi';
+  font-family: "TiroDevMarathi";
   font-style: normal;
   font-weight: 400;
   font-size: 0px;
   line-height: 35px;
-  color: #FFFFFF;
+  color: #ffffff;
   text-align: left;
 }
 
 .ayah-reference {
-  margin-top: 20px
+  margin-top: 20px;
 }
 
 .signature {
@@ -280,7 +280,7 @@ nav li {
 
 @media (max-width: 480px) {
   .slider-container {
-    max-width: 460px
+    max-width: 460px;
   }
 
   .reciter-name {
@@ -290,7 +290,7 @@ nav li {
   .surah-name {
     font-size: 18px;
   }
-  
+
   .ayah-text {
     font-size: 0px;
     line-height: 30px;
@@ -300,7 +300,7 @@ nav li {
     width: 320px;
   }
   .player-wrapper {
-    padding: 5px
+    padding: 5px;
   }
   .signature {
     width: 180px;
@@ -314,8 +314,8 @@ nav li {
 }
 
 @media (max-width: 320px) {
-  .slider-container  {
-    max-width: 310px
+  .slider-container {
+    max-width: 310px;
   }
 
   .ayah-inner {
@@ -323,12 +323,81 @@ nav li {
   }
 
   .player-wrapper {
-    padding: 2px
+    padding: 2px;
   }
 }
 
-@media (max-width: 376px ) and (max-height: 750px) {
+@media (max-width: 376px) and (max-height: 750px) {
   .player-inner {
     margin-top: 0;
   }
+}
+
+.glassmorphism {
+  /* From https://css.glass */
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+.glassmorphism-lg {
+  /* From https://css.glass */
+  background: rgba(255, 167, 0, 0.3);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(7.5px);
+  -webkit-backdrop-filter: blur(7.5px);
+}
+
+/* .noise {
+  background: linear-gradient(to right, black, transparent),
+    url(https://grainy-gradients.vercel.app/noise.svg);
+} */
+
+/* countdown timer */
+.circular-timer {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  position: relative;
+  background: #eee;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.circular-timer-mask {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  clip-path: polygon(50% 0%, 50% 100%, 100% 100%, 100% 0%);
+  background: #fff;
+  position: absolute;
+}
+
+.circular-timer-progress {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  clip-path: polygon(50% 0%, 50% 100%, 100% 100%, 100% 0%);
+  background: #3498db;
+  position: absolute;
+  transform-origin: 50% 50%;
+  transform: rotate(0deg);
+  transition: transform 1s linear;
+  z-index: 1;
+}
+
+.circular-timer-content {
+  z-index: 2;
+  position: relative;
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+}
+
+textarea:focus,
+input:focus {
+  outline: none;
 }

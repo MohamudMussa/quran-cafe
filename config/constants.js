@@ -6,6 +6,9 @@ import seven from "../public/7.jpg";
 import eight from "../public/8.jpg";
 import nine from "../public/9.jpg";
 import ten from "../public/10.jpg";
+import glitch_1 from "../public/videos/glitch_effect_1.gif";
+import glitch_2 from "../public/videos/glitch_effect_2.gif";
+import glitch_3 from "../public/videos/glitch_effect_3.gif";
 
 export const IMAGES = [
   meccaone,
@@ -17,6 +20,11 @@ export const IMAGES = [
   nine,
   ten,
 ];
+
+export const GLITCHES = [
+  glitch_2,
+];
+
 export const STATION = [
   "hO5wCnVLHWU",
   "bEGm_DHmiuk&list=PLxGJ20Im19wOWIfITK3KL69qm2j8kb3gI&index=3&ab_channel=محبالخير",

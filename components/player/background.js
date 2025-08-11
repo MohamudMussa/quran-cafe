@@ -1,9 +1,7 @@
 import { motion } from "framer-motion";
 
 import vignette from "../../public/vignette.png";
-// Preferred path (once available): ../../assets/images/GnIY3QCXQAAprad.jpeg
-// Using public fallback so build passes now
-import bgImage from "../../public/meccanew.jpg";
+import bgImage from "../../assets/images/GnIY3QCXQAAprad.jpeg";
 import lines from "../../public/lines.jpg";
 
 function Background({ isTuning = false }) {

@@ -31,26 +31,16 @@ function Home() {
         getRecitations();
       }, 1500);
     }
-    // console.log("recitations::::", recitations)
   }, [recitations]);
 
   useEffect(() => {
     setTimeout(() => {
       setLoadingText((prev) => {
-        if (prev === "Booting _") {
-          return "Loading Recitations .";
-        } else if (prev === "Loading Recitations .") {
-          return "Loading Recitations ..";
-        }
-        else if (prev === "Loading Recitations ..") {
-          return "Loading Recitations ...";
-        }
-        else if (prev === "Loading Recitations ...") {
-          return "Loading Recitations .";
-        }
-      }
-      );
-
+        if (prev === "Booting _") return "Loading Recitations .";
+        if (prev === "Loading Recitations .") return "Loading Recitations ..";
+        if (prev === "Loading Recitations ..") return "Loading Recitations ...";
+        if (prev === "Loading Recitations ...") return "Loading Recitations .";
+      });
     }, 500);
   }, [loadingText]);
 
@@ -67,14 +57,14 @@ function Home() {
       <main ref={appElement}>
         {
           recitations ? (
-            <PlayerContainer onTuning={setIsTuning} appElement={appElement} recitations={recitations} />
+            <>
+              <PlayerContainer onTuning={setIsTuning} appElement={appElement} recitations={recitations} />
+              <Background isTuning={isTuning} />
+            </>
           ) : (
             <div className="m-8">
               <div className="text-xl">
-
-                {/* Loading */}
                 <span>{loadingText}</span>
-
                 <div className="mt-2">
                   <Typewriter
                     onInit={(typewriter) => {
@@ -86,22 +76,13 @@ function Home() {
                           .start();
                       }, 1000);
                     }}
-                    options={
-                      {
-                        autoStart: true,
-                        loop: false,
-                        delay: 10,
-                      }
-                    }
+                    options={{ autoStart: true, loop: false, delay: 10 }}
                   />
                 </div>
-
-
               </div>
             </div>
           )
         }
-        <Background isTuning={isTuning} />
         <Footer />
       </main>
     </Layout>

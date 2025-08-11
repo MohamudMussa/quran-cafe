@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 
 import vignette from "../../public/vignette.png";
-import bgImage from "../../public/new.jpg";
+import bgImage from "../../public/meccanew.jpg";
 import lines from "../../public/lines.jpg";
 
 function Background() {

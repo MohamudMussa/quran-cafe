@@ -219,165 +219,126 @@ function Container({ recitations, appElement }) {
 
 
   return (
-    <main
-      className="noise"
-    >
-
+    <main className="noise">
       <KeyboardShortcuts onKeyEvent={(key, e) => handleKeyDown(key)} />
 
-
-      {/* Prayer times - left panel */}
-      <Draggable>
-        <div className={`flex cursor-pointer flex-col items-center justify-center w-80 top-16 left-6 absolute max-w-md ${isBuffering && "-top-full"}`}>
-          <div className="panel-card w-full">
-            <PrayerTime handleGetLocation={handleGetLocation} latitude={location.latitude} longitude={location.longitude} />
-          </div>
-        </div>
-      </Draggable>
-
-      {/* Pomodoro - right panel */}
-      <Draggable>
-        <div className={`flex cursor-pointer flex-col items-center justify-center w-80 top-16 right-6 absolute h-60 max-w-md ${isBuffering && "-top-full"}`}>
-          <div className="panel-card w-full p-2">
-            <PomodoroTimer expiryTimestamp={time} />
-          </div>
-        </div>
-      </Draggable>
-
-      {/* TodoList - bottom right group */}
-      <Draggable>
-        <div className={`flex cursor-pointer flex-col items-center justify-center right-10 bottom-10 max-w-md w-96 absolute ${isBuffering && "-top-full"}`} >
-          <div className="panel-card w-full p-4">
-            <TodoList />
-          </div>
-        </div>
-      </Draggable>
-
-      <motion.div
-        className="flex py-16	justify-center h-screen"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5 }}
-        style={{
-          backgroundImage: `url(${activeImage.src})`,
-          backgroundSize: "cover",
-          opacity: "0.7",
-        }}
-      >
-
-        {/* Player */}
-        <Draggable>
-          <div className={`w-[28rem] h-80 absolute left-[50%] player-window rounded-lg flex flex-col border-2 shadow ${isBuffering && 'hidden'}`} style={{
-            top: height / 2 - 200,
-            transform: 'translateX(-50%)'
-          }}>
-            {/* Header */}
-            <div className="flex justify-between items-center border border-t-0 border-l-0 border-r-0 px-3 panel-header">
-              <p className="text-left text-sm tracking-wide font-black">Quran-Café</p>
-              <button onClick={() => setShow(false)} className="py-2">
-                <RxCross2 size={12} />
-              </button>
+      {/* Grid layout to avoid overlap on desktop; stack on small screens */}
+      <div className="fixed inset-0 pointer-events-none">
+        <div className="h-full w-full grid grid-cols-1 gap-4 p-4 md:grid-cols-[22rem_1fr_22rem] md:grid-rows-[auto_1fr_auto]">
+          {/* Left: Prayer Times */}
+          <div className="pointer-events-auto md:row-span-3 md:col-start-1 flex md:items-start md:justify-start">
+            <div className={`panel-card w-full max-w-sm md:max-w-[22rem] ${isBuffering && "hidden"}`}>
+              <PrayerTime handleGetLocation={handleGetLocation} latitude={location.latitude} longitude={location.longitude} />
             </div>
-            {/* Main */}
-            <div className="p-4 md:p-4">
-              <Player
-                playerRef={playerRef}
-                playing={isPlaying}
-                muted={isMuted}
-                volume={volume}
-                show={show}
-                loop={onLoop}
-                station={station}
-                onPlay={() => setIsMuted(false)}
-                onPause={() => setIsPlaying(false)}
-                onDuration={(duration) => setDuration(duration)}
-                onProgress={handleProgress}
-                onEnded={handleShuffle}
-                onError={handleShuffle}
-              />
-              <div className="p-2">
-                {/* Info */}
-                <div className="station-info flex items-center">
-                  <span className="text-2xl ml-10 text-gray-100 font-semibold">{station.surah.slice(0, 18)} </span>
-                  <BsDashLg size={10} color="black" className="text-gray-100 mx-2" />
-                  <span className="text-sm">{station.reciter?.name.slice(0, 23)}</span>
-                  <div className={`ml-4 absolute left-1 ${isPlaying ? 'top-11' : 'top-14'}`}>
-                    {
-                      isPlaying ? (<Audio
-                        height="30"
-                        width="30"
-                        radius="2"
-                        color='black'
-                        ariaLabel='three-dots-loading'
-                        animate={false}
-                        wrapperStyle={{
-                          display: 'flex',
-                          justifyContent: 'center',
-                          alignItems: 'center',
-                        }}
-                        wrapperClass
-                      />) : (
-                        <span className="text-xl">....</span>
-                      )
-                    }
+          </div>
+
+          {/* Center: Player */}
+          <div className="pointer-events-auto md:col-start-2 md:row-start-2 flex items-center justify-center">
+            <div className={`player-window w-full max-w-[28rem] ${isBuffering && 'hidden'}`}>
+              {/* Header */}
+              <div className="flex justify-between items-center border border-t-0 border-l-0 border-r-0 px-3 panel-header">
+                <p className="text-left text-sm tracking-wide font-black">Quran-Café</p>
+                <button onClick={() => setShow(false)} className="py-2">
+                  <RxCross2 size={12} />
+                </button>
+              </div>
+              {/* Main */}
+              <div className="p-4 md:p-4">
+                <Player
+                  playerRef={playerRef}
+                  playing={isPlaying}
+                  muted={isMuted}
+                  volume={volume}
+                  show={show}
+                  loop={onLoop}
+                  station={station}
+                  onPlay={() => setIsMuted(false)}
+                  onPause={() => setIsPlaying(false)}
+                  onDuration={(duration) => setDuration(duration)}
+                  onProgress={handleProgress}
+                  onEnded={handleShuffle}
+                  onError={handleShuffle}
+                />
+                <div className="p-2">
+                  {/* Info */}
+                  <div className="station-info flex items-center">
+                    <span className="text-2xl ml-10 text-gray-100 font-semibold">{station.surah.slice(0, 18)} </span>
+                    <BsDashLg size={10} color="black" className="text-gray-100 mx-2" />
+                    <span className="text-sm">{station.reciter?.name.slice(0, 23)}</span>
+                    <div className={`ml-4 absolute left-1 ${isPlaying ? 'top-11' : 'top-14'}`}>
+                      {
+                        isPlaying ? (<Audio
+                          height="30"
+                          width="30"
+                          radius="2"
+                          color='black'
+                          ariaLabel='three-dots-loading'
+                          animate={false}
+                          wrapperStyle={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+                          wrapperClass
+                        />) : (
+                          <span className="text-xl">....</span>
+                        )
+                      }
+                    </div>
+                  </div>
+                  {/* Slider */}
+                  <div className="slider-container">
+                    {duration && <Slider value={progress} duration={duration} onSeek={handleSeekChange} />}
+                  </div>
+                  {/* Actions */}
+                  <div className="player-controls">
+                    <Actions
+                      voted={voted}
+                      loop={onLoop}
+                      onUpvote={handleUpvote}
+                      playing={isPlaying}
+                      handlePlay={() => setIsPlaying(true)}
+                      handlePause={() => setIsPlaying(false)}
+                      onSetLoop={handleSetLoop}
+                      onShuffle={handleShuffle}
+                      onPrevious={handleOnPrevious}
+                    />
+                  </div>
+
+                  <div className="mt-6 flex flex-col">
+                    <div className="flex">
+                      {volumePart.map((item, index) => (
+                        <>
+                          <div key={`vol-${index}`} onClick={() => setVolume(item)} className={`${item <= volume ? 'bg-black' : 'bg-gray-400'} px-1 py-2 mr-1 cursor-pointer`} />
+                          <span />
+                        </>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="ayah-container">
+                    <div className="ayah-inner">
+                      <p className="ayah-text">So when the Quran is recited, listen carefully to it, and keep silent so that you may, be shown mercy.</p>
+                      <p className="ayah-text ayah-reference">[7:204]</p>
+                    </div>
                   </div>
                 </div>
-                {/* Slider */}
-                <div className="slider-container">
-                  {
-                    duration &&
-                    <Slider value={progress} duration={duration} onSeek={handleSeekChange} />
-                  }
-                </div>
-                {/* Actions */}
-                <div className="player-controls">
-                  <Actions
-                    voted={voted}
-                    loop={onLoop}
-                    onUpvote={handleUpvote}
-                    playing={isPlaying}
-                    handlePlay={() => setIsPlaying(true)}
-                    handlePause={() => setIsPlaying(false)}
-                    onSetLoop={handleSetLoop}
-                    onShuffle={handleShuffle}
-                    onPrevious={handleOnPrevious}
-                  />
-                </div>
-
-                <div className="mt-6 flex flex-col">
-
-                  <div className="flex">
-                    {
-                      volumePart.map((item, index) => {
-                        return (
-                          <>
-                            <div onClick={
-                              () => setVolume(item)
-                            } className={`${item <= volume ? "bg-black" : "bg-gray-400"
-                              } px-1 py-2 mr-1 cursor-pointer`} />
-                            <span >
-                            </span>
-                          </>)
-                      })
-                    }
-                  </div>
-                </div>
-                <div className="ayah-container">
-                  <div className="ayah-inner">
-
-                    <p className="ayah-text">So when the Quran is recited, listen carefully to it, and keep silent so that you may, be shown mercy.</p>
-                    <p className="ayah-text ayah-reference">[7:204]</p>
-                  </div>
-                </div>
-
               </div>
             </div>
           </div>
-        </Draggable>
 
+          {/* Right: Promidot Timer */}
+          <div className="pointer-events-auto md:row-start-1 md:row-end-3 md:col-start-3 flex md:items-start md:justify-end">
+            <div className={`panel-card w-full max-w-sm md:max-w-[22rem] p-2 ${isBuffering && "hidden"}`}>
+              <PomodoroTimer expiryTimestamp={time} />
+            </div>
+          </div>
 
-      </motion.div >
-      {/* Info Bar */}
+          {/* Bottom Right: Todo List */}
+          <div className="pointer-events-auto md:col-start-3 md:row-start-3 flex md:items-end md:justify-end">
+            <div className={`panel-card w-full max-w-md md:max-w-[22rem] p-4 ${isBuffering && "hidden"}`}>
+              <TodoList />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Shortcuts/help overlays remain */}
       {
         !isBuffering && (
           <div>
@@ -396,9 +357,7 @@ function Container({ recitations, appElement }) {
           </div>
         )
       }
-
-    </main >
-
+    </main>
   );
 }
 

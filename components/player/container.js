@@ -13,11 +13,8 @@ import { BsDashLg } from "react-icons/bs";
 import fscreen from 'fscreen';
 import PomodoroTimer from "../PomodoroTimer";
 import TodoList from "../TodoList/Index";
-import dynamic from "next/dynamic";
 import useWindowDimensions from "../../hooks/use-dimensions";
 import PrayerTime from "../PrayerTime";
-
-const KeyboardEventHandler = dynamic(() => import("react-keyboard-event-handler"), { ssr: false })
 
 function Container({ recitations, appElement }) {
   const { instance } = useRecitations();
@@ -98,6 +95,27 @@ function Container({ recitations, appElement }) {
       console.log(e)
     }
   };
+
+  useEffect(() => {
+    const onKeyDown = (e) => {
+      if (e.ctrlKey && (e.code === 'Space' || e.key === ' ')) {
+        e.preventDefault();
+        handleKeyDown('ctrl+space');
+        return;
+      }
+      if (e.ctrlKey && (e.key === 'f' || e.key === 'F')) {
+        e.preventDefault();
+        handleKeyDown('ctrl+f');
+        return;
+      }
+      if (e.key === 'Escape') {
+        handleKeyDown('esc');
+      }
+    };
+
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [handleKeyDown]);
 
 
   // Handle full screen
@@ -221,11 +239,6 @@ function Container({ recitations, appElement }) {
     <main
       className="noise"
     >
-
-      <KeyboardEventHandler
-        handleKeys={['esc', 'ctrl+f', 'ctrl+space']}
-        onKeyEvent={(key, e) => handleKeyDown(key)} />
-
 
       {/* Prayer times - left panel */}
       <Draggable>

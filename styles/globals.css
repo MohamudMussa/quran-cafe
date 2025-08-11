@@ -556,3 +556,22 @@ input[type="checkbox"].retro-check:checked::after {
   z-index: 50;
   pointer-events: none;
 }
+
+/* Full-image background layering */
+.retro-bg-base-cover {
+  position: absolute;
+  inset: 0;
+  background-position: center;
+  background-size: cover;
+  filter: blur(12px) saturate(1.06) brightness(0.98);
+  transform: scale(1.05);
+  opacity: 0.6;
+}
+
+.retro-bg-base-contain {
+  position: absolute;
+  inset: 0;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain; /* show the whole image */
+}

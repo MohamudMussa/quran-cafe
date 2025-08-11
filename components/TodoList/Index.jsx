@@ -59,9 +59,9 @@ function TodoList() {
   }, [todoList]);
 
   return (
-    <div className="flex overflow-hidden flex-col" style={{ width: 192 * 1.6667 /* ~320px */ }}>
+    <div className="flex overflow-hidden flex-col w-full min-w-0">
       <Header />
-      <form onSubmit={handleSave}>
+      <form onSubmit={handleSave} className="min-w-0">
         <input
           value={todo.title}
           onChange={(e) =>
@@ -70,9 +70,8 @@ function TodoList() {
               completed: false,
             })
           }
-          className="w-full bg-black text-white py-2 px-3 text-lg mb-2 box-border"
+          className="w-full bg-black text-white py-2 px-3 text-lg mb-2 box-border min-w-0"
           placeholder="Type to add new task and press enter"
-          style={{ maxWidth: '100%' }}
         />
       </form>
       {/* List */}
@@ -82,12 +81,12 @@ function TodoList() {
             <Todo key={index}>
               <input
                 type="checkbox"
-                className="mr-3 p-2 retro-check"
+                className="mr-3 p-2 retro-check flex-shrink-0"
                 checked={item.completed}
                 onChange={() => handleComplete(index)}
               />
-              <p className="text-xl text-left flex-1 break-words">{item.title}</p>
-              <ImCross onClick={() => handleDelete(index)} size={13} />
+              <p className="text-xl text-left flex-1 min-w-0 break-words">{item.title}</p>
+              <ImCross onClick={() => handleDelete(index)} size={13} className="flex-shrink-0" />
             </Todo>
           ))}
       </div>

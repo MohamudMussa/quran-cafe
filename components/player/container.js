@@ -20,7 +20,7 @@ import PrayerTime from "../PrayerTime";
 
 // const KeyboardEventHandler = dynamic(() => import("react-keyboard-event-handler"), { ssr: false })
 
-function Container({ recitations, appElement }) {
+function Container({ recitations, appElement, onTuning }) {
   const { instance } = useRecitations();
   const [voted, setVoted] = useState(false);
   const [activeImage, setActiveImage] = useState(IMAGES[0]);
@@ -173,6 +173,7 @@ function Container({ recitations, appElement }) {
   }, [instance, station, voted]);
 
   const handleShuffle = useCallback(() => {
+    onTuning && onTuning(true);
     setIsBuffering(true);
     setActiveImage(GLITCHES[Math.floor(Math.random() * GLITCHES.length)]);
     setTimeout(() => {
@@ -183,6 +184,7 @@ function Container({ recitations, appElement }) {
       setActiveImage(image);
       setOnLoop(false);
       setIsBuffering(false);
+      setTimeout(() => onTuning && onTuning(false), 200);
     }, 500);
   }, [recitations]);
 
@@ -205,6 +207,7 @@ function Container({ recitations, appElement }) {
 
   const handleOnPrevious = () => {
     if (previousStation) {
+      onTuning && onTuning(true);
       setIsBuffering(true);
       setActiveImage(GLITCHES[Math.floor(Math.random() * GLITCHES.length)]);
 
@@ -213,6 +216,7 @@ function Container({ recitations, appElement }) {
         const image = getImage();
         setActiveImage(image);
         setIsBuffering(false);
+        setTimeout(() => onTuning && onTuning(false), 200);
       }, 500);
     }
   }
@@ -342,17 +346,7 @@ function Container({ recitations, appElement }) {
       {
         !isBuffering && (
           <div>
-            <div className="absolute right-5 bottom-5">
-              <div className="glassmorphism p-3 rounded-xl flex justify-start flex-col mb-5">
-                <span className="text-black text-sm rotate-90">play/pause</span>
-                <span className="text-xl"> press <span className="font-semibold text-xl">ctrl+space</span></span>
-              </div>
 
-              <div className="glassmorphism p-3 rounded-xl flex justify-start flex-col">
-                <span className="text-black text-sm rotate-90"> {inFullscreenMode && 'exit '}fullscreen</span>
-                <span className="text-xl"> press <span className="font-semibold text-xl">{inFullscreenMode ? 'esc' : 'ctrl+f'}</span></span>
-              </div>
-            </div>
             <AdditionalActions toggleFullscreen={toggleFullscreen} inFullscreenMode={inFullscreenMode} appElement={appElement} />
           </div>
         )

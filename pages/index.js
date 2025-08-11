@@ -15,6 +15,7 @@ function Home() {
 
   const [recitations, setRecitations] = useState(null);
   const [loadingText, setLoadingText] = useState("Booting _");
+  const [isTuning, setIsTuning] = useState(false);
 
   // Get all recitations
   const getRecitations = async () => {
@@ -66,7 +67,7 @@ function Home() {
       <main ref={appElement}>
         {
           recitations ? (
-            <PlayerContainer appElement={appElement} recitations={recitations} />
+            <PlayerContainer onTuning={setIsTuning} appElement={appElement} recitations={recitations} />
           ) : (
             <div className="m-8">
               <div className="text-xl">
@@ -100,7 +101,7 @@ function Home() {
             </div>
           )
         }
-        <Background />
+        <Background isTuning={isTuning} />
         <Footer />
       </main>
     </Layout>

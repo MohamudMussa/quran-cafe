@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import ReactPlayer from "react-player";
 
 const wrapperStyle = {
@@ -58,19 +58,23 @@ function Player({
   const mediaUrl = audioUrl || station?.video_url;
 
   const audioEl = useRef(null);
+  const reactPlayerRef = useRef(null);
 
-  // Expose a seekTo API compatible with container for audio
+  // Expose a seekTo API compatible with container for both cases
   useEffect(() => {
-    if (audioUrl && playerRef) {
-      playerRef.current = {
-        seekTo: (seconds) => {
-          if (audioEl.current) audioEl.current.currentTime = seconds;
-        },
-      };
-    }
+    if (!playerRef) return;
+    playerRef.current = {
+      seekTo: (seconds) => {
+        if (audioUrl && audioEl.current) {
+          audioEl.current.currentTime = seconds;
+        } else if (reactPlayerRef.current && typeof reactPlayerRef.current.seekTo === 'function') {
+          reactPlayerRef.current.seekTo(seconds, 'seconds');
+        }
+      },
+    };
   }, [audioUrl, playerRef]);
 
-  // Control audio play/pause, mute, and volume via props
+  // Control audio play/pause, mute, and volume via props when using <audio>
   useEffect(() => {
     if (!audioUrl || !audioEl.current) return;
     const el = audioEl.current;
@@ -105,7 +109,7 @@ function Player({
           />
         ) : (
           <ReactPlayer
-            ref={playerRef}
+            ref={reactPlayerRef}
             url={mediaUrl}
             style={reactPlayerStyle}
             playing={playing}

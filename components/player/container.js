@@ -55,6 +55,12 @@ function Container({ recitations, appElement, onTuning }) {
     handleGetLocation();
   }, []); // Empty dependency array ensures useEffect runs only once after initial render
 
+  useEffect(() => {
+    // Autoplay muted to satisfy browser policy
+    setIsMuted(true);
+    setIsPlaying(true);
+  }, []);
+
 
   // Handle get location permission
   const handleGetLocation = () => {

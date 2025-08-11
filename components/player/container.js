@@ -322,7 +322,7 @@ function Container({ recitations, appElement, onTuning }) {
           {/* Right: Promidot Timer */}
           <div className="pointer-events-auto md:row-start-1 md:row-end-3 md:col-start-3 flex md:items-start md:justify-end">
             <Draggable defaultPosition={{x:0,y:0}}>
-              <div className={`panel-card w-full max-w-sm md:max-w-[22rem] p-2 ${isBuffering && "hidden"}`}>
+              <div className={`panel-card w-full p-2 ${isBuffering && "hidden"}`} style={{ width: 320 }}>
                 <PomodoroTimer expiryTimestamp={time} />
               </div>
             </Draggable>
@@ -331,7 +331,7 @@ function Container({ recitations, appElement, onTuning }) {
           {/* Bottom Right: Todo List */}
           <div className="pointer-events-auto md:col-start-3 md:row-start-3 flex md:items-end md:justify-end">
             <Draggable defaultPosition={{x:0,y:0}}>
-              <div className={`panel-card w-full max-w-md md:max-w-[22rem] p-4 ${isBuffering && "hidden"}`}>
+              <div className={`panel-card w-full p-4 ${isBuffering && "hidden"}`} style={{ width: 320 }}>
                 <TodoList />
               </div>
             </Draggable>

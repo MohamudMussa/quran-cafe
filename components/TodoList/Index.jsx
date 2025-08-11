@@ -59,7 +59,7 @@ function TodoList() {
   }, [todoList]);
 
   return (
-    <div className="flex overflow-y-auto flex-col w-full">
+    <div className="flex overflow-hidden flex-col w-full" style={{ width: 320 }}>
       <Header />
       <form onSubmit={handleSave}>
         <input
@@ -74,8 +74,8 @@ function TodoList() {
           placeholder="Type to add new task and press enter"
         />
       </form>
-      {/* Lodo list */}
-      <div className="overflow-y-auto h-48">
+      {/* List */}
+      <div className="overflow-y-auto" style={{ height: 192 }}>
         {typeof todoList !== "string" &&
           todoList?.map((item, index) => (
             <Todo key={index}>

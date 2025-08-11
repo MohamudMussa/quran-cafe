@@ -8,6 +8,9 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "engines": {
+    "node": ">=22.x"
+  },
   "dependencies": {
     "@supabase/supabase-js": "^1.23.0",
     "cookies-next": "^4.0.0",
@@ -21,7 +24,6 @@
     "react-dom": "^18.2.0",
     "react-draggable": "^4.4.6",
     "react-icons": "^4.11.0",
-    "react-keyboard-event-handler": "^1.5.4",
     "react-loader-spinner": "^5.4.5",
     "react-player": "^2.9.0",
     "react-query": "^3.24.4",

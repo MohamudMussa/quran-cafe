@@ -13,11 +13,12 @@ import { BsDashLg } from "react-icons/bs";
 import fscreen from 'fscreen';
 import PomodoroTimer from "../PomodoroTimer";
 import TodoList from "../TodoList/Index";
-import dynamic from "next/dynamic";
+// import dynamic from "next/dynamic";
+import KeyboardShortcuts from "./keyboard-shortcuts";
 import useWindowDimensions from "../../hooks/use-dimensions";
 import PrayerTime from "../PrayerTime";
 
-const KeyboardEventHandler = dynamic(() => import("react-keyboard-event-handler"), { ssr: false })
+// const KeyboardEventHandler = dynamic(() => import("react-keyboard-event-handler"), { ssr: false })
 
 function Container({ recitations, appElement }) {
   const { instance } = useRecitations();
@@ -222,9 +223,7 @@ function Container({ recitations, appElement }) {
       className="noise"
     >
 
-      <KeyboardEventHandler
-        handleKeys={['esc', 'ctrl+f', 'ctrl+space']}
-        onKeyEvent={(key, e) => handleKeyDown(key)} />
+      <KeyboardShortcuts onKeyEvent={(key, e) => handleKeyDown(key)} />
 
 
       {/* Prayer times - left panel */}

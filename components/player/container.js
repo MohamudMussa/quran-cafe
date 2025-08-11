@@ -272,11 +272,6 @@ function Container({ recitations, appElement }) {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
-        style={{
-          backgroundImage: `url(${activeImage.src})`,
-          backgroundSize: "cover",
-          opacity: "0.7",
-        }}
       >
 
         {/* Player */}

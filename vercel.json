@@ -1,7 +1,8 @@
 {
+  "version": 2,
   "functions": {
     "**": {
-      "runtime": "nodejs22.x"
+      "runtime": "nodejs20.x"
     }
   }
 }

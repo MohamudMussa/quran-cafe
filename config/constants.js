@@ -1,24 +1,8 @@
-import meccaone from "../public/meccanew.jpg";
-import medina from "../public/medina.jpg";
-import meccatwo from "../public/meccanew.jpg";
-import five from "../public/5.jpg";
-import seven from "../public/7.jpg";
-import eight from "../public/8.jpg";
-import nine from "../public/9.jpg";
-import ten from "../public/10.jpg";
-import glitch_1 from "../public/videos/glitch_effect_1.gif";
+import meccaRetro from "../public/oldmecca.jpg";
 import glitch_2 from "../public/videos/glitch_effect_2.gif";
-import glitch_3 from "../public/videos/glitch_effect_3.gif";
 
 export const IMAGES = [
-  meccaone,
-  medina,
-  meccatwo,
-  five,
-  seven,
-  eight,
-  nine,
-  ten,
+  meccaRetro,
 ];
 
 export const GLITCHES = [

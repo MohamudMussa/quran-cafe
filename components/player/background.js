@@ -11,7 +11,6 @@ function Background() {
   const [bgUrl, setBgUrl] = useState(LOCAL_BG);
 
   useEffect(() => {
-    // If local not found (dev/preview), fallback to remote
     const img = new Image();
     img.onerror = () => setBgUrl(REMOTE_BG);
     img.src = LOCAL_BG;
@@ -19,10 +18,10 @@ function Background() {
 
   return (
     <motion.div id="retro-bg-root" className="retro-bg-root">
-      {/* Cover base (16:9) should fill screens nicely */}
-      <div className="retro-bg-base-cover" style={{ backgroundImage: `url(${bgUrl})` }} />
-      {/* Full image, in case of non-16:9 screens; usually still fits */}
+      {/* Full image (contain) behind */}
       <div className="retro-bg-base-contain" style={{ backgroundImage: `url(${bgUrl})` }} />
+      {/* Stretched image layer that always covers */}
+      <div className="retro-bg-base-cover" style={{ backgroundImage: `url(${bgUrl})` }} />
 
       {/* CRT effects */}
       <div className="retro-scan-scroll" />

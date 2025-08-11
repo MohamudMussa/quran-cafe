@@ -562,7 +562,7 @@ input[type="checkbox"].retro-check:checked::after {
   position: absolute;
   inset: 0;
   background-position: center;
-  background-size: cover;
+  background-size: 100% 100%;
   filter: blur(10px) saturate(1.06) brightness(0.98);
   transform: none;
   opacity: 0.55;

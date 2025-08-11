@@ -216,8 +216,8 @@ function Container({ recitations, appElement, onTuning }) {
       <KeyboardShortcuts onKeyEvent={(key, e) => handleKeyDown(key)} />
 
       {/* Grid layout for initial alignment; Draggable for freedom thereafter */}
-      <div className="fixed inset-0 pointer-events-none">
-        <div className="h-full w-full grid grid-cols-1 gap-4 p-4 md:grid-cols-[22rem_1fr_22rem] md:grid-rows-[auto_1fr_auto]">
+      <div className="fixed inset-0">
+        <div className="h-full w-full grid grid-cols-1 gap-3 p-4 md:grid-cols-[22rem_1fr_22rem] md:grid-rows-[auto_1fr_auto]">
           {/* Left: Prayer Times */}
           <div className="pointer-events-auto md:row-span-3 md:col-start-1 flex md:items-start md:justify-start">
             <Draggable defaultPosition={{x:0,y:0}}>
@@ -228,7 +228,7 @@ function Container({ recitations, appElement, onTuning }) {
           </div>
 
           {/* Center: Player */}
-          <div className="pointer-events-auto md:col-start-2 md:row-start-2 flex items-center justify-center min-h-[60vh]">
+          <div className="md:col-start-2 md:row-start-2 flex items-center justify-center min-h-[70vh]">
             <Draggable defaultClassName="cursor-move" defaultPosition={{x:0,y:0}}>
               <div className={`player-window w-full max-w-[28rem] ${isBuffering && 'hidden'}`}>
                 {/* Header */}

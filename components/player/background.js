@@ -18,8 +18,6 @@ function Background() {
 
   return (
     <motion.div id="retro-bg-root" className="retro-bg-root">
-      {/* Full image (contain) behind */}
-      <div className="retro-bg-base-contain" style={{ backgroundImage: `url(${bgUrl})` }} />
       {/* Stretched image layer that always covers */}
       <div className="retro-bg-base-cover" style={{ backgroundImage: `url(${bgUrl})` }} />
 

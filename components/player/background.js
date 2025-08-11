@@ -4,26 +4,27 @@ import { useEffect, useState } from "react";
 import vignette from "../../public/vignette.png";
 import lines from "../../public/lines.jpg";
 
+const LOCAL_BG = "/meccaanime.jpeg"; // new 16:9 upload
 const REMOTE_BG = "https://raw.githubusercontent.com/MohamudMussa/quran-cafe/master/public/meccaanime.jpeg";
-const LOCAL_BG = "/meccaanime.jpeg";
 
 function Background() {
-  const [bgUrl, setBgUrl] = useState(REMOTE_BG);
+  const [bgUrl, setBgUrl] = useState(LOCAL_BG);
 
   useEffect(() => {
+    // If local not found (dev/preview), fallback to remote
     const img = new Image();
-    img.onload = () => setBgUrl(LOCAL_BG);
+    img.onerror = () => setBgUrl(REMOTE_BG);
     img.src = LOCAL_BG;
   }, []);
 
   return (
     <motion.div id="retro-bg-root" className="retro-bg-root">
-      {/* Blurred, stretched base to fill edges */}
+      {/* Cover base (16:9) should fill screens nicely */}
       <div className="retro-bg-base-cover" style={{ backgroundImage: `url(${bgUrl})` }} />
-      {/* Show full image without cropping */}
+      {/* Full image, in case of non-16:9 screens; usually still fits */}
       <div className="retro-bg-base-contain" style={{ backgroundImage: `url(${bgUrl})` }} />
 
-      {/* Constant CRT effects */}
+      {/* CRT effects */}
       <div className="retro-scan-scroll" />
       <div className="retro-pixel-grid" />
       <div className="retro-chroma retro-chroma-r" style={{ backgroundImage: `url(${bgUrl})` }} />

@@ -19,25 +19,30 @@ function parseToMinutesFlexible(val) {
 const PrayerTime = ({ longitude, latitude, handleGetLocation }) => {
   const [data, setData] = useState(null);
   const [currentKey, setCurrentKey] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    if (!data && longitude && latitude) {
+    if (longitude && latitude) {
+      setLoading(true);
+      setError(null);
       let dateToday = new Date();
       let dd = String(dateToday.getDate()).padStart(2, "0");
-      let mm = String(dateToday.getMonth() + 1).padStart(2, "0"); //January is 0!
+      let mm = String(dateToday.getMonth() + 1).padStart(2, "0");
       let yyyy = dateToday.getFullYear();
       dateToday = dd + "-" + mm + "-" + yyyy;
 
       fetch(
         `https://api.aladhan.com/v1/timings/${dateToday}?latitude=${latitude}&longitude=${longitude}&method=2`
-      ).then((res) => {
-        res.json().then((data) => {
-          setData(data.data.timings);
-          console.log("Data ::: ", data.data.timings);
-        });
-      });
+      )
+        .then((res) => res.json())
+        .then((json) => {
+          setData(json?.data?.timings || null);
+        })
+        .catch((e) => setError('Failed to load timings'))
+        .finally(() => setLoading(false));
     }
-  }, [longitude, data, latitude]);
+  }, [longitude, latitude]);
 
   // Prepare ordered list of available keys
   const ordered = useMemo(() => {
@@ -96,10 +101,22 @@ const PrayerTime = ({ longitude, latitude, handleGetLocation }) => {
                 );
               })
             ) : (
-              <button onClick={handleGetLocation} className="text-center w-full py-3 text-lg font-bold flex justify-center items-center">
-                {" "}
-                <FaLocationDot  /> <span className="pl-1">Need permission</span>
-              </button>
+              <tr>
+                <td colSpan={2} className="px-2 py-3">
+                  {!longitude || !latitude ? (
+                    <button onClick={handleGetLocation} className="text-center w-full py-3 text-lg font-bold flex justify-center items-center">
+                      <FaLocationDot />
+                      <span className="pl-2">Enable location to load prayer times</span>
+                    </button>
+                  ) : loading ? (
+                    <span>Loading prayer times...</span>
+                  ) : error ? (
+                    <span className="text-red-600">{error}</span>
+                  ) : (
+                    <span>Prayer times unavailable</span>
+                  )}
+                </td>
+              </tr>
             )}
           </tbody>
         </table>

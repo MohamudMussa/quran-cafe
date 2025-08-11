@@ -59,20 +59,46 @@ function Container({ recitations, appElement, onTuning }) {
   // Handle get location permission
   const handleGetLocation = () => {
 
+    const setCoords = (lat, lon) => setLocation({ latitude: lat, longitude: lon });
+
     const successCallback = (position) => {
       console.log('Latitude is:', position.coords.latitude);
       console.log('Longitude is:', position.coords.longitude);
-      setLocation({
-        latitude: position.coords.latitude,
-        longitude: position.coords.longitude,
-      });
+      setCoords(position.coords.latitude, position.coords.longitude);
+    };
+
+    const ipFallback = async () => {
+      try {
+        const res = await fetch('https://ipapi.co/json/');
+        const json = await res.json();
+        if (json && json.latitude && json.longitude) {
+          console.log('IP Fallback coords:', json.latitude, json.longitude);
+          setCoords(json.latitude, json.longitude);
+        }
+      } catch (e) {
+        console.error('IP fallback error', e);
+      }
     };
 
     const errorCallback = (error) => {
       console.error('Error getting geolocation:', error.message);
+      // Fallback to IP-based location if permission denied or unavailable
+      ipFallback();
     };
 
-    navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+    try {
+      if (navigator?.geolocation) {
+        navigator.geolocation.getCurrentPosition(successCallback, errorCallback, {
+          enableHighAccuracy: true,
+          maximumAge: 600000,
+          timeout: 10000,
+        });
+      } else {
+        ipFallback();
+      }
+    } catch (e) {
+      ipFallback();
+    }
   }
 
   const { height, width } = useWindowDimensions();

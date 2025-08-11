@@ -228,8 +228,8 @@ function Container({ recitations, appElement, onTuning }) {
           </div>
 
           {/* Center: Player */}
-          <div className="pointer-events-auto md:col-start-2 md:row-start-2 flex items-center justify-center">
-            <Draggable defaultPosition={{x:0,y:0}}>
+          <div className="pointer-events-auto md:col-start-2 md:row-start-2 flex items-center justify-center min-h-[60vh]">
+            <Draggable defaultClassName="cursor-move" defaultPosition={{x:0,y:0}}>
               <div className={`player-window w-full max-w-[28rem] ${isBuffering && 'hidden'}`}>
                 {/* Header */}
                 <div className="flex justify-between items-center border border-t-0 border-l-0 border-r-0 px-3 panel-header">

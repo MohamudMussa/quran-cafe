@@ -18,7 +18,10 @@ function Background() {
 
   return (
     <motion.div id="retro-bg-root" className="retro-bg-root">
+      {/* Blurred, stretched base to fill edges */}
       <div className="retro-bg-base-cover" style={{ backgroundImage: `url(${bgUrl})` }} />
+      {/* Show full image without cropping */}
+      <div className="retro-bg-base-contain" style={{ backgroundImage: `url(${bgUrl})` }} />
 
       {/* Constant CRT effects */}
       <div className="retro-scan-scroll" />

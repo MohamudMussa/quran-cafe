@@ -1,4 +1,5 @@
-import ReactPlayer from "react-player/youtube";
+import React from "react";
+import ReactPlayer from "react-player";
 
 const wrapperStyle = {
   display: "flex",
@@ -51,36 +52,48 @@ function Player({
   volume,
   onDuration,
   onProgress,
-  playerRef
+  playerRef,
 }) {
+  const audioUrl = station?.mp3;
+  const mediaUrl = audioUrl || station?.video_url;
+
   return (
     <div style={show ? wrapperStyle : hiddenStyle}>
       <div style={innerWrapperStyle}>
-        <ReactPlayer
-          ref={playerRef}
-          url={station.video_url}
-          style={reactPlayerStyle}
-          playing={playing}
-          controls={false}
-          muted={muted}
-          volume={volume}
-          loop={loop}
-          playsinline={true}
-          onDuration={onDuration}
-          onProgress={onProgress}
-          config={{
-            youtube: {
-              playerVars: {
-                modestbranding: false,
-                color: "black",
-              },
-            },
-          }}
-          onPlay={onPlay}
-          onPause={onPause}
-          onEnded={onEnded}
-          onError={onError}
-        />
+        {audioUrl ? (
+          <audio
+            ref={playerRef}
+            src={audioUrl}
+            preload="auto"
+            autoPlay={playing}
+            muted={muted}
+            loop={loop}
+            onCanPlay={(e) => onDuration && onDuration(e.target.duration)}
+            onTimeUpdate={(e) => onProgress && onProgress({ playedSeconds: e.target.currentTime })}
+            onPlay={onPlay}
+            onPause={onPause}
+            onEnded={onEnded}
+            onError={onError}
+          />
+        ) : (
+          <ReactPlayer
+            ref={playerRef}
+            url={mediaUrl}
+            style={reactPlayerStyle}
+            playing={playing}
+            controls={false}
+            muted={muted}
+            volume={volume}
+            loop={loop}
+            playsinline={true}
+            onDuration={onDuration}
+            onProgress={onProgress}
+            onPlay={onPlay}
+            onPause={onPause}
+            onEnded={onEnded}
+            onError={onError}
+          />
+        )}
       </div>
     </div>
   );

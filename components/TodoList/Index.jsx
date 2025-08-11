@@ -81,7 +81,7 @@ function TodoList() {
             <Todo key={index}>
               <input
                 type="checkbox"
-                className="mr-3 p-2 accent-yellow-400"
+                className="mr-3 p-2 retro-check"
                 checked={item.completed}
                 onChange={() => handleComplete(index)}
               />

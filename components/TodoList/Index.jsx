@@ -59,7 +59,7 @@ function TodoList() {
   }, [todoList]);
 
   return (
-    <div className="flex overflow-hidden flex-col w-full" style={{ width: 320 }}>
+    <div className="flex overflow-hidden flex-col" style={{ width: 192 * 1.6667 /* ~320px */ }}>
       <Header />
       <form onSubmit={handleSave}>
         <input
@@ -70,8 +70,9 @@ function TodoList() {
               completed: false,
             })
           }
-          className="w-full bg-black text-white py-2 px-3 text-lg mb-2"
+          className="w-full bg-black text-white py-2 px-3 text-lg mb-2 box-border"
           placeholder="Type to add new task and press enter"
+          style={{ maxWidth: '100%' }}
         />
       </form>
       {/* List */}
@@ -85,7 +86,7 @@ function TodoList() {
                 checked={item.completed}
                 onChange={() => handleComplete(index)}
               />
-              <p className="text-xl text-left w-full">{item.title}</p>
+              <p className="text-xl text-left flex-1 break-words">{item.title}</p>
               <ImCross onClick={() => handleDelete(index)} size={13} />
             </Todo>
           ))}

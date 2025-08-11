@@ -3,7 +3,14 @@ import React, { useEffect, useMemo, useState } from "react";
 const ORDERED_KEYS = ["Fajr", "Sunrise", "Dhuhr", "Asr", "Sunset", "Maghrib", "Isha"]; // keep order
 
 function toMinutes(val) {
-  const [hh, mm] = String(val).split(":").map(Number);
+  if (!val) return 0;
+  const m = String(val).match(/(\d{1,2}):(\d{2})(?:\s*(AM|PM))?/i);
+  if (!m) return 0;
+  let hh = parseInt(m[1], 10);
+  const mm = parseInt(m[2], 10);
+  const ampm = m[3]?.toUpperCase();
+  if (ampm === 'PM' && hh < 12) hh += 12;
+  if (ampm === 'AM' && hh === 12) hh = 0;
   return (hh % 24) * 60 + (mm % 60);
 }
 
@@ -34,9 +41,7 @@ const NextCountdown = ({ timings }) => {
     const nowMinutes = now.getHours() * 60 + now.getMinutes() + now.getSeconds() / 60;
     let nextIndex = 0;
     for (let i = 0; i < ordered.length; i++) {
-      if (nowMinutes < ordered[i].minutes) {
-        nextIndex = i; break;
-      }
+      if (nowMinutes < ordered[i].minutes) { nextIndex = i; break; }
       nextIndex = 0; // default to first of next day
     }
     const next = ordered[nextIndex].minutes;

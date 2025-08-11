@@ -4,6 +4,18 @@ import NextCountdown from "./NextCountdown";
 
 const ORDERED_KEYS = ["Fajr", "Sunrise", "Dhuhr", "Asr", "Sunset", "Maghrib", "Isha"]; // keep order consistent
 
+function parseToMinutesFlexible(val) {
+  if (!val) return 0;
+  const m = String(val).match(/(\d{1,2}):(\d{2})(?:\s*(AM|PM))?/i);
+  if (!m) return 0;
+  let hh = parseInt(m[1], 10);
+  const mm = parseInt(m[2], 10);
+  const ampm = m[3]?.toUpperCase();
+  if (ampm === 'PM' && hh < 12) hh += 12;
+  if (ampm === 'AM' && hh === 12) hh = 0;
+  return (hh % 24) * 60 + (mm % 60);
+}
+
 const PrayerTime = ({ longitude, latitude, handleGetLocation }) => {
   const [data, setData] = useState(null);
   const [currentKey, setCurrentKey] = useState(null);
@@ -30,11 +42,7 @@ const PrayerTime = ({ longitude, latitude, handleGetLocation }) => {
   // Prepare ordered list of available keys
   const ordered = useMemo(() => {
     if (!data) return [];
-    const toMinutes = (val) => {
-      const [hh, mm] = String(val).split(":").map(Number);
-      return (hh % 24) * 60 + (mm % 60);
-    };
-    return ORDERED_KEYS.filter((k) => data[k]).map((k) => ({ key: k, minutes: toMinutes(data[k]) }));
+    return ORDERED_KEYS.filter((k) => data[k]).map((k) => ({ key: k, minutes: parseToMinutesFlexible(data[k]) }));
   }, [data]);
 
   // Determine the current active prayer window
@@ -45,7 +53,6 @@ const PrayerTime = ({ longitude, latitude, handleGetLocation }) => {
       const now = new Date();
       const nowMinutes = now.getHours() * 60 + now.getMinutes();
 
-      // Find interval [i, i+1)
       for (let i = 0; i < ordered.length; i++) {
         const curr = ordered[i].minutes;
         const next = i < ordered.length - 1 ? ordered[i + 1].minutes : ordered[0].minutes + 24 * 60;
@@ -54,12 +61,11 @@ const PrayerTime = ({ longitude, latitude, handleGetLocation }) => {
           return;
         }
       }
-      // If before first prayer time, treat as last of previous day
       setCurrentKey(ordered[ordered.length - 1].key);
     };
 
     computeActive();
-    const id = setInterval(computeActive, 60 * 1000); // update every minute
+    const id = setInterval(computeActive, 60 * 1000);
     return () => clearInterval(id);
   }, [ordered]);
 

@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 
 import vignette from "../../public/vignette.png";
-import bgImage from "../../assets/images/GnIY3QCXQAAprad.jpeg";
+import bgImage from "../../public/meccaanime.jpeg";
 import lines from "../../public/lines.jpg";
 
 function Background({ isTuning = false }) {

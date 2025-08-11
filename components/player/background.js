@@ -1,28 +1,35 @@
 import { motion } from "framer-motion";
 
 import vignette from "../../public/vignette.png";
-import newImage from "../../public/new.gif";
-// import rain from "../../public/rain.gif";
+import bgImage from "../../public/new.jpg";
+import lines from "../../public/lines.jpg";
 
 function Background() {
   return (
-    <motion.div
-      id="vignette"
-    >
+    <motion.div id="retro-bg-root" className="retro-bg-root">
+      {/* Base image */}
       <div
-        id="vin"
-        style={{
-          backgroundImage: `url(${vignette.src})`,
-        }}
-      >
-        <div
-          id="vignette"
-          style={{
-            backgroundImage: `url(${newImage.src})`,
-          }}
-          className="z-0 flex flex-col items-center md:h-screen md:justify-center px-4 py-16 md:py-0"
-        />
-      </div>
+        className="retro-bg-base"
+        style={{ backgroundImage: `url(${bgImage.src})` }}
+      />
+
+      {/* Warm tint */}
+      <div className="retro-bg-tint" />
+
+      {/* Scanlines */}
+      <div
+        className="retro-bg-scanlines"
+        style={{ backgroundImage: `url(${lines.src})` }}
+      />
+
+      {/* Grain/Glitch layer */}
+      <div className="retro-bg-grain" />
+
+      {/* Vignette */}
+      <div
+        className="retro-bg-vignette"
+        style={{ backgroundImage: `url(${vignette.src})` }}
+      />
     </motion.div>
   );
 }

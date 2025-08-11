@@ -227,24 +227,30 @@ function Container({ recitations, appElement }) {
         onKeyEvent={(key, e) => handleKeyDown(key)} />
 
 
-      {/* Timer */}
+      {/* Prayer times - left panel */}
       <Draggable>
-        <div className={`flex cursor-pointer flex-col items-center justify-center w-80 top-10 -left-14 absolute max-w-md ${isBuffering && "-top-full"}`}>
-          <PrayerTime handleGetLocation={handleGetLocation} latitude={location.latitude} longitude={location.longitude} />
+        <div className={`flex cursor-pointer flex-col items-center justify-center w-80 top-16 left-6 absolute max-w-md ${isBuffering && "-top-full"}`}>
+          <div className="panel-card w-full">
+            <PrayerTime handleGetLocation={handleGetLocation} latitude={location.latitude} longitude={location.longitude} />
+          </div>
         </div>
       </Draggable>
 
-      {/* Timer */}
+      {/* Pomodoro - right panel */}
       <Draggable>
-        <div className={`flex cursor-pointer flex-col items-center justify-center w-80 top-12 -right-5 absolute h-60 max-w-md ${isBuffering && "-top-full"}`}>
-          <PomodoroTimer expiryTimestamp={time} />
+        <div className={`flex cursor-pointer flex-col items-center justify-center w-80 top-16 right-6 absolute h-60 max-w-md ${isBuffering && "-top-full"}`}>
+          <div className="panel-card w-full p-2">
+            <PomodoroTimer expiryTimestamp={time} />
+          </div>
         </div>
       </Draggable>
 
-      {/* TodoList */}
+      {/* TodoList - bottom right group */}
       <Draggable>
-        <div className={`flex cursor-pointer flex-col items-center justify-center left-10 bottom-8 max-w-md w-96 absolute ${isBuffering && "-top-full"}`} >
-          <TodoList />
+        <div className={`flex cursor-pointer flex-col items-center justify-center right-10 bottom-10 max-w-md w-96 absolute ${isBuffering && "-top-full"}`} >
+          <div className="panel-card w-full p-4">
+            <TodoList />
+          </div>
         </div>
       </Draggable>
 
@@ -262,18 +268,19 @@ function Container({ recitations, appElement }) {
 
         {/* Player */}
         <Draggable>
-          <div className={`w-96 h-80 absolute left-[50%] glassmorphism rounded-none flex flex-col border-2 shadow ${isBuffering && 'hidden'}`} style={{
+          <div className={`w-[28rem] h-80 absolute left-[50%] player-window rounded-lg flex flex-col border-2 shadow ${isBuffering && 'hidden'}`} style={{
             top: height / 2 - 200,
+            transform: 'translateX(-50%)'
           }}>
             {/* Header */}
-            <div className="flex justify-end border border-t-0 border-l-0 border-r-0 px-2">
-              <button onClick={() => setShow(false)} className="absolute left-2 top-2">
-                <RxCross2 size={12} fontWeight={1000} />
+            <div className="flex justify-between items-center border border-t-0 border-l-0 border-r-0 px-3 panel-header">
+              <p className="text-left text-sm tracking-wide font-black">Quran-Café</p>
+              <button onClick={() => setShow(false)} className="py-2">
+                <RxCross2 size={12} />
               </button>
-              <p className="text-right">Quran-Cafe</p>
             </div>
             {/* Main */}
-            <div className="p-5 md:p-0">
+            <div className="p-4 md:p-4">
               <Player
                 playerRef={playerRef}
                 playing={isPlaying}
@@ -289,10 +296,10 @@ function Container({ recitations, appElement }) {
                 onEnded={handleShuffle}
                 onError={handleShuffle}
               />
-              <div className="p-6">
+              <div className="p-2">
                 {/* Info */}
                 <div className="station-info flex items-center">
-                  <span className="text-2xl ml-10 text-gray-100 font-semibold">{station.surah.slice(0, 14)} </span>
+                  <span className="text-2xl ml-10 text-gray-100 font-semibold">{station.surah.slice(0, 18)} </span>
                   <BsDashLg size={10} color="black" className="text-gray-100 mx-2" />
                   <span className="text-sm">{station.reciter?.name.slice(0, 23)}</span>
                   <div className={`ml-4 absolute left-1 ${isPlaying ? 'top-11' : 'top-14'}`}>
@@ -324,7 +331,7 @@ function Container({ recitations, appElement }) {
                   }
                 </div>
                 {/* Actions */}
-                <div className="">
+                <div className="player-controls">
                   <Actions
                     voted={voted}
                     loop={onLoop}
@@ -338,7 +345,7 @@ function Container({ recitations, appElement }) {
                   />
                 </div>
 
-                <div className="mt-8 flex flex-col">
+                <div className="mt-6 flex flex-col">
 
                   <div className="flex">
                     {

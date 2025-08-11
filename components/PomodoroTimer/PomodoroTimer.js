@@ -27,26 +27,23 @@ function PomodoroTimer() {
     };
 
     const handleReset = () => {
-        // Restarts to 5 minutes timer
-        const time = new Date();
-        time.setSeconds(minutes * 60 + seconds + 60);
-        restart(time)
+        const t = new Date();
+        t.setSeconds(minutes * 60 + seconds + 60);
+        restart(t)
     };
 
     return (
-        <div className="text-center absolute top-10 right-10">
-            <div className="text-3xl font-bold mb-4">Promidot Timer</div>
-            <div className="text-6xl font-bold w-48 h-48 flex justify-center items-center mb-5 glassmorphism rounded-full border-4 border-black">
+        <div className="text-center">
+            <div className="text-2xl font-black mb-3">Promidot Timer</div>
+            <div className="text-5xl font-extrabold w-48 h-48 mx-auto flex justify-center items-center mb-4 glassmorphism rounded-full border-4 border-black">
                 {minutes}:{seconds < 10 ? `0${seconds}` : seconds}
             </div>
 
             <div className='flex flex-col justify-center'>
-                <button onClick={handleStartPause} className="bg-yellow-400 text-lg text-black px-10 py-2 mt-4">
-                    {
-                        isRunning ? "Pause" : "Start"
-                    }
+                <button onClick={handleStartPause} className="bg-yellow-400 text-lg text-black px-10 py-2 mt-2 rounded-md">
+                    {isRunning ? "Pause" : "Start"}
                 </button>
-                <button onClick={handleReset} className="glassmorphism text-lg text-black px-10 py-2 mt-4">
+                <button onClick={handleReset} className="glassmorphism text-lg text-black px-10 py-2 mt-2 rounded-md">
                     + 1
                 </button>
             </div>

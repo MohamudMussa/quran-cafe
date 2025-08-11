@@ -1,13 +1,26 @@
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 
 import vignette from "../../public/vignette.png";
 import lines from "../../public/lines.jpg";
 
+const REMOTE_BG = "https://raw.githubusercontent.com/MohamudMussa/quran-cafe/master/public/meccaanime.jpeg";
+const LOCAL_BG = "/meccaanime.jpeg";
+
 function Background({ isTuning = false }) {
+  const [bgUrl, setBgUrl] = useState(REMOTE_BG);
+
+  useEffect(() => {
+    // Try to switch to local if available
+    const img = new Image();
+    img.onload = () => setBgUrl(LOCAL_BG);
+    img.src = LOCAL_BG;
+  }, []);
+
   return (
     <>
       <motion.div id="retro-bg-root" className="retro-bg-root">
-        <div className="retro-bg-base" style={{ backgroundImage: `url(/meccaanime.jpeg)` }} />
+        <div className="retro-bg-base" style={{ backgroundImage: `url(${bgUrl})` }} />
         <div className="retro-bg-tint" />
         <div className="retro-bg-scanlines" style={{ backgroundImage: `url(${lines.src})` }} />
         <div className="retro-bg-grain" />

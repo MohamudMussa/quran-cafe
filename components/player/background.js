@@ -18,7 +18,6 @@ function Background() {
 
   return (
     <motion.div id="retro-bg-root" className="retro-bg-root">
-      {/* Base image fills screen */}
       <div className="retro-bg-base-cover" style={{ backgroundImage: `url(${bgUrl})` }} />
 
       {/* Constant CRT effects */}
@@ -27,6 +26,9 @@ function Background() {
       <div className="retro-chroma retro-chroma-r" style={{ backgroundImage: `url(${bgUrl})` }} />
       <div className="retro-chroma retro-chroma-g" style={{ backgroundImage: `url(${bgUrl})` }} />
       <div className="retro-chroma retro-chroma-b" style={{ backgroundImage: `url(${bgUrl})` }} />
+
+      {/* Dark overlay */}
+      <div className="retro-bg-darken" />
 
       {/* Existing overlays */}
       <div className="retro-bg-tint" />

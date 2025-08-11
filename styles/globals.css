@@ -562,10 +562,10 @@ input[type="checkbox"].retro-check:checked::after {
   position: absolute;
   inset: 0;
   background-position: center;
-  background-size: cover;
+  background-size: 100% 100%;
   filter: blur(12px) saturate(1.06) brightness(0.98);
-  transform: scale(1.05);
-  opacity: 0.6;
+  transform: none;
+  opacity: 0.55;
 }
 
 .retro-bg-base-contain {
@@ -626,3 +626,15 @@ input[type="checkbox"].retro-check:checked::after {
 
 /* Increase grain slightly for analog vibe */
 .retro-bg-grain { opacity: 0.22; }
+
+/* Dark overlay above the background */
+.retro-bg-darken {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  pointer-events: none;
+}
+
+/* Stronger grain and pixel grid */
+.retro-bg-grain { opacity: 0.32; filter: contrast(110%); }
+.retro-pixel-grid { opacity: 0.28; }

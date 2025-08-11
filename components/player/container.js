@@ -173,19 +173,14 @@ function Container({ recitations, appElement, onTuning }) {
   }, [instance, station, voted]);
 
   const handleShuffle = useCallback(() => {
-    onTuning && onTuning(true);
     setIsBuffering(true);
-    setActiveImage(GLITCHES[Math.floor(Math.random() * GLITCHES.length)]);
     setTimeout(() => {
       setPreviousStation(station);
       const shuffledStation = getStation(recitations);
       setStation(shuffledStation);
-      const image = getImage();
-      setActiveImage(image);
       setOnLoop(false);
       setIsBuffering(false);
-      setTimeout(() => onTuning && onTuning(false), 200);
-    }, 500);
+    }, 100);
   }, [recitations]);
 
   const handleSeekChange = (seekFraction) => {
@@ -207,17 +202,11 @@ function Container({ recitations, appElement, onTuning }) {
 
   const handleOnPrevious = () => {
     if (previousStation) {
-      onTuning && onTuning(true);
       setIsBuffering(true);
-      setActiveImage(GLITCHES[Math.floor(Math.random() * GLITCHES.length)]);
-
       setTimeout(() => {
         setStation(previousStation);
-        const image = getImage();
-        setActiveImage(image);
         setIsBuffering(false);
-        setTimeout(() => onTuning && onTuning(false), 200);
-      }, 500);
+      }, 100);
     }
   }
 

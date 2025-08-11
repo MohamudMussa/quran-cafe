@@ -69,14 +69,14 @@ function Container({ recitations, appElement, onTuning }) {
 
     const ipFallback = async () => {
       try {
-        const res = await fetch('https://ipapi.co/json/');
+        const res = await fetch('/api/geo');
         const json = await res.json();
         if (json && json.latitude && json.longitude) {
-          console.log('IP Fallback coords:', json.latitude, json.longitude);
+          console.log('Server Fallback coords:', json.latitude, json.longitude, 'source:', json.source);
           setCoords(json.latitude, json.longitude);
         }
       } catch (e) {
-        console.error('IP fallback error', e);
+        console.error('Server fallback error', e);
       }
     };
 

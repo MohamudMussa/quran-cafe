@@ -55,14 +55,20 @@ function Home() {
       }}
     >
       <main ref={appElement}>
+        {/* Background always present */}
+        <Background isTuning={isTuning} />
+
+        {/* App content */}
         {
           recitations ? (
-            <>
-              <PlayerContainer onTuning={setIsTuning} appElement={appElement} recitations={recitations} />
-              <Background isTuning={isTuning} />
-            </>
-          ) : (
-            <div className="m-8">
+            <PlayerContainer onTuning={setIsTuning} appElement={appElement} recitations={recitations} />
+          ) : null
+        }
+
+        {/* Black loading overlay while booting */}
+        {
+          !recitations && (
+            <div className="fixed inset-0 z-40 bg-black text-white p-8">
               <div className="text-xl">
                 <span>{loadingText}</span>
                 <div className="mt-2">
@@ -83,6 +89,7 @@ function Home() {
             </div>
           )
         }
+
         <Footer />
       </main>
     </Layout>

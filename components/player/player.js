@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useMemo, useRef } from "react";
 import ReactPlayer from "react-player";
 
 const wrapperStyle = {
@@ -57,15 +57,43 @@ function Player({
   const audioUrl = station?.mp3;
   const mediaUrl = audioUrl || station?.video_url;
 
+  const audioEl = useRef(null);
+
+  // Expose a seekTo API compatible with container for audio
+  useEffect(() => {
+    if (audioUrl && playerRef) {
+      playerRef.current = {
+        seekTo: (seconds) => {
+          if (audioEl.current) audioEl.current.currentTime = seconds;
+        },
+      };
+    }
+  }, [audioUrl, playerRef]);
+
+  // Control audio play/pause, mute, and volume via props
+  useEffect(() => {
+    if (!audioUrl || !audioEl.current) return;
+    const el = audioEl.current;
+    try {
+      el.muted = !!muted;
+      el.volume = typeof volume === 'number' ? Math.min(1, Math.max(0, volume)) : el.volume;
+      if (playing) {
+        const p = el.play();
+        if (p?.catch) p.catch(() => {});
+      } else {
+        el.pause();
+      }
+    } catch {}
+  }, [audioUrl, playing, muted, volume]);
+
   return (
     <div style={show ? wrapperStyle : hiddenStyle}>
       <div style={innerWrapperStyle}>
         {audioUrl ? (
           <audio
-            ref={playerRef}
+            ref={audioEl}
             src={audioUrl}
             preload="auto"
-            autoPlay={playing}
             muted={muted}
             loop={loop}
             onCanPlay={(e) => onDuration && onDuration(e.target.duration)}

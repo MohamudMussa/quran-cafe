@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useMemo } from "react";
 import { FaLocationDot } from "react-icons/fa6";
+import NextCountdown from "./NextCountdown";
 
 const ORDERED_KEYS = ["Fajr", "Sunrise", "Dhuhr", "Asr", "Sunset", "Maghrib", "Isha"]; // keep order consistent
 
@@ -96,6 +97,7 @@ const PrayerTime = ({ longitude, latitude, handleGetLocation }) => {
             )}
           </tbody>
         </table>
+        {data && <NextCountdown timings={data} />}
       </div>
     </div>
   );

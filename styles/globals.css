@@ -455,7 +455,7 @@ input:focus {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  opacity: 0.18;
+  opacity: 0.22;
   background: repeating-radial-gradient(circle at 50% 50%, rgba(0,0,0,0.06) 0 1px, transparent 1px 2px);
   animation: grain-move 8s steps(10) infinite;
   mix-blend-mode: overlay;
@@ -575,3 +575,54 @@ input[type="checkbox"].retro-check:checked::after {
   background-repeat: no-repeat;
   background-size: contain; /* show the whole image */
 }
+
+/* Animated horizontal scan (CRT) */
+.retro-scan-scroll {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255,255,255,0.06) 0px,
+    rgba(255,255,255,0.06) 1px,
+    rgba(0,0,0,0) 2px,
+    rgba(0,0,0,0) 3px
+  );
+  mix-blend-mode: screen;
+  animation: scan-scroll 6s linear infinite;
+  opacity: 0.25;
+}
+
+@keyframes scan-scroll {
+  0% { transform: translateY(-3%); }
+  100% { transform: translateY(3%); }
+}
+
+/* Pixel grid overlay for low-res feel */
+.retro-pixel-grid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: linear-gradient(rgba(0,0,0,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.05) 1px, transparent 1px);
+  background-size: 2px 2px, 2px 2px;
+  mix-blend-mode: multiply;
+  opacity: 0.2;
+}
+
+/* Chromatic aberration layers */
+.retro-chroma {
+  position: absolute;
+  inset: 0;
+  background-position: center;
+  background-size: cover;
+  mix-blend-mode: screen;
+  opacity: 0.08;
+  filter: saturate(120%);
+  pointer-events: none;
+}
+.retro-chroma-r { transform: translateX(1px); filter: hue-rotate(0deg) saturate(130%); }
+.retro-chroma-g { transform: translateX(-1px); filter: hue-rotate(120deg) saturate(130%); }
+.retro-chroma-b { transform: translateY(0.5px); filter: hue-rotate(240deg) saturate(130%); }
+
+/* Increase grain slightly for analog vibe */
+.retro-bg-grain { opacity: 0.22; }

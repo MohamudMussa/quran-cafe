@@ -7,7 +7,7 @@ import lines from "../../public/lines.jpg";
 const REMOTE_BG = "https://raw.githubusercontent.com/MohamudMussa/quran-cafe/master/public/meccaanime.jpeg";
 const LOCAL_BG = "/meccaanime.jpeg";
 
-function Background({ isTuning = false }) {
+function Background() {
   const [bgUrl, setBgUrl] = useState(REMOTE_BG);
 
   useEffect(() => {
@@ -17,29 +17,23 @@ function Background({ isTuning = false }) {
   }, []);
 
   return (
-    <>
-      <motion.div id="retro-bg-root" className="retro-bg-root">
-        {/* Blurred cover to fill edges */}
-        <div className="retro-bg-base-cover" style={{ backgroundImage: `url(${bgUrl})` }} />
-        {/* Actual full image, contained */}
-        <div className="retro-bg-base-contain" style={{ backgroundImage: `url(${bgUrl})` }} />
-        <div className="retro-bg-tint" />
-        <div className="retro-bg-scanlines" style={{ backgroundImage: `url(${lines.src})` }} />
-        <div className="retro-bg-grain" />
-        <div className="retro-bg-vignette" style={{ backgroundImage: `url(${vignette.src})` }} />
-      </motion.div>
+    <motion.div id="retro-bg-root" className="retro-bg-root">
+      {/* Base image fills screen */}
+      <div className="retro-bg-base-cover" style={{ backgroundImage: `url(${bgUrl})` }} />
 
-      {isTuning && (
-        <motion.div
-          className="retro-tuning-portal"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: [0, 1, 0] }}
-          transition={{ duration: 0.55 }}
-        >
-          <div className="retro-tuning-overlay" />
-        </motion.div>
-      )}
-    </>
+      {/* Constant CRT effects */}
+      <div className="retro-scan-scroll" />
+      <div className="retro-pixel-grid" />
+      <div className="retro-chroma retro-chroma-r" style={{ backgroundImage: `url(${bgUrl})` }} />
+      <div className="retro-chroma retro-chroma-g" style={{ backgroundImage: `url(${bgUrl})` }} />
+      <div className="retro-chroma retro-chroma-b" style={{ backgroundImage: `url(${bgUrl})` }} />
+
+      {/* Existing overlays */}
+      <div className="retro-bg-tint" />
+      <div className="retro-bg-scanlines" style={{ backgroundImage: `url(${lines.src})` }} />
+      <div className="retro-bg-grain" />
+      <div className="retro-bg-vignette" style={{ backgroundImage: `url(${vignette.src})` }} />
+    </motion.div>
   );
 }
 

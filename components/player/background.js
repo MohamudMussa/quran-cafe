@@ -1,14 +1,13 @@
 import { motion } from "framer-motion";
 
 import vignette from "../../public/vignette.png";
-import bgImage from "../../public/meccaanime.jpeg";
 import lines from "../../public/lines.jpg";
 
 function Background({ isTuning = false }) {
   return (
     <>
       <motion.div id="retro-bg-root" className="retro-bg-root">
-        <div className="retro-bg-base" style={{ backgroundImage: `url(${bgImage.src})` }} />
+        <div className="retro-bg-base" style={{ backgroundImage: `url(/meccaanime.jpeg)` }} />
         <div className="retro-bg-tint" />
         <div className="retro-bg-scanlines" style={{ backgroundImage: `url(${lines.src})` }} />
         <div className="retro-bg-grain" />

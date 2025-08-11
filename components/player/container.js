@@ -173,14 +173,10 @@ function Container({ recitations, appElement, onTuning }) {
   }, [instance, station, voted]);
 
   const handleShuffle = useCallback(() => {
-    setIsBuffering(true);
-    setTimeout(() => {
-      setPreviousStation(station);
-      const shuffledStation = getStation(recitations);
-      setStation(shuffledStation);
-      setOnLoop(false);
-      setIsBuffering(false);
-    }, 100);
+    setPreviousStation(station);
+    const shuffledStation = getStation(recitations);
+    setStation(shuffledStation);
+    setOnLoop(false);
   }, [recitations]);
 
   const handleSeekChange = (seekFraction) => {
@@ -202,11 +198,7 @@ function Container({ recitations, appElement, onTuning }) {
 
   const handleOnPrevious = () => {
     if (previousStation) {
-      setIsBuffering(true);
-      setTimeout(() => {
-        setStation(previousStation);
-        setIsBuffering(false);
-      }, 100);
+      setStation(previousStation);
     }
   }
 
@@ -221,7 +213,7 @@ function Container({ recitations, appElement, onTuning }) {
           {/* Left: Prayer Times */}
           <div className="pointer-events-auto md:row-span-3 md:col-start-1 flex md:items-start md:justify-start">
             <Draggable defaultPosition={{x:0,y:0}}>
-              <div className={`panel-card w-full max-w-sm md:max-w-[22rem] ${isBuffering && "hidden"}`}>
+              <div className={`panel-card w-full max-w-sm md:max-w-[22rem]`}>
                 <PrayerTime handleGetLocation={handleGetLocation} latitude={location.latitude} longitude={location.longitude} />
               </div>
             </Draggable>
@@ -230,7 +222,7 @@ function Container({ recitations, appElement, onTuning }) {
           {/* Center: Player */}
           <div className="md:col-start-2 md:row-start-2 flex items-center justify-center min-h-[70vh]">
             <Draggable defaultClassName="cursor-move" defaultPosition={{x:0,y:0}}>
-              <div className={`player-window w-full max-w-[28rem] ${isBuffering && 'hidden'}`}>
+              <div className={`player-window w-full max-w-[28rem]`}>
                 {/* Header */}
                 <div className="flex justify-between items-center border border-t-0 border-l-0 border-r-0 px-3 panel-header">
                   <p className="text-left text-sm tracking-wide font-black">Quran-Café</p>
@@ -322,7 +314,7 @@ function Container({ recitations, appElement, onTuning }) {
           {/* Right: Promidot Timer */}
           <div className="pointer-events-auto md:row-start-1 md:row-end-3 md:col-start-3 flex md:items-start md:justify-end">
             <Draggable defaultPosition={{x:0,y:0}}>
-              <div className={`panel-card w-full p-2 ${isBuffering && "hidden"}`} style={{ width: 320 }}>
+              <div className={`panel-card w-full p-2`} style={{ width: 320 }}>
                 <PomodoroTimer expiryTimestamp={time} />
               </div>
             </Draggable>
@@ -331,7 +323,7 @@ function Container({ recitations, appElement, onTuning }) {
           {/* Bottom Right: Todo List */}
           <div className="pointer-events-auto md:col-start-3 md:row-start-3 flex md:items-end md:justify-end">
             <Draggable defaultPosition={{x:0,y:0}}>
-              <div className={`panel-card w-full p-4 ${isBuffering && "hidden"}`} style={{ width: 320 }}>
+              <div className={`panel-card w-full p-4`} style={{ width: 320 }}>
                 <TodoList />
               </div>
             </Draggable>

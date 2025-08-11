@@ -548,3 +548,11 @@ input[type="checkbox"].retro-check:checked::after {
   40% { transform: scaleY(1.02); filter: blur(0.6px); opacity: 1; }
   100% { transform: scaleY(1); filter: blur(0px); opacity: 0; }
 }
+
+/* Tuning overlay portal at top layer */
+.retro-tuning-portal {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  pointer-events: none;
+}

@@ -1,28 +1,33 @@
 import { motion } from "framer-motion";
 
 import vignette from "../../public/vignette.png";
+// Preferred path (once available): ../../assets/images/GnIY3QCXQAAprad.jpeg
+// Using public fallback so build passes now
 import bgImage from "../../public/meccanew.jpg";
 import lines from "../../public/lines.jpg";
 
 function Background({ isTuning = false }) {
   return (
-    <motion.div id="retro-bg-root" className="retro-bg-root">
-      <div className="retro-bg-base" style={{ backgroundImage: `url(${bgImage.src})` }} />
-      <div className="retro-bg-tint" />
-      <div className="retro-bg-scanlines" style={{ backgroundImage: `url(${lines.src})` }} />
-      <div className="retro-bg-grain" />
-      <div className="retro-bg-vignette" style={{ backgroundImage: `url(${vignette.src})` }} />
+    <>
+      <motion.div id="retro-bg-root" className="retro-bg-root">
+        <div className="retro-bg-base" style={{ backgroundImage: `url(${bgImage.src})` }} />
+        <div className="retro-bg-tint" />
+        <div className="retro-bg-scanlines" style={{ backgroundImage: `url(${lines.src})` }} />
+        <div className="retro-bg-grain" />
+        <div className="retro-bg-vignette" style={{ backgroundImage: `url(${vignette.src})` }} />
+      </motion.div>
 
-      {/* Tuning overlay when switching stations */}
       {isTuning && (
         <motion.div
-          className="retro-tuning-overlay"
+          className="retro-tuning-portal"
           initial={{ opacity: 0 }}
           animate={{ opacity: [0, 1, 0] }}
           transition={{ duration: 0.55 }}
-        />
+        >
+          <div className="retro-tuning-overlay" />
+        </motion.div>
       )}
-    </motion.div>
+    </>
   );
 }
 

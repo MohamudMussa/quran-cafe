@@ -13,9 +13,11 @@ function MyApp({ Component, pageProps }) {
     <QueryClientProvider client={queryClient}>
       <RecitationsProvider>
         <Hydrate state={pageProps.dehydratedState}>
-          <main className={myFont.className}>
-            <Component {...pageProps} />
-          </main>
+          <div id="app-root" className="min-h-screen bg-black text-white">
+            <main className={myFont.className}>
+              <Component {...pageProps} />
+            </main>
+          </div>
         </Hydrate>
       </RecitationsProvider>
     </QueryClientProvider>

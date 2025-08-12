@@ -52,7 +52,7 @@ const DuaCard = () => {
 
   return (
     <div className="panel-card w-full md:max-w-[22rem]">
-      <div className="panel-header px-3 py-2 text-sm uppercase tracking-wide">Reminders For Believers</div>
+      <div className="panel-header px-3 py-2 text-sm uppercase tracking-wide">Reminders For The Believers</div>
       <div className="p-3">
         <div className="space-y-2">
           <div className="text-xl leading-8">{daily.arabic}</div>

@@ -59,9 +59,9 @@ function PomodoroTimer() {
     const adjust = (deltaSec) => restartWithSeconds(remaining + deltaSec, false);
 
     return (
-        <div className="text-center" style={{ width: 320 }}>
+        <div style={{ width: 320 }}>
             {/* Match PrayerTime header style */}
-            <div className="panel-header px-3 py-2 text-sm uppercase tracking-wide">Pomodoro Timer</div>
+            <div className="panel-header px-3 py-2 text-sm uppercase tracking-wide text-left">Pomodoro Timer</div>
             <div className="p-3 panel-card-dark">
                 {/* Presets */}
                 <div className="flex flex-wrap items-center justify-center gap-2 mb-3">

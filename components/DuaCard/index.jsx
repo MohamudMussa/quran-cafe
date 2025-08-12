@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 
 const DUAS = [
   {
@@ -39,62 +39,34 @@ function getDailyIndex(len) {
   return dayCount % len;
 }
 
-const DuaItem = ({ dua }) => {
+const DuaCard = () => {
+  const daily = useMemo(() => DUAS[getDailyIndex(DUAS.length)], []);
+
   const handleCopy = async () => {
-    const text = `${dua.arabic}\n\n${dua.english} (${dua.reference})\n\nListening on https://quran.cafe #QuranCafe`;
+    const text = `${daily.arabic}\n\n${daily.english} (${daily.reference})\n\nListening on https://quran.cafe #QuranCafe`;
     try {
       await navigator.clipboard.writeText(text);
-      // Optional: small UX feedback
       alert('Copied to clipboard!');
     } catch (e) {}
   };
 
   return (
-    <div className="border-b border-gray-300 py-2">
-      <div className="text-lg leading-7 mb-1">{dua.arabic}</div>
-      <div className="text-sm">{dua.english}</div>
-      <div className="text-xs opacity-80 mt-1">{dua.reference}</div>
-      <div className="flex justify-end mt-2">
-        <button onClick={handleCopy} className="px-2 py-1 text-xs font-bold border border-black rounded" style={{ backgroundColor: '#ffa700', color: '#000' }}>
-          Copy
-        </button>
-      </div>
-    </div>
-  );
-};
-
-function DuaCard() {
-  const [q, setQ] = useState('');
-
-  const daily = useMemo(() => DUAS[getDailyIndex(DUAS.length)], []);
-  const filtered = useMemo(() => {
-    const s = q.trim().toLowerCase();
-    if (!s) return [daily];
-    return DUAS.filter(d =>
-      d.arabic.toLowerCase().includes(s) ||
-      d.english.toLowerCase().includes(s) ||
-      d.reference.toLowerCase().includes(s)
-    );
-  }, [q, daily]);
-
-  return (
     <div className="panel-card w-full md:max-w-[22rem]">
-      <div className="panel-header px-3 py-2 text-sm uppercase tracking-wide">Qur’an Duʿā</div>
+      <div className="panel-header px-3 py-2 text-sm uppercase tracking-wide">Reminders For Believers</div>
       <div className="p-3">
-        <input
-          value={q}
-          onChange={(e) => setQ(e.target.value)}
-          placeholder="Search duas..."
-          className="w-full bg-black text-white py-2 px-3 text-sm mb-2 box-border"
-        />
-        <div className="max-h-56 overflow-y-auto pr-1">
-          {filtered.map((dua) => (
-            <DuaItem key={dua.id} dua={dua} />
-          ))}
+        <div className="space-y-2">
+          <div className="text-xl leading-8">{daily.arabic}</div>
+          <div className="text-sm leading-6">{daily.english}</div>
+          <div className="text-xs font-semibold" style={{ color: '#ffa700' }}>{daily.reference}</div>
+          <div className="flex justify-end pt-1">
+            <button onClick={handleCopy} className="px-2 py-1 text-xs font-bold border border-black rounded" style={{ backgroundColor: '#ffa700', color: '#000' }}>
+              Copy
+            </button>
+          </div>
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default DuaCard;

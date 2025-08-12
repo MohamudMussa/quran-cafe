@@ -46,8 +46,9 @@ function PomodoroTimer() {
     const duration = sessionSeconds; // total session length
     const progress = Math.min(1, Math.max(0, 1 - remaining / Math.max(1, duration)));
 
-    const size = 192; // 48*4 = matches w-48 h-48
-    const stroke = 10;
+    // Reduced circle for better balance
+    const size = 168; // smaller than 192 to balance layout
+    const stroke = 8;
     const radius = (size - stroke) / 2;
     const circumference = 2 * Math.PI * radius;
     const strokeDashoffset = useMemo(() => circumference * (1 - progress), [circumference, progress]);
@@ -91,7 +92,7 @@ function PomodoroTimer() {
                         transform={`rotate(-90 ${size/2} ${size/2})`}
                     />
                 </svg>
-                <div className="text-3xl md:text-5xl font-extrabold w-48 h-48 mx-auto flex justify-center items-center glassmorphism rounded-full">
+                <div className="glassmorphism rounded-full flex items-center justify-center mx-auto text-3xl font-extrabold" style={{ width: size, height: size }}>
                     {display}
                 </div>
             </div>

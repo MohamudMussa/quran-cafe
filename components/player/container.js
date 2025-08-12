@@ -390,8 +390,8 @@ function Container({ recitations, appElement, onTuning }) {
         </div>
       </div>
 
-      {/* Standalone live counter */}
-      <LiveCounter standalone />
+      {/* Standalone live counter bottom-left, desktop only */}
+      <LiveCounter standalone standalonePos="bottom-left" hideOnMobile />
       {/* Shortcuts/help overlays removed */}
       {
         !isBuffering && (

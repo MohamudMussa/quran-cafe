@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 
-function LiveCounter({ standalone = false }) {
+function LiveCounter({ standalone = false, standalonePos = 'center', hideOnMobile = false }) {
   const [count, setCount] = useState(1);
   const clientId = useMemo(() => {
     if (typeof window === 'undefined') return '';
@@ -46,8 +46,16 @@ function LiveCounter({ standalone = false }) {
 
   if (!standalone) return content;
 
+  const base = 'fixed z-40 pointer-events-none';
+  const posClass = standalonePos === 'bottom-left'
+    ? 'bottom-5 left-5'
+    : standalonePos === 'bottom-right'
+      ? 'bottom-5 right-5'
+      : 'inset-0 flex items-center justify-center';
+  const responsive = hideOnMobile ? 'hidden md:block' : '';
+
   return (
-    <div className="fixed inset-0 pointer-events-none flex items-center justify-center z-40">
+    <div className={`${base} ${posClass} ${responsive}`}>
       <div className="pointer-events-auto">
         {content}
       </div>

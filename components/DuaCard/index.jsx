@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 
 const DUAS = [
   {
@@ -41,13 +41,17 @@ function getDailyIndex(len) {
 
 const DuaCard = () => {
   const daily = useMemo(() => DUAS[getDailyIndex(DUAS.length)], []);
+  const [open, setOpen] = useState(false);
 
-  const handleCopy = async () => {
-    const text = `${daily.arabic}\n\n${daily.english} (${daily.reference})\n\nListening on https://quran.cafe #QuranCafe`;
+  const tweetText = `${daily.arabic}\n\n${daily.english} (${daily.reference})\n\nListening on https://quran.cafe #QuranCafe`;
+  const shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}`;
+
+  const handleShare = () => setOpen(true);
+  const doShare = () => {
     try {
-      await navigator.clipboard.writeText(text);
-      alert('Copied to clipboard!');
-    } catch (e) {}
+      window.open(shareUrl, '_blank', 'noopener');
+    } catch {}
+    setOpen(false);
   };
 
   return (
@@ -59,12 +63,28 @@ const DuaCard = () => {
           <div className="text-sm leading-6">{daily.english}</div>
           <div className="text-xs font-semibold" style={{ color: '#ffa700' }}>{daily.reference}</div>
           <div className="flex justify-end pt-1">
-            <button onClick={handleCopy} className="px-2 py-1 text-xs font-bold border border-black rounded" style={{ backgroundColor: '#ffa700', color: '#000' }}>
-              Copy
+            <button onClick={handleShare} className="px-2 py-1 text-xs font-bold border border-black rounded" style={{ backgroundColor: '#ffa700', color: '#000' }}>
+              Share
             </button>
           </div>
         </div>
       </div>
+
+      {open && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
+          <div className="absolute inset-0 bg-black opacity-50" onClick={() => setOpen(false)} />
+          <div className="relative panel-card w-96 max-w-[90vw] p-4 z-10" style={{ background: 'rgba(255,255,255,0.2)' }}>
+            <div className="panel-header px-3 py-2 text-sm uppercase tracking-wide mb-2">Share on Twitter</div>
+            <div className="bg-black text-white p-3 text-sm whitespace-pre-wrap mb-3" style={{ maxHeight: 240, overflowY: 'auto' }}>
+              {tweetText}
+            </div>
+            <div className="flex justify-end space-x-2">
+              <button onClick={() => setOpen(false)} className="px-3 py-1 text-sm border border-black rounded bg-white text-black">Cancel</button>
+              <button onClick={doShare} className="px-3 py-1 text-sm font-bold border border-black rounded" style={{ backgroundColor: '#ffa700', color: '#000' }}>Share on Twitter</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

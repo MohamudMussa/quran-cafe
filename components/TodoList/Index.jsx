@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Todo from "./Todo";
-import Header from "./Header";
+// import Header from "./Header";
 import { getCookie, setCookie } from "cookies-next";
 import { ImCross } from "react-icons/im";
 
@@ -59,36 +59,39 @@ function TodoList() {
   }, [todoList]);
 
   return (
-    <div className="flex overflow-hidden flex-col w-full min-w-0">
-      <Header />
-      <form onSubmit={handleSave} className="min-w-0">
-        <input
-          value={todo.title}
-          onChange={(e) =>
-            setTodo({
-              title: e.target.value,
-              completed: false,
-            })
-          }
-          className="w-full bg-black text-white py-2 px-3 text-lg mb-2 box-border min-w-0"
-          placeholder="Type to add new task and press enter"
-        />
-      </form>
-      {/* List */}
-      <div className="overflow-y-auto" style={{ height: 192 }}>
-        {typeof todoList !== "string" &&
-          todoList?.map((item, index) => (
-            <Todo key={index}>
-              <input
-                type="checkbox"
-                className="mr-3 p-2 retro-check flex-shrink-0"
-                checked={item.completed}
-                onChange={() => handleComplete(index)}
-              />
-              <p className="text-xl text-left flex-1 min-w-0 break-words">{item.title}</p>
-              <ImCross onClick={() => handleDelete(index)} size={13} className="flex-shrink-0" />
-            </Todo>
-          ))}
+    <div className="w-full min-w-0">
+      {/* Match PrayerTime header style */}
+      <div className="panel-header px-3 py-2 text-sm uppercase tracking-wide">Task List</div>
+      <div className="p-3">
+        <form onSubmit={handleSave} className="min-w-0">
+          <input
+            value={todo.title}
+            onChange={(e) =>
+              setTodo({
+                title: e.target.value,
+                completed: false,
+              })
+            }
+            className="w-full bg-black text-white py-2 px-3 text-lg mb-2 box-border min-w-0"
+            placeholder="Type to add new task and press enter"
+          />
+        </form>
+        {/* List */}
+        <div className="overflow-y-auto" style={{ height: 192 }}>
+          {typeof todoList !== "string" &&
+            todoList?.map((item, index) => (
+              <Todo key={index}>
+                <input
+                  type="checkbox"
+                  className="mr-3 p-2 retro-check flex-shrink-0"
+                  checked={item.completed}
+                  onChange={() => handleComplete(index)}
+                />
+                <p className="text-xl text-left flex-1 min-w-0 break-words">{item.title}</p>
+                <ImCross onClick={() => handleDelete(index)} size={13} className="flex-shrink-0" />
+              </Todo>
+            ))}
+        </div>
       </div>
     </div>
   );

@@ -349,6 +349,15 @@ nav li {
   -webkit-backdrop-filter: blur(7.5px);
 }
 
+/* Glass effect for tables with improved contrast */
+.glassmorphism-table {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
 /* .noise {
   background: linear-gradient(to right, black, transparent),
     url(https://grainy-gradients.vercel.app/noise.svg);

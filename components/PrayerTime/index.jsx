@@ -92,8 +92,8 @@ const PrayerTime = ({ longitude, latitude, handleGetLocation }) => {
                 return (
                   <tr
                     key={index}
-                    className={`border-b border-gray-400 ${isActive ? "" : "glassmorphism text-black"}`}
-                    style={isActive ? { backgroundColor: "#ffa700", color: "#000" } : {}}
+                    className={`border-b border-gray-400 ${isActive ? "" : "glassmorphism-table"}`}
+                    style={isActive ? { backgroundColor: "#ffa700", color: "#000" } : { color: '#f3f4f6' }}
                   >
                     <td className="px-2 py-1 font-semibold">{key}</td>
                     <td className="px-2 py-1 font-bold">{data[key]}</td>

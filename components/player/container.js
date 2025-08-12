@@ -383,7 +383,7 @@ function Container({ recitations, appElement, onTuning }) {
 
                 <div className="mt-6 flex flex-col">
                   <div className="flex items-center">
-                    <FiVolume2 size={14} className="mr-2 text-black" />
+                    <FiVolume2 size={18} className="mr-2" style={{ color: '#ffa700' }} />
                     {volumePart.map((item, index) => (
                       <>
                         <div key={`vol-${index}`} onClick={() => setVolume(item)} className={`${item <= volume ? 'bg-black' : 'bg-gray-400'} px-1 py-2 mr-1 cursor-pointer`} />

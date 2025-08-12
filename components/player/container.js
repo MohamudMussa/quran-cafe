@@ -17,6 +17,7 @@ import TodoList from "../TodoList/Index";
 import KeyboardShortcuts from "./keyboard-shortcuts";
 import useWindowDimensions from "../../hooks/use-dimensions";
 import PrayerTime from "../PrayerTime";
+import LiveCounter from "./live-counter";
 
 // const KeyboardEventHandler = dynamic(() => import("react-keyboard-event-handler"), { ssr: false })
 
@@ -332,7 +333,7 @@ function Container({ recitations, appElement, onTuning }) {
                       {duration && <Slider value={progress} duration={duration} onSeek={handleSeekChange} />}
                     </div>
                     {/* Actions */}
-                    <div className="player-controls">
+                    <div className="player-controls flex items-center justify-between">
                       <Actions
                         voted={voted}
                         loop={onLoop}
@@ -344,6 +345,7 @@ function Container({ recitations, appElement, onTuning }) {
                         onShuffle={handleShuffle}
                         onPrevious={handleOnPrevious}
                       />
+                      <div className="ml-4"><LiveCounter /></div>
                     </div>
 
                     <div className="mt-6 flex flex-col">

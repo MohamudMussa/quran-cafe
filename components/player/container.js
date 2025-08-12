@@ -59,6 +59,31 @@ function Container({ recitations, appElement, onTuning }) {
     // Autoplay muted to satisfy browser policy
     setIsMuted(true);
     setIsPlaying(true);
+
+    // Try a pause->play toggle to coax autoplay pipelines in some browsers
+    const toggleRetry = setTimeout(() => {
+      setIsPlaying(false);
+      setTimeout(() => setIsPlaying(true), 250);
+    }, 800);
+
+    // If autoplay is blocked, start on first interaction and unmute
+    const kickOff = () => {
+      setIsMuted(false);
+      setIsPlaying(true);
+      window.removeEventListener('click', kickOff);
+      window.removeEventListener('keydown', kickOff);
+      window.removeEventListener('touchstart', kickOff);
+    };
+    window.addEventListener('click', kickOff, { once: true });
+    window.addEventListener('keydown', kickOff, { once: true });
+    window.addEventListener('touchstart', kickOff, { once: true });
+
+    return () => {
+      clearTimeout(toggleRetry);
+      window.removeEventListener('click', kickOff);
+      window.removeEventListener('keydown', kickOff);
+      window.removeEventListener('touchstart', kickOff);
+    };
   }, []);
 
 

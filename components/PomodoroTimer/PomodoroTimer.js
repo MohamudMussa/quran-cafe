@@ -14,13 +14,21 @@ function PomodoroTimer() {
         autoStart: false,
     });
 
+    // Presets (seconds)
+    const PRESETS = [300, 600, 900, 1500, 2700, 3600];
+
+    const restartWithSeconds = (sec, autoStart = true) => {
+        const clamped = Math.max(10, Math.floor(sec));
+        setSessionSeconds(clamped);
+        const base = new Date();
+        base.setSeconds(base.getSeconds() + clamped);
+        restart(base, autoStart);
+    };
+
     useEffect(() => {
         const handler = (e) => {
             const sec = Math.max(1, Math.floor(e?.detail?.seconds || 0));
-            setSessionSeconds(sec);
-            const base = new Date();
-            base.setSeconds(base.getSeconds() + sec);
-            restart(base, true);
+            restartWithSeconds(sec, true);
         };
         window.addEventListener('focus-until-salah', handler);
         return () => window.removeEventListener('focus-until-salah', handler);
@@ -32,11 +40,7 @@ function PomodoroTimer() {
         else resume();
     };
 
-    const handleReset = () => {
-        const t = new Date();
-        t.setSeconds(minutes * 60 + seconds + hours * 3600 + 60);
-        restart(t)
-    };
+    const handleReset = () => restartWithSeconds(minutes * 60 + seconds + hours * 3600 + 60, true);
 
     const remaining = hours * 3600 + minutes * 60 + seconds;
     const duration = sessionSeconds; // total session length
@@ -51,10 +55,27 @@ function PomodoroTimer() {
     const two = (n) => String(n).padStart(2, '0');
     const display = `${two(hours)}:${two(minutes)}:${two(seconds)}`;
 
+    const adjust = (deltaSec) => restartWithSeconds(remaining + deltaSec, false);
+
     return (
         <div className="text-center" style={{ width: 320 }}>
-            <div className="text-2xl font-black mb-3">Pomodoro Timer</div>
-            <div className="relative mx-auto mb-4" style={{ width: size, height: size }}>
+            <div className="text-2xl font-black mb-2">Pomodoro Timer</div>
+
+            {/* Presets */}
+            <div className="flex flex-wrap items-center justify-center gap-2 mb-2">
+                {PRESETS.map((sec) => (
+                    <button
+                        key={sec}
+                        onClick={() => restartWithSeconds(sec, true)}
+                        className="px-2 py-1 text-xs font-bold border border-black rounded"
+                        style={{ backgroundColor: '#ffa700', color: '#000' }}
+                    >
+                        {Math.round(sec / 60)}m
+                    </button>
+                ))}
+            </div>
+
+            <div className="relative mx-auto mb-2" style={{ width: size, height: size }}>
                 <svg width={size} height={size} className="absolute top-0 left-0">
                     <circle cx={size/2} cy={size/2} r={radius} stroke="#000" strokeWidth={stroke} fill="transparent" />
                     <circle
@@ -75,13 +96,13 @@ function PomodoroTimer() {
                 </div>
             </div>
 
-            <div className='flex flex-col justify-center'>
-                <button onClick={handleStartPause} className="bg-yellow-400 text-lg text-black px-10 py-2 mt-2 rounded-md">
+            {/* Controls */}
+            <div className='flex flex-wrap justify-center gap-2'>
+                <button onClick={() => adjust(-60)} className="px-2 py-1 text-xs font-bold border border-black rounded bg-white">- 1m</button>
+                <button onClick={handleStartPause} className="px-3 py-1 text-sm font-bold rounded" style={{ backgroundColor: '#ffa700', color: '#000' }}>
                     {isRunning ? "Pause" : "Start"}
                 </button>
-                <button onClick={handleReset} className="glassmorphism text-lg text-black px-10 py-2 mt-2 rounded-md">
-                    + 1
-                </button>
+                <button onClick={() => adjust(60)} className="px-2 py-1 text-xs font-bold border border-black rounded bg-white">+ 1m</button>
             </div>
         </div>
     );

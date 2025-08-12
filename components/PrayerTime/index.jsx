@@ -82,10 +82,9 @@ const PrayerTime = ({ longitude, latitude, handleGetLocation }) => {
 
   return (
     <div className="relative overflow-hidden sm:rounded-lg">
-      {hijri && (
-        <div className="px-3 pt-2 text-xs opacity-90 text-gray-200">Hijri: {hijri}</div>
-      )}
-      <div className="panel-header px-3 py-2 text-sm uppercase tracking-wide">Prayer Times</div>
+      <div className="panel-header px-3 py-2 text-sm uppercase tracking-wide">
+        {`Prayer Time${hijri ? ` - ${hijri}` : ''}`}
+      </div>
       <div className="overflow-x-auto">
         <table className="w-full text-sm text-left ">
           <thead className="b">

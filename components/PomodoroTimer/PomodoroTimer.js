@@ -60,10 +60,10 @@ function PomodoroTimer() {
 
     return (
         <div className="text-center" style={{ width: 320 }}>
-            <div className="text-2xl font-black mb-2">Pomodoro Timer</div>
+            <div className="text-2xl font-black mb-3">Pomodoro Timer</div>
 
             {/* Presets */}
-            <div className="flex flex-wrap items-center justify-center gap-2 mb-2">
+            <div className="flex flex-wrap items-center justify-center gap-2 mb-3">
                 {PRESETS.map((sec) => (
                     <button
                         key={sec}
@@ -76,7 +76,7 @@ function PomodoroTimer() {
                 ))}
             </div>
 
-            <div className="relative mx-auto mb-2" style={{ width: size, height: size }}>
+            <div className="relative mx-auto mb-4" style={{ width: size, height: size }}>
                 <svg width={size} height={size} className="absolute top-0 left-0">
                     <circle cx={size/2} cy={size/2} r={radius} stroke="#000" strokeWidth={stroke} fill="transparent" />
                     <circle
@@ -98,7 +98,7 @@ function PomodoroTimer() {
             </div>
 
             {/* Controls */}
-            <div className='flex flex-wrap justify-center gap-2'>
+            <div className='flex flex-wrap justify-center gap-3'>
                 <button onClick={() => adjust(-60)} className="px-2 py-1 text-xs font-bold border border-black rounded bg-white text-black">- 1m</button>
                 <button onClick={handleStartPause} className="px-3 py-1 text-sm font-bold rounded" style={{ backgroundColor: '#ffa700', color: '#000' }}>
                     {isRunning ? "Pause" : "Start"}

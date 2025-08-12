@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 
-function LiveCounter() {
+function LiveCounter({ standalone = false }) {
   const [count, setCount] = useState(1);
   const clientId = useMemo(() => {
     if (typeof window === 'undefined') return '';
@@ -37,10 +37,20 @@ function LiveCounter() {
     return () => { stopped = true; clearInterval(id); };
   }, []);
 
-  return (
-    <div className="flex items-center space-x-2">
-      <span className="animate-pulse px-2 py-1 rounded-md font-black" style={{ backgroundColor: '#ffa700', color: '#000' }}>LIVE</span>
+  const content = (
+    <div className="flex items-center space-x-2 px-3 py-2 panel-card rounded-md" style={{ backdropFilter: 'blur(6px)' }}>
+      <span className="animate-pulse inline-block w-3 h-3 rounded-full" style={{ backgroundColor: '#ffa700' }} />
       <span className="font-semibold">{count} Muslims are listening now</span>
+    </div>
+  );
+
+  if (!standalone) return content;
+
+  return (
+    <div className="fixed inset-0 pointer-events-none flex items-center justify-center z-40">
+      <div className="pointer-events-auto">
+        {content}
+      </div>
     </div>
   );
 }

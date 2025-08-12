@@ -345,7 +345,7 @@ function Container({ recitations, appElement, onTuning }) {
                         onShuffle={handleShuffle}
                         onPrevious={handleOnPrevious}
                       />
-                      <div className="ml-4"><LiveCounter /></div>
+                      
                     </div>
 
                     <div className="mt-6 flex flex-col">
@@ -390,6 +390,8 @@ function Container({ recitations, appElement, onTuning }) {
         </div>
       </div>
 
+      {/* Standalone live counter */}
+      <LiveCounter standalone />
       {/* Shortcuts/help overlays removed */}
       {
         !isBuffering && (

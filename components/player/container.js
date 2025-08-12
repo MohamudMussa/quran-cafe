@@ -17,7 +17,6 @@ import TodoList from "../TodoList/Index";
 import KeyboardShortcuts from "./keyboard-shortcuts";
 import useWindowDimensions from "../../hooks/use-dimensions";
 import PrayerTime from "../PrayerTime";
-import LiveCounter from "./live-counter";
 import ListenerCountText from "./listener-count";
 
 // const KeyboardEventHandler = dynamic(() => import("react-keyboard-event-handler"), { ssr: false })
@@ -245,10 +244,8 @@ function Container({ recitations, appElement, onTuning }) {
   };
 
   const handleProgress = ({ playedSeconds }) => {
-    // if (!seeking) {
     const percentageProgress = (playedSeconds / duration) * 100;
     setProgress(percentageProgress)
-    // }
   }
 
   const handleSetLoop = () => {
@@ -264,7 +261,10 @@ function Container({ recitations, appElement, onTuning }) {
 
   return (
     <main className="noise">
-      <KeyboardShortcuts onKeyEvent={(key, e) => handleKeyDown(key)} />
+
+      <KeyboardShortcuts
+        onKeyEvent={(key, e) => handleKeyDown(key)} />
+
 
       {/* Grid layout for initial alignment; Draggable for freedom thereafter */}
       <div className="fixed inset-0">
@@ -308,6 +308,7 @@ function Container({ recitations, appElement, onTuning }) {
             <div className="flex justify-between items-center border border-t-0 border-l-0 border-r-0 px-3 panel-header">
               <p className="text-left text-sm tracking-wide font-black">Quran-Café</p>
               <div className="flex items-center space-x-2">
+                <span className="animate-pulse inline-block w-2.5 h-2.5 rounded-full bg-black" />
                 <ListenerCountText className="text-left text-sm tracking-wide font-black" />
                 <button onClick={() => setShow(false)} className="py-2">
                   <RxCross2 size={12} />
@@ -395,8 +396,6 @@ function Container({ recitations, appElement, onTuning }) {
         </Draggable>
       </div>
 
-      {/* Standalone live counter bottom-left, desktop only */}
-      <LiveCounter standalone standalonePos="bottom-left" hideOnMobile />
       {/* Shortcuts/help overlays removed */}
       {
         !isBuffering && (
@@ -405,7 +404,9 @@ function Container({ recitations, appElement, onTuning }) {
           </div>
         )
       }
+
     </main>
+
   );
 }
 

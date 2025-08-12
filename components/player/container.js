@@ -277,98 +277,7 @@ function Container({ recitations, appElement, onTuning }) {
             </Draggable>
           </div>
 
-          {/* Center: Player */}
-          <div className="md:col-start-2 md:row-start-2 flex items-center justify-center min-h-[70vh]">
-            <Draggable defaultClassName="cursor-move" defaultPosition={{x:0,y:0}}>
-              <div className={`player-window w-full max-w-[28rem]`}>
-                {/* Header */}
-                <div className="flex justify-between items-center border border-t-0 border-l-0 border-r-0 px-3 panel-header">
-                  <p className="text-left text-sm tracking-wide font-black">Quran-Café</p>
-                  <button onClick={() => setShow(false)} className="py-2">
-                    <RxCross2 size={12} />
-                  </button>
-                </div>
-                {/* Main */}
-                <div className="p-4 md:p-4">
-                  <Player
-                    playerRef={playerRef}
-                    playing={isPlaying}
-                    muted={isMuted}
-                    volume={volume}
-                    show={show}
-                    loop={onLoop}
-                    station={station}
-                    onPlay={() => setIsMuted(false)}
-                    onPause={() => setIsPlaying(false)}
-                    onDuration={(duration) => setDuration(duration)}
-                    onProgress={handleProgress}
-                    onEnded={handleShuffle}
-                    onError={handleShuffle}
-                  />
-                  <div className="p-2">
-                    {/* Info */}
-                    <div className="station-info flex items-center">
-                      <span className="text-2xl ml-10 text-gray-100 font-semibold">{station.surah.slice(0, 18)} </span>
-                      <BsDashLg size={10} color="black" className="text-gray-100 mx-2" />
-                      <span className="text-sm">{station.reciter?.name.slice(0, 23)}</span>
-                      <div className={`ml-4 absolute left-1 ${isPlaying ? 'top-11' : 'top-14'}`}>
-                        {
-                          isPlaying ? (<Audio
-                            height="30"
-                            width="30"
-                            radius="2"
-                            color='black'
-                            ariaLabel='three-dots-loading'
-                            animate={false}
-                            wrapperStyle={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
-                            wrapperClass
-                          />) : (
-                            <span className="text-xl">....</span>
-                          )
-                        }
-                      </div>
-                    </div>
-                    {/* Slider */}
-                    <div className="slider-container">
-                      {duration && <Slider value={progress} duration={duration} onSeek={handleSeekChange} />}
-                    </div>
-                    {/* Actions */}
-                    <div className="player-controls flex items-center justify-between">
-                      <Actions
-                        voted={voted}
-                        loop={onLoop}
-                        onUpvote={handleUpvote}
-                        playing={isPlaying}
-                        handlePlay={() => setIsPlaying(true)}
-                        handlePause={() => setIsPlaying(false)}
-                        onSetLoop={handleSetLoop}
-                        onShuffle={handleShuffle}
-                        onPrevious={handleOnPrevious}
-                      />
-                      
-                    </div>
-
-                    <div className="mt-6 flex flex-col">
-                      <div className="flex">
-                        {volumePart.map((item, index) => (
-                          <>
-                            <div key={`vol-${index}`} onClick={() => setVolume(item)} className={`${item <= volume ? 'bg-black' : 'bg-gray-400'} px-1 py-2 mr-1 cursor-pointer`} />
-                            <span />
-                          </>
-                        ))}
-                      </div>
-                    </div>
-                    <div className="ayah-container">
-                      <div className="ayah-inner">
-                        <p className="ayah-text">So when the Quran is recited, listen carefully to it, and keep silent so that you may, be shown mercy.</p>
-                        <p className="ayah-text ayah-reference">[7:204]</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </Draggable>
-          </div>
+          {/* Center: Player moved to viewport overlay below */}
 
           {/* Right: Promidot Timer */}
           <div className="pointer-events-auto md:row-start-1 md:row-end-3 md:col-start-3 flex md:items-start md:justify-end">
@@ -388,6 +297,98 @@ function Container({ recitations, appElement, onTuning }) {
             </Draggable>
           </div>
         </div>
+      </div>
+
+      {/* Viewport-centered Player Overlay */}
+      <div className="fixed inset-0 flex items-center justify-center pointer-events-none">
+        <Draggable defaultClassName="cursor-move" defaultPosition={{ x: 0, y: 0 }}>
+          <div className="player-window w-full max-w-[28rem] pointer-events-auto">
+            {/* Header */}
+            <div className="flex justify-between items-center border border-t-0 border-l-0 border-r-0 px-3 panel-header">
+              <p className="text-left text-sm tracking-wide font-black">Quran-Café</p>
+              <button onClick={() => setShow(false)} className="py-2">
+                <RxCross2 size={12} />
+              </button>
+            </div>
+            {/* Main */}
+            <div className="p-4 md:p-4">
+              <Player
+                playerRef={playerRef}
+                playing={isPlaying}
+                muted={isMuted}
+                volume={volume}
+                show={show}
+                loop={onLoop}
+                station={station}
+                onPlay={() => setIsMuted(false)}
+                onPause={() => setIsPlaying(false)}
+                onDuration={(duration) => setDuration(duration)}
+                onProgress={handleProgress}
+                onEnded={handleShuffle}
+                onError={handleShuffle}
+              />
+              <div className="p-2">
+                {/* Info */}
+                <div className="station-info flex items-center">
+                  <span className="text-2xl ml-10 text-gray-100 font-semibold">{station.surah.slice(0, 18)} </span>
+                  <BsDashLg size={10} color="black" className="text-gray-100 mx-2" />
+                  <span className="text-sm">{station.reciter?.name.slice(0, 23)}</span>
+                  <div className={`ml-4 absolute left-1 ${isPlaying ? 'top-11' : 'top-14'}`}>
+                    {
+                      isPlaying ? (<Audio
+                        height="30"
+                        width="30"
+                        radius="2"
+                        color='black'
+                        ariaLabel='three-dots-loading'
+                        animate={false}
+                        wrapperStyle={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+                        wrapperClass
+                      />) : (
+                        <span className="text-xl">....</span>
+                      )
+                    }
+                  </div>
+                </div>
+                {/* Slider */}
+                <div className="slider-container">
+                  {duration && <Slider value={progress} duration={duration} onSeek={handleSeekChange} />}
+                </div>
+                {/* Actions */}
+                <div className="player-controls flex items-center justify-between">
+                  <Actions
+                    voted={voted}
+                    loop={onLoop}
+                    onUpvote={handleUpvote}
+                    playing={isPlaying}
+                    handlePlay={() => setIsPlaying(true)}
+                    handlePause={() => setIsPlaying(false)}
+                    onSetLoop={handleSetLoop}
+                    onShuffle={handleShuffle}
+                    onPrevious={handleOnPrevious}
+                  />
+                </div>
+
+                <div className="mt-6 flex flex-col">
+                  <div className="flex">
+                    {volumePart.map((item, index) => (
+                      <>
+                        <div key={`vol-${index}`} onClick={() => setVolume(item)} className={`${item <= volume ? 'bg-black' : 'bg-gray-400'} px-1 py-2 mr-1 cursor-pointer`} />
+                        <span />
+                      </>
+                    ))}
+                  </div>
+                </div>
+                <div className="ayah-container">
+                  <div className="ayah-inner">
+                    <p className="ayah-text">So when the Quran is recited, listen carefully to it, and keep silent so that you may, be shown mercy.</p>
+                    <p className="ayah-text ayah-reference">[7:204]</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Draggable>
       </div>
 
       {/* Standalone live counter bottom-left, desktop only */}

@@ -98,11 +98,11 @@ function PomodoroTimer() {
 
             {/* Controls */}
             <div className='flex flex-wrap justify-center gap-2'>
-                <button onClick={() => adjust(-60)} className="px-2 py-1 text-xs font-bold border border-black rounded bg-white">- 1m</button>
+                <button onClick={() => adjust(-60)} className="px-2 py-1 text-xs font-bold border border-black rounded bg-white text-black">- 1m</button>
                 <button onClick={handleStartPause} className="px-3 py-1 text-sm font-bold rounded" style={{ backgroundColor: '#ffa700', color: '#000' }}>
                     {isRunning ? "Pause" : "Start"}
                 </button>
-                <button onClick={() => adjust(60)} className="px-2 py-1 text-xs font-bold border border-black rounded bg-white">+ 1m</button>
+                <button onClick={() => adjust(60)} className="px-2 py-1 text-xs font-bold border border-black rounded bg-white text-black">+ 1m</button>
             </div>
         </div>
     );

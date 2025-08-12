@@ -72,7 +72,7 @@ function TodoList() {
                 completed: false,
               })
             }
-            className="w-full bg-black text-white py-2 px-3 text-lg mb-2 box-border min-w-0"
+            className="w-full bg-black text-white py-2 px-3 text-base mb-2 box-border min-w-0"
             placeholder="Type to add new task and press enter"
           />
         </form>
@@ -87,7 +87,7 @@ function TodoList() {
                   checked={item.completed}
                   onChange={() => handleComplete(index)}
                 />
-                <p className="text-xl text-left flex-1 min-w-0 break-words">{item.title}</p>
+                <p className="text-base text-left flex-1 min-w-0 break-words">{item.title}</p>
                 <ImCross onClick={() => handleDelete(index)} size={13} className="flex-shrink-0" />
               </Todo>
             ))}

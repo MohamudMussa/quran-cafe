@@ -3,12 +3,13 @@ import useTimer from 'react-timer-hook';
 
 function PomodoroTimer() {
     const [isWorking, setIsWorking] = useState(true);
-    const [time, setTime] = useState(1500); // 25 minutes in seconds
-    const { seconds, minutes, start, pause, totalSeconds, isRunning, restart, resume } = useTimer({
-        expiryTimestamp: Date.now() + time * 1000,
+    const [sessionSeconds, setSessionSeconds] = useState(1500); // default 25m
+    const { seconds, minutes, hours, start, pause, totalSeconds, isRunning, restart, resume } = useTimer({
+        expiryTimestamp: Date.now() + sessionSeconds * 1000,
         onExpire: () => {
             setIsWorking(!isWorking);
-            setTime(isWorking ? 300 : 1500); // 5 minutes or 25 minutes
+            const next = isWorking ? 300 : 1500; // 5 minutes or 25 minutes
+            setSessionSeconds(next);
         },
         autoStart: false,
     });
@@ -16,6 +17,7 @@ function PomodoroTimer() {
     useEffect(() => {
         const handler = (e) => {
             const sec = Math.max(1, Math.floor(e?.detail?.seconds || 0));
+            setSessionSeconds(sec);
             const base = new Date();
             base.setSeconds(base.getSeconds() + sec);
             restart(base, true);
@@ -32,19 +34,22 @@ function PomodoroTimer() {
 
     const handleReset = () => {
         const t = new Date();
-        t.setSeconds(minutes * 60 + seconds + 60);
+        t.setSeconds(minutes * 60 + seconds + hours * 3600 + 60);
         restart(t)
     };
 
-    const remaining = minutes * 60 + seconds;
-    const duration = time; // base session length
-    const progress = 1 - remaining / duration; // 0..1
+    const remaining = hours * 3600 + minutes * 60 + seconds;
+    const duration = sessionSeconds; // total session length
+    const progress = Math.min(1, Math.max(0, 1 - remaining / Math.max(1, duration)));
 
     const size = 192; // 48*4 = matches w-48 h-48
     const stroke = 10;
     const radius = (size - stroke) / 2;
     const circumference = 2 * Math.PI * radius;
     const strokeDashoffset = useMemo(() => circumference * (1 - progress), [circumference, progress]);
+
+    const two = (n) => String(n).padStart(2, '0');
+    const display = `${two(hours)}:${two(minutes)}:${two(seconds)}`;
 
     return (
         <div className="text-center" style={{ width: 320 }}>
@@ -65,8 +70,8 @@ function PomodoroTimer() {
                         transform={`rotate(-90 ${size/2} ${size/2})`}
                     />
                 </svg>
-                <div className="text-5xl font-extrabold w-48 h-48 mx-auto flex justify-center items-center glassmorphism rounded-full">
-                    {minutes}:{seconds < 10 ? `0${seconds}` : seconds}
+                <div className="text-3xl md:text-5xl font-extrabold w-48 h-48 mx-auto flex justify-center items-center glassmorphism rounded-full">
+                    {display}
                 </div>
             </div>
 

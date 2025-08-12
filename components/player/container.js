@@ -302,7 +302,7 @@ function Container({ recitations, appElement, onTuning }) {
       {/* Viewport-centered Player Overlay */}
       <div className="fixed inset-0 flex items-center justify-center pointer-events-none">
         <Draggable defaultClassName="cursor-move" defaultPosition={{ x: 0, y: 0 }}>
-          <div className="player-window w-full max-w-[28rem] pointer-events-auto">
+          <div className="player-window w-96 pointer-events-auto">
             {/* Header */}
             <div className="flex justify-between items-center border border-t-0 border-l-0 border-r-0 px-3 panel-header">
               <p className="text-left text-sm tracking-wide font-black">Quran-Café</p>

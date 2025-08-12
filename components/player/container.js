@@ -236,6 +236,7 @@ function Container({ recitations, appElement, onTuning }) {
     const shuffledStation = getStation(recitations);
     setStation(shuffledStation);
     setOnLoop(false);
+    setIsPlaying(true);
   }, [recitations]);
 
   const handleSeekChange = (seekFraction) => {
@@ -256,6 +257,7 @@ function Container({ recitations, appElement, onTuning }) {
   const handleOnPrevious = () => {
     if (previousStation) {
       setStation(previousStation);
+      setIsPlaying(true);
     }
   }
 
@@ -330,7 +332,7 @@ function Container({ recitations, appElement, onTuning }) {
                 loop={onLoop}
                 station={station}
                 onPlay={() => setIsMuted(false)}
-                onPause={() => setIsPlaying(false)}
+                onPause={() => { /* keep playing state for seamless chaining */ }}
                 onDuration={(duration) => setDuration(duration)}
                 onProgress={handleProgress}
                 onEnded={handleShuffle}

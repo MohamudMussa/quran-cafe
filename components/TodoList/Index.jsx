@@ -62,7 +62,7 @@ function TodoList() {
     <div className="w-full min-w-0">
       {/* Match PrayerTime header style */}
       <div className="panel-header px-3 py-2 text-sm uppercase tracking-wide">Task List</div>
-      <div className="p-3">
+      <div className="p-3 panel-card-dark">
         <form onSubmit={handleSave} className="min-w-0">
           <input
             value={todo.title}

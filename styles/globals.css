@@ -510,6 +510,15 @@ input:focus {
 
 .panel-subtle-text { color: rgba(255,255,255,0.8); }
 
+/* Dark-tinted glass panel */
+.panel-card-dark {
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(10px) saturate(120%);
+  -webkit-backdrop-filter: blur(10px) saturate(120%);
+}
+
 /* Player window refinement to match UI mock */
 .player-window {
   border-radius: 12px;

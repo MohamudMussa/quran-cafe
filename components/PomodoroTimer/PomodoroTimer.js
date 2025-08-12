@@ -62,7 +62,7 @@ function PomodoroTimer() {
         <div className="text-center" style={{ width: 320 }}>
             {/* Match PrayerTime header style */}
             <div className="panel-header px-3 py-2 text-sm uppercase tracking-wide">Pomodoro Timer</div>
-            <div className="p-3">
+            <div className="p-3 panel-card-dark">
                 {/* Presets */}
                 <div className="flex flex-wrap items-center justify-center gap-2 mb-3">
                     {PRESETS.map((sec) => (

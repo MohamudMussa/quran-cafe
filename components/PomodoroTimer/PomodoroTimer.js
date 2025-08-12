@@ -60,50 +60,52 @@ function PomodoroTimer() {
 
     return (
         <div className="text-center" style={{ width: 320 }}>
-            <div className="text-2xl font-black mb-3">Pomodoro Timer</div>
-
-            {/* Presets */}
-            <div className="flex flex-wrap items-center justify-center gap-2 mb-3">
-                {PRESETS.map((sec) => (
-                    <button
-                        key={sec}
-                        onClick={() => restartWithSeconds(sec, true)}
-                        className="px-2 py-1 text-xs font-bold border border-black rounded"
-                        style={{ backgroundColor: '#ffa700', color: '#000' }}
-                    >
-                        {Math.round(sec / 60)}m
-                    </button>
-                ))}
-            </div>
-
-            <div className="relative mx-auto mb-4" style={{ width: size, height: size }}>
-                <svg width={size} height={size} className="absolute top-0 left-0">
-                    <circle cx={size/2} cy={size/2} r={radius} stroke="#000" strokeWidth={stroke} fill="transparent" />
-                    <circle
-                        cx={size/2}
-                        cy={size/2}
-                        r={radius}
-                        stroke="#ffa700"
-                        strokeWidth={stroke}
-                        fill="transparent"
-                        strokeDasharray={circumference}
-                        strokeDashoffset={strokeDashoffset}
-                        strokeLinecap="round"
-                        transform={`rotate(-90 ${size/2} ${size/2})`}
-                    />
-                </svg>
-                <div className="glassmorphism rounded-full flex items-center justify-center mx-auto text-3xl font-extrabold" style={{ width: size, height: size }}>
-                    {display}
+            {/* Match PrayerTime header style */}
+            <div className="panel-header px-3 py-2 text-sm uppercase tracking-wide">Pomodoro Timer</div>
+            <div className="p-3">
+                {/* Presets */}
+                <div className="flex flex-wrap items-center justify-center gap-2 mb-3">
+                    {PRESETS.map((sec) => (
+                        <button
+                            key={sec}
+                            onClick={() => restartWithSeconds(sec, true)}
+                            className="px-2 py-1 text-xs font-bold border border-black rounded"
+                            style={{ backgroundColor: '#ffa700', color: '#000' }}
+                        >
+                            {Math.round(sec / 60)}m
+                        </button>
+                    ))}
                 </div>
-            </div>
 
-            {/* Controls */}
-            <div className='flex flex-wrap justify-center gap-3'>
-                <button onClick={() => adjust(-60)} className="px-2 py-1 text-xs font-bold border border-black rounded bg-white text-black">- 1m</button>
-                <button onClick={handleStartPause} className="px-3 py-1 text-sm font-bold rounded" style={{ backgroundColor: '#ffa700', color: '#000' }}>
-                    {isRunning ? "Pause" : "Start"}
-                </button>
-                <button onClick={() => adjust(60)} className="px-2 py-1 text-xs font-bold border border-black rounded bg-white text-black">+ 1m</button>
+                <div className="relative mx-auto mb-4" style={{ width: size, height: size }}>
+                    <svg width={size} height={size} className="absolute top-0 left-0">
+                        <circle cx={size/2} cy={size/2} r={radius} stroke="#000" strokeWidth={stroke} fill="transparent" />
+                        <circle
+                            cx={size/2}
+                            cy={size/2}
+                            r={radius}
+                            stroke="#ffa700"
+                            strokeWidth={stroke}
+                            fill="transparent"
+                            strokeDasharray={circumference}
+                            strokeDashoffset={strokeDashoffset}
+                            strokeLinecap="round"
+                            transform={`rotate(-90 ${size/2} ${size/2})`}
+                        />
+                    </svg>
+                    <div className="glassmorphism rounded-full flex items-center justify-center mx-auto text-3xl font-extrabold" style={{ width: size, height: size }}>
+                        {display}
+                    </div>
+                </div>
+
+                {/* Controls */}
+                <div className='flex flex-wrap justify-center gap-3'>
+                    <button onClick={() => adjust(-60)} className="px-2 py-1 text-xs font-bold border border-black rounded bg-white text-black">- 1m</button>
+                    <button onClick={handleStartPause} className="px-3 py-1 text-sm font-bold rounded" style={{ backgroundColor: '#ffa700', color: '#000' }}>
+                        {isRunning ? "Pause" : "Start"}
+                    </button>
+                    <button onClick={() => adjust(60)} className="px-2 py-1 text-xs font-bold border border-black rounded bg-white text-black">+ 1m</button>
+                </div>
             </div>
         </div>
     );

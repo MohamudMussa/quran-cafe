@@ -1,4 +1,4 @@
-import React, { memo, useMemo, useState } from 'react';
+import React, { memo, useEffect, useMemo, useState } from 'react';
 import useTimer from 'react-timer-hook';
 
 function PomodoroTimer() {
@@ -12,6 +12,17 @@ function PomodoroTimer() {
         },
         autoStart: false,
     });
+
+    useEffect(() => {
+        const handler = (e) => {
+            const sec = Math.max(1, Math.floor(e?.detail?.seconds || 0));
+            const base = new Date();
+            base.setSeconds(base.getSeconds() + sec);
+            restart(base, true);
+        };
+        window.addEventListener('focus-until-salah', handler);
+        return () => window.removeEventListener('focus-until-salah', handler);
+    }, [restart]);
 
     const handleStartPause = () => {
         if (isRunning) pause();

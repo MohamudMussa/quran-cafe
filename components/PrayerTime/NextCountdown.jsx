@@ -51,12 +51,24 @@ const NextCountdown = ({ timings }) => {
     return { label: ordered[nextIndex].key, remainingSec: diffMin * 60 };
   }, [ordered, now]);
 
+  const handleFocusUntilSalah = () => {
+    const seconds = Math.max(1, Math.floor(remainingSec));
+    try {
+      window.dispatchEvent(new CustomEvent('focus-until-salah', { detail: { seconds } }));
+    } catch {}
+  };
+
   return (
     <div className="w-full mt-3">
       <div className="panel-header px-3 py-2 text-sm uppercase tracking-wide">Next Prayer</div>
       <div className="w-full h-20 flex items-center justify-between px-4" style={{ backgroundColor: "#ffa700", color: "#000" }}>
         <div className="font-extrabold text-lg">{label}</div>
         <div className="font-black text-2xl">{formatHMS(remainingSec)}</div>
+      </div>
+      <div className="w-full flex justify-end mt-2">
+        <button onClick={handleFocusUntilSalah} className="px-3 py-1 rounded-md text-sm font-bold" style={{ backgroundColor: "#ffa700", color: "#000" }}>
+          Focus Until Salah
+        </button>
       </div>
     </div>
   );

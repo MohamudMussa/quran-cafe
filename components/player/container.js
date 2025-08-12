@@ -19,6 +19,7 @@ import useWindowDimensions from "../../hooks/use-dimensions";
 import PrayerTime from "../PrayerTime";
 import ListenerCountText from "./listener-count";
 import DuaCard from "../DuaCard";
+import { FiVolume2 } from "react-icons/fi";
 
 // const KeyboardEventHandler = dynamic(() => import("react-keyboard-event-handler"), { ssr: false })
 
@@ -381,7 +382,8 @@ function Container({ recitations, appElement, onTuning }) {
                 </div>
 
                 <div className="mt-6 flex flex-col">
-                  <div className="flex">
+                  <div className="flex items-center">
+                    <FiVolume2 size={14} className="mr-2 text-black" />
                     {volumePart.map((item, index) => (
                       <>
                         <div key={`vol-${index}`} onClick={() => setVolume(item)} className={`${item <= volume ? 'bg-black' : 'bg-gray-400'} px-1 py-2 mr-1 cursor-pointer`} />

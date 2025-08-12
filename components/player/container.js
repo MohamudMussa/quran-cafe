@@ -18,6 +18,7 @@ import KeyboardShortcuts from "./keyboard-shortcuts";
 import useWindowDimensions from "../../hooks/use-dimensions";
 import PrayerTime from "../PrayerTime";
 import ListenerCountText from "./listener-count";
+import DuaCard from "../DuaCard";
 
 // const KeyboardEventHandler = dynamic(() => import("react-keyboard-event-handler"), { ssr: false })
 
@@ -274,6 +275,9 @@ function Container({ recitations, appElement, onTuning }) {
             <Draggable defaultPosition={{x:0,y:0}}>
               <div className={`panel-card w-full max-w-sm md:max-w-[22rem]`}>
                 <PrayerTime handleGetLocation={handleGetLocation} latitude={location.latitude} longitude={location.longitude} />
+                <div className="mt-3">
+                  <DuaCard />
+                </div>
               </div>
             </Draggable>
           </div>

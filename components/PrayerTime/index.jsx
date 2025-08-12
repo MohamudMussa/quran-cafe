@@ -21,6 +21,7 @@ const PrayerTime = ({ longitude, latitude, handleGetLocation }) => {
   const [currentKey, setCurrentKey] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [hijri, setHijri] = useState(null);
 
   useEffect(() => {
     if (longitude && latitude) {
@@ -38,6 +39,11 @@ const PrayerTime = ({ longitude, latitude, handleGetLocation }) => {
         .then((res) => res.json())
         .then((json) => {
           setData(json?.data?.timings || null);
+          const hj = json?.data?.date?.hijri;
+          if (hj) {
+            const composed = `${hj?.day} ${hj?.month?.en} ${hj?.year} AH`;
+            setHijri(composed);
+          }
         })
         .catch((e) => setError('Failed to load timings'))
         .finally(() => setLoading(false));
@@ -76,6 +82,9 @@ const PrayerTime = ({ longitude, latitude, handleGetLocation }) => {
 
   return (
     <div className="relative overflow-hidden sm:rounded-lg">
+      {hijri && (
+        <div className="px-3 pt-2 text-xs opacity-90 text-gray-200">Hijri: {hijri}</div>
+      )}
       <div className="panel-header px-3 py-2 text-sm uppercase tracking-wide">Prayer Times</div>
       <div className="overflow-x-auto">
         <table className="w-full text-sm text-left ">

@@ -7,19 +7,27 @@ import lines from "../../public/lines.jpg";
 const LOCAL_BG_1 = "/meccaanime.jpeg"; // 16:9
 const LOCAL_BG_2 = "/newimage.png";
 const LOCAL_BG_3 = "/newbackground.png";
+const LOCAL_BG_4 = "/1.jpg";
+const LOCAL_BG_5 = "/10.jpg";
 const REMOTE_BG_1 = "https://raw.githubusercontent.com/MohamudMussa/quran-cafe/master/public/meccaanime.jpeg";
 const REMOTE_BG_2 = "https://raw.githubusercontent.com/MohamudMussa/quran-cafe/master/public/newimage.png";
 const REMOTE_BG_3 = "https://raw.githubusercontent.com/MohamudMussa/quran-cafe/master/public/newbackground.png";
+const REMOTE_BG_4 = "https://raw.githubusercontent.com/MohamudMussa/quran-cafe/master/public/1.jpg";
+const REMOTE_BG_5 = "https://raw.githubusercontent.com/MohamudMussa/quran-cafe/master/public/10.jpg";
 
 function Background() {
   const [bgUrl, setBgUrl] = useState(LOCAL_BG_1);
 
   useEffect(() => {
     // Pick one of the backgrounds on each refresh
-    const choices = [LOCAL_BG_1, LOCAL_BG_2, LOCAL_BG_3];
+    const choices = [LOCAL_BG_1, LOCAL_BG_2, LOCAL_BG_3, LOCAL_BG_4, LOCAL_BG_5];
     const chosen = choices[Math.floor(Math.random() * choices.length)];
 
-    const fallback = chosen === LOCAL_BG_1 ? REMOTE_BG_1 : chosen === LOCAL_BG_2 ? REMOTE_BG_2 : REMOTE_BG_3;
+    const fallback =
+      chosen === LOCAL_BG_1 ? REMOTE_BG_1 :
+      chosen === LOCAL_BG_2 ? REMOTE_BG_2 :
+      chosen === LOCAL_BG_3 ? REMOTE_BG_3 :
+      chosen === LOCAL_BG_4 ? REMOTE_BG_4 : REMOTE_BG_5;
 
     // Try chosen local; if it fails, fallback to remote equivalent
     const img = new Image();

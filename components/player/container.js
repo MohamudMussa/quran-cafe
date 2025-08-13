@@ -367,6 +367,13 @@ function Container({ recitations, appElement, onTuning }) {
                 </div>
               </div>
             </section>
+
+            {/* Submit Recitation (mobile last) */}
+            <section className="w-full mb-8">
+              <div className="w-full">
+                <SubmitRecitation />
+              </div>
+            </section>
           </div>
         </div>
       ) : (

@@ -299,6 +299,12 @@ function Container({ recitations, appElement, onTuning }) {
                     onEnded={handleShuffle}
                     onError={handleShuffle}
                   />
+                  {/* Station info (titles) */}
+                  <div className="mt-2 px-1 flex items-center">
+                    <span className="text-base text-gray-100 font-semibold truncate max-w-[55%]">{station.surah.slice(0, 28)}</span>
+                    <BsDashLg size={10} color="black" className="text-gray-100 mx-2" />
+                    <span className="text-xs truncate max-w-[35%]">{station.reciter?.name.slice(0, 28)}</span>
+                  </div>
                   <div className="mt-2 slider-container">
                     {duration && <Slider value={progress} duration={duration} onSeek={handleSeekChange} />}
                   </div>
@@ -319,29 +325,21 @@ function Container({ recitations, appElement, onTuning }) {
               </div>
             </section>
 
-            {/* Prayer Times + Dua */}
+            {/* Reminder (Duʿā) */}
             <section className="w-full">
               <div className="w-full">
                 <div className={`panel-card w-full`}>
-                  <PrayerTime handleGetLocation={handleGetLocation} latitude={location.latitude} longitude={location.longitude} />
-                  <div className="mt-3">
-                    <DuaCard />
-                  </div>
+                  <DuaCard />
                 </div>
               </div>
             </section>
 
-            {/* Pomodoro */}
-            <section className="w-full">
-              <div className="w-full">
-                <PomodoroTimer expiryTimestamp={time} />
-              </div>
-            </section>
-
-            {/* Task List */}
+            {/* Prayer Timetable */}
             <section className="w-full mb-6">
               <div className="w-full">
-                <TodoList />
+                <div className={`panel-card w-full`}>
+                  <PrayerTime handleGetLocation={handleGetLocation} latitude={location.latitude} longitude={location.longitude} />
+                </div>
               </div>
             </section>
           </div>

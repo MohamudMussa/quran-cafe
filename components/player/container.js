@@ -19,6 +19,7 @@ import useWindowDimensions from "../../hooks/use-dimensions";
 import PrayerTime from "../PrayerTime";
 import ListenerCountText from "./listener-count";
 import DuaCard from "../DuaCard";
+import SubmitRecitation from "../SubmitRecitation";
 import { FiVolume2 } from "react-icons/fi";
 
 // const KeyboardEventHandler = dynamic(() => import("react-keyboard-event-handler"), { ssr: false })
@@ -381,6 +382,9 @@ function Container({ recitations, appElement, onTuning }) {
                     <PrayerTime handleGetLocation={handleGetLocation} latitude={location.latitude} longitude={location.longitude} />
                     <div className="mt-3">
                       <DuaCard />
+                    </div>
+                    <div className="mt-3">
+                      <SubmitRecitation />
                     </div>
                   </div>
                 </Draggable>

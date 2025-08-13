@@ -7,6 +7,7 @@ import lines from "../../public/lines.jpg";
 const LOCAL_BG_1 = "/meccaanime.jpeg"; // 16:9
 const LOCAL_BG_2 = "/newimage.png";    // newly uploaded
 const REMOTE_BG_1 = "https://raw.githubusercontent.com/MohamudMussa/quran-cafe/master/public/meccaanime.jpeg";
+const REMOTE_BG_2 = "https://raw.githubusercontent.com/MohamudMussa/quran-cafe/master/public/newimage.png";
 
 function Background() {
   const [bgUrl, setBgUrl] = useState(LOCAL_BG_1);
@@ -16,15 +17,11 @@ function Background() {
     const choices = [LOCAL_BG_1, LOCAL_BG_2];
     const chosen = choices[Math.floor(Math.random() * choices.length)];
 
-    // Try chosen local; if it's meccaanime and fails, fallback to remote
+    const fallback = chosen === LOCAL_BG_1 ? REMOTE_BG_1 : REMOTE_BG_2;
+
+    // Try chosen local; if it fails, fallback to remote equivalent
     const img = new Image();
-    img.onerror = () => {
-      if (chosen === LOCAL_BG_1) {
-        setBgUrl(REMOTE_BG_1);
-      } else {
-        setBgUrl(chosen);
-      }
-    };
+    img.onerror = () => setBgUrl(fallback);
     img.onload = () => setBgUrl(chosen);
     img.src = chosen;
   }, []);

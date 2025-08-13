@@ -269,9 +269,86 @@ function Container({ recitations, appElement, onTuning }) {
       <KeyboardShortcuts
         onKeyEvent={(key, e) => handleKeyDown(key)} />
 
+      {/* Mobile: horizontal snap scroller, non-draggable cards */}
+      <div className="md:hidden fixed inset-0 overflow-x-auto overflow-y-hidden">
+        <div className="flex flex-nowrap h-full items-start snap-x snap-mandatory">
+          {/* Player card */}
+          <section className="w-screen p-4 snap-start">
+            <div className="player-window w-full pointer-events-auto">
+              <div className="flex justify-between items-center border border-t-0 border-l-0 border-r-0 px-3 panel-header">
+                <p className="text-left text-sm tracking-wide font-black">Quran-Café</p>
+                <div className="flex items-center space-x-2">
+                  <span className="animate-pulse inline-block w-2.5 h-2.5 rounded-full bg-black" />
+                  <ListenerCountText className="text-left text-sm tracking-wide font-black" />
+                </div>
+              </div>
+              <div className="p-3 panel-card-dark">
+                <Player
+                  playerRef={playerRef}
+                  playing={isPlaying}
+                  muted={isMuted}
+                  volume={volume}
+                  show={true}
+                  loop={onLoop}
+                  station={station}
+                  onPlay={() => setIsMuted(false)}
+                  onPause={() => {}}
+                  onDuration={(duration) => setDuration(duration)}
+                  onProgress={handleProgress}
+                  onEnded={handleShuffle}
+                  onError={handleShuffle}
+                />
+                <div className="mt-2 slider-container">
+                  {duration && <Slider value={progress} duration={duration} onSeek={handleSeekChange} />}
+                </div>
+                <div className="mt-2 player-controls flex items-center justify-between">
+                  <Actions
+                    voted={voted}
+                    loop={onLoop}
+                    onUpvote={handleUpvote}
+                    playing={isPlaying}
+                    handlePlay={() => setIsPlaying(true)}
+                    handlePause={() => setIsPlaying(false)}
+                    onSetLoop={handleSetLoop}
+                    onShuffle={handleShuffle}
+                    onPrevious={handleOnPrevious}
+                  />
+                </div>
+              </div>
+            </div>
+          </section>
 
+          {/* Prayer Times + Dua */}
+          <section className="w-screen p-4 snap-start">
+            <div className="w-full">
+              <div className={`panel-card w-full`}>
+                <PrayerTime handleGetLocation={handleGetLocation} latitude={location.latitude} longitude={location.longitude} />
+                <div className="mt-3">
+                  <DuaCard />
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Pomodoro */}
+          <section className="w-screen p-4 snap-start">
+            <div className="w-full">
+              <PomodoroTimer expiryTimestamp={time} />
+            </div>
+          </section>
+
+          {/* Task List */}
+          <section className="w-screen p-4 snap-start">
+            <div className="w-full">
+              <TodoList />
+            </div>
+          </section>
+        </div>
+      </div>
+
+      {/* Desktop layout */}
       {/* Grid layout for initial alignment; Draggable for freedom thereafter */}
-      <div className="fixed inset-0">
+      <div className="hidden md:block fixed inset-0">
         <div className="h-full w-full grid grid-cols-1 gap-3 p-4 md:grid-cols-[22rem_1fr_22rem] md:grid-rows-[auto_1fr_auto]">
           {/* Left: Prayer Times */}
           <div className="pointer-events-auto md:row-span-3 md:col-start-1 flex md:items-start md:justify-start">
@@ -307,8 +384,8 @@ function Container({ recitations, appElement, onTuning }) {
         </div>
       </div>
 
-      {/* Viewport-centered Player Overlay */}
-      <div className="fixed inset-0 flex items-center justify-center pointer-events-none">
+      {/* Viewport-centered Player Overlay (Desktop) */}
+      <div className="hidden md:flex fixed inset-0 items-center justify-center pointer-events-none">
         <Draggable defaultClassName="cursor-move" defaultPosition={{ x: 0, y: 0 }}>
           <div className="player-window w-96 pointer-events-auto">
             {/* Header */}
@@ -407,7 +484,7 @@ function Container({ recitations, appElement, onTuning }) {
       {/* Shortcuts/help overlays removed */}
       {
         !isBuffering && (
-          <div>
+          <div className="hidden md:block">
             <AdditionalActions />
           </div>
         )

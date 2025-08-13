@@ -11,7 +11,7 @@ const isValidUrl = (value) => {
 	}
 };
 
-const SubmitRecitation = () => {
+const SubmitRecitation = ({ onSubmitted }) => {
 	const [url, setUrl] = useState("");
 	const [busy, setBusy] = useState(false);
 	const [status, setStatus] = useState(null);
@@ -34,6 +34,9 @@ const SubmitRecitation = () => {
 			if (!res.ok) throw new Error(json?.error || 'Failed to submit');
 			setStatus({ ok: true, msg: "Thanks! We'll review your recitation." });
 			setUrl("");
+      if (typeof onSubmitted === 'function') {
+        onSubmitted();
+      }
 		} catch (e) {
 			setStatus({ ok: false, msg: e.message || 'Submission failed' });
 		} finally {

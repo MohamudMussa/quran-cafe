@@ -14,7 +14,8 @@ function Actions({
   onUpvote,
   onShuffle,
   voted,
-  loop
+  loop,
+  onOpenSubmit
 }) {
   const disabledColor = "#000000";
   return (
@@ -65,7 +66,15 @@ function Actions({
 
 
       </div >
-      <div>
+      <div className="flex items-stretch space-x-2">
+        <motion.button
+          className="p-2 pt-3 border-2 border-black rounded-md h-full z-40"
+          onClick={onOpenSubmit}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.9 }}
+        >
+          <span className="text-xs font-bold">Submit Recitation</span>
+        </motion.button>
         <motion.button
           className="p-2 pt-3 border-2 border-black rounded-md h-full z-40 "
           onClick={onUpvote}

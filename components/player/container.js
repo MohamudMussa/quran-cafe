@@ -38,6 +38,7 @@ function Container({ recitations, appElement, onTuning }) {
   const [progress, setProgress] = useState(0);
   const [seeking, setSeeking] = useState(false);
   const [isBuffering, setIsBuffering] = useState(false);
+  const [showSubmit, setShowSubmit] = useState(false);
   const playerRef = useRef();
   const [location, setLocation] = useState({
     latitude: null,
@@ -344,6 +345,7 @@ function Container({ recitations, appElement, onTuning }) {
                       onSetLoop={handleSetLoop}
                       onShuffle={handleShuffle}
                       onPrevious={handleOnPrevious}
+                      onOpenSubmit={() => setShowSubmit(true)}
                     />
                   </div>
                 </div>
@@ -494,6 +496,7 @@ function Container({ recitations, appElement, onTuning }) {
                         onSetLoop={handleSetLoop}
                         onShuffle={handleShuffle}
                         onPrevious={handleOnPrevious}
+                        onOpenSubmit={() => setShowSubmit(true)}
                       />
                     </div>
 
@@ -519,6 +522,22 @@ function Container({ recitations, appElement, onTuning }) {
               </div>
             </Draggable>
           </div>
+
+          {/* Submit Recitation Modal */}
+          {showSubmit && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70">
+              <div className="w-[90%] max-w-md bg-black rounded-xl border border-white/10 shadow-xl">
+                <div className="flex items-center justify-between px-4 py-3 border-b border-white/10">
+                  <span className="text-sm font-bold">Submit a Recitation</span>
+                  <button onClick={() => setShowSubmit(false)} className="text-white/80">✕</button>
+                </div>
+                <div className="p-4">
+                  <p className="text-xs text-white/80 mb-3">Paste a link from YouTube, Instagram, Twitter/X, or a direct MP3.</p>
+                  <SubmitRecitation onSubmitted={() => setShowSubmit(false)} />
+                </div>
+              </div>
+            </div>
+          )}
 
           {/* Shortcuts/help overlays removed */}
           {

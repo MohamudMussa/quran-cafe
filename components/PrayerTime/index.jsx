@@ -81,7 +81,7 @@ const PrayerTime = ({ longitude, latitude, handleGetLocation }) => {
   }, [ordered]);
 
   return (
-    <div className="relative overflow-hidden sm:rounded-lg">
+    <div className="relative overflow-visible sm:rounded-lg pb-2">
       <div className="panel-header px-3 py-2 text-sm uppercase tracking-wide">
         {`Prayer Time${hijri ? ` - ${hijri}` : ''}`}
       </div>

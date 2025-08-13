@@ -67,10 +67,10 @@ const NextCountdown = ({ timings }) => {
   return (
     <div className="w-full mt-3">
       <div className="panel-header px-3 py-2 text-sm uppercase tracking-wide">Next Prayer</div>
-      <div className="w-full h-20 flex items-center justify-between px-4" style={{ backgroundColor: "#ffa700", color: "#000" }}>
+      <div className="w-full min-h-[5rem] flex items-center justify-between px-4 py-2" style={{ backgroundColor: "#ffa700", color: "#000" }}>
         <div className="flex items-center space-x-2">
           <div className="font-extrabold text-lg">{label}</div>
-          <button onClick={handleFocusUntilSalah} className="px-2 py-1 rounded-md text-xs font-bold border border-black" style={{ backgroundColor: "#000", color: "#ffa700" }}>
+          <button onClick={handleFocusUntilSalah} className="hidden md:inline-block px-2 py-1 rounded-md text-xs font-bold border border-black" style={{ backgroundColor: "#000", color: "#ffa700" }}>
             Focus Until Salah
           </button>
         </div>

@@ -53,6 +53,10 @@ function Player({
   onDuration,
   onProgress,
   playerRef,
+  onNext,
+  onPrevious,
+  onRequestPlay,
+  onRequestPause,
 }) {
   const audioUrl = station?.mp3;
   const mediaUrl = audioUrl || station?.video_url;
@@ -69,6 +73,20 @@ function Player({
           audioEl.current.currentTime = seconds;
         } else if (reactPlayerRef.current && typeof reactPlayerRef.current.seekTo === 'function') {
           reactPlayerRef.current.seekTo(seconds, 'seconds');
+        }
+      },
+      forcePlay: async () => {
+        if (audioEl.current) {
+          try { await audioEl.current.play(); } catch {}
+        } else if (reactPlayerRef.current) {
+          try { await reactPlayerRef.current.getInternalPlayer()?.play?.(); } catch {}
+        }
+      },
+      forcePause: () => {
+        if (audioEl.current) {
+          try { audioEl.current.pause(); } catch {}
+        } else if (reactPlayerRef.current) {
+          try { reactPlayerRef.current.getInternalPlayer()?.pause?.(); } catch {}
         }
       },
     };
@@ -90,6 +108,40 @@ function Player({
     } catch {}
   }, [audioUrl, playing, muted, volume]);
 
+  // Media Session API for background controls and lockscreen metadata
+  useEffect(() => {
+    if (typeof navigator === 'undefined' || !('mediaSession' in navigator)) return;
+    try {
+      const title = station?.surah || 'Qur\u2019an Recitation';
+      const artist = station?.reciter?.name || 'Unknown Reciter';
+      const album = 'Quran-Caf\u00E9';
+      // Set metadata
+      navigator.mediaSession.metadata = new window.MediaMetadata({ title, artist, album });
+
+      navigator.mediaSession.setActionHandler('previoustrack', () => {
+        if (onPrevious) onPrevious();
+      });
+      navigator.mediaSession.setActionHandler('nexttrack', () => {
+        if (onNext) onNext();
+      });
+      navigator.mediaSession.setActionHandler('play', async () => {
+        if (audioEl.current) {
+          try { await audioEl.current.play(); } catch {}
+        }
+        if (onRequestPlay) onRequestPlay();
+      });
+      navigator.mediaSession.setActionHandler('pause', () => {
+        if (audioEl.current) audioEl.current.pause();
+        if (onRequestPause) onRequestPause();
+      });
+      navigator.mediaSession.setActionHandler('stop', () => {
+        if (audioEl.current) audioEl.current.pause();
+        if (onRequestPause) onRequestPause();
+      });
+      navigator.mediaSession.playbackState = playing ? 'playing' : 'paused';
+    } catch {}
+  }, [station, onNext, onPrevious, onRequestPlay, onRequestPause, playing]);
+
   return (
     <div style={show ? wrapperStyle : hiddenStyle}>
       <div style={innerWrapperStyle}>
@@ -98,6 +150,7 @@ function Player({
             ref={audioEl}
             src={audioUrl}
             preload="auto"
+            autoPlay
             muted={muted}
             loop={loop}
             onCanPlay={(e) => onDuration && onDuration(e.target.duration)}

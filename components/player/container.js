@@ -89,6 +89,26 @@ function Container({ recitations, appElement, onTuning }) {
     };
   }, []);
 
+  useEffect(() => {
+    const handleVisibility = () => {
+      if (document.visibilityState === 'hidden') {
+        // Keep playing in background; do not auto-pause
+        setIsPlaying((prev) => prev); // no-op but documents intent
+      }
+    };
+    document.addEventListener('visibilitychange', handleVisibility);
+    return () => document.removeEventListener('visibilitychange', handleVisibility);
+  }, []);
+
+  useEffect(() => {
+    // Attempt to keep audio active when navigating away on mobile PWA-like behavior
+    const onBeforeUnload = (e) => {
+      // Allow playback to continue; most browsers ignore prompts
+    };
+    window.addEventListener('beforeunload', onBeforeUnload);
+    return () => window.removeEventListener('beforeunload', onBeforeUnload);
+  }, []);
+
 
   // Handle get location permission
   const handleGetLocation = () => {
@@ -298,6 +318,10 @@ function Container({ recitations, appElement, onTuning }) {
                     onProgress={handleProgress}
                     onEnded={handleShuffle}
                     onError={handleShuffle}
+                    onNext={handleShuffle}
+                    onPrevious={handleOnPrevious}
+                    onRequestPlay={() => setIsPlaying(true)}
+                    onRequestPause={() => setIsPlaying(false)}
                   />
                   {/* Station info (titles) */}
                   <div className="mt-2 px-1 flex items-center">
@@ -415,6 +439,10 @@ function Container({ recitations, appElement, onTuning }) {
                     onProgress={handleProgress}
                     onEnded={handleShuffle}
                     onError={handleShuffle}
+                    onNext={handleShuffle}
+                    onPrevious={handleOnPrevious}
+                    onRequestPlay={() => setIsPlaying(true)}
+                    onRequestPause={() => setIsPlaying(false)}
                   />
                   <div className="p-2">
                     {/* Info */}

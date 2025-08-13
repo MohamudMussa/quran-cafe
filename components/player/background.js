@@ -4,20 +4,35 @@ import { useEffect, useState } from "react";
 import vignette from "../../public/vignette.png";
 import lines from "../../public/lines.jpg";
 
-const LOCAL_BG = "/meccaanime.jpeg"; // new 16:9 upload
-const REMOTE_BG = "https://raw.githubusercontent.com/MohamudMussa/quran-cafe/master/public/meccaanime.jpeg";
+const LOCAL_BG_1 = "/meccaanime.jpeg"; // 16:9
+const LOCAL_BG_2 = "/newimage.png";    // newly uploaded
+const REMOTE_BG_1 = "https://raw.githubusercontent.com/MohamudMussa/quran-cafe/master/public/meccaanime.jpeg";
 
 function Background() {
-  const [bgUrl, setBgUrl] = useState(LOCAL_BG);
+  const [bgUrl, setBgUrl] = useState(LOCAL_BG_1);
 
   useEffect(() => {
+    // Pick one of the two backgrounds on each refresh
+    const choices = [LOCAL_BG_1, LOCAL_BG_2];
+    const chosen = choices[Math.floor(Math.random() * choices.length)];
+
+    // Try chosen local; if it's meccaanime and fails, fallback to remote
     const img = new Image();
-    img.onerror = () => setBgUrl(REMOTE_BG);
-    img.src = LOCAL_BG;
+    img.onerror = () => {
+      if (chosen === LOCAL_BG_1) {
+        setBgUrl(REMOTE_BG_1);
+      } else {
+        setBgUrl(chosen);
+      }
+    };
+    img.onload = () => setBgUrl(chosen);
+    img.src = chosen;
   }, []);
 
   return (
     <motion.div id="retro-bg-root" className="retro-bg-root">
+      {/* Full image (contain) behind */}
+      <div className="retro-bg-base-contain" style={{ backgroundImage: `url(${bgUrl})` }} />
       {/* Stretched image layer that always covers */}
       <div className="retro-bg-base-cover" style={{ backgroundImage: `url(${bgUrl})` }} />
 

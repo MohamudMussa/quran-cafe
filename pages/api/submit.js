@@ -1,10 +1,19 @@
 import { instance as Supabase } from '../../lib/db/models/supbase';
 
 async function trySendEmail(url) {
+  const fnUrl = process.env.NEXT_PUBLIC_SUPABASE_FUNCTION_URL;
+  const anonKey = process.env.SUPABASE_ANON_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  if (!fnUrl || !anonKey) return false;
   try {
-    // If you have a Supabase function set up to send email, call it here
-    // Example: await fetch(process.env.NEXT_PUBLIC_SUPABASE_FUNCTION_URL + '/send-email', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${process.env.SUPABASE_ANON_KEY}` }, body: JSON.stringify({ to: 'mmussa92@gmail.com', subject: 'New Recitation Submission', text: url }) });
-    return true;
+    const res = await fetch(`${fnUrl}/send-email`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${anonKey}`
+      },
+      body: JSON.stringify({ to: 'mmussa92@gmail.com', subject: 'New Recitation Submission', text: url })
+    });
+    return res.ok;
   } catch {
     return false;
   }

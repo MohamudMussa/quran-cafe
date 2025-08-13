@@ -370,12 +370,7 @@ function Container({ recitations, appElement, onTuning }) {
               </div>
             </section>
 
-            {/* Submit Recitation (mobile last) */}
-            <section className="w-full mb-8">
-              <div className="w-full">
-                <SubmitRecitation />
-              </div>
-            </section>
+            {/* Submit Recitation moved to modal via player control */}
           </div>
         </div>
       ) : (
@@ -392,14 +387,10 @@ function Container({ recitations, appElement, onTuning }) {
                     <div className="mt-3">
                       <DuaCard />
                     </div>
-                    <div className="mt-3">
-                      <SubmitRecitation />
-                    </div>
+                    {/* Submit Recitation moved to modal via player control */}
                   </div>
                 </Draggable>
               </div>
-
-              {/* Center: Player moved to viewport overlay below */}
 
               {/* Right: Promidot Timer */}
               <div className="pointer-events-auto md:row-start-1 md:row-end-3 md:col-start-3 flex md:items-start md:justify-end">
@@ -520,39 +511,39 @@ function Container({ recitations, appElement, onTuning }) {
                   </div>
                 </div>
               </div>
-            </Draggable>
-          </div>
-
-          {/* Submit Recitation Modal */}
-          {showSubmit && (
-            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70">
-              <div className="w-[90%] max-w-md bg-black rounded-xl border border-white/10 shadow-xl">
-                <div className="flex items-center justify-between px-4 py-3 border-b border-white/10">
-                  <span className="text-sm font-bold">Submit a Recitation</span>
-                  <button onClick={() => setShowSubmit(false)} className="text-white/80">✕</button>
-                </div>
-                <div className="p-4">
-                  <p className="text-xs text-white/80 mb-3">Paste a link from YouTube, Instagram, Twitter/X, or a direct MP3.</p>
-                  <SubmitRecitation onSubmitted={() => setShowSubmit(false)} />
-                </div>
-              </div>
+              </Draggable>
             </div>
-          )}
 
-          {/* Shortcuts/help overlays removed */}
-          {
-            !isBuffering && (
-              <div>
-                <AdditionalActions />
+            {/* Submit Recitation Modal */}
+            {showSubmit && (
+              <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70">
+                <div className="w-[90%] max-w-md bg-black rounded-xl border border-white/10 shadow-xl">
+                  <div className="flex items-center justify-between px-4 py-3 border-b border-white/10">
+                    <span className="text-sm font-bold">Submit a Recitation</span>
+                    <button onClick={() => setShowSubmit(false)} className="text-white/80">✕</button>
+                  </div>
+                  <div className="p-4">
+                    <p className="text-xs text-white/80 mb-3">Paste a link from YouTube, Instagram, Twitter/X, or a direct MP3.</p>
+                    <SubmitRecitation onSubmitted={() => setShowSubmit(false)} />
+                  </div>
+                </div>
               </div>
-            )
-          }
-        </>
-      )}
+            )}
 
-    </main>
+            {/* Shortcuts/help overlays removed */}
+            {
+              !isBuffering && (
+                <div>
+                  <AdditionalActions />
+                </div>
+              )
+            }
+          </>
+        )}
 
-  );
-}
+      </main>
 
-export default Container;
+    );
+  }
+
+  export default Container;
